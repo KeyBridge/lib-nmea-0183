@@ -12,7 +12,7 @@ This project reads and writes NMEA GPS sentences.
 
 https://www.nmea.org/
 
-LICENSING
+## LICENSING
 
 This is free software: you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as published by the
@@ -27,7 +27,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with this software. If not, see <http://www.gnu.org/licenses/>.
 
-DISCLAIMER
+## DISCLAIMER
 
 This is not official NMEA software. Further, it is not related to
 National Marine Electronics Association <http://www.nmea.org/>. The decoding of
@@ -35,7 +35,7 @@ NMEA-0183 sentences is based entirely on publicly available resources in the
 Internet. Thus, it is NOT guaranteed that the library would follow and implement
 the standard accurately and correctly.
 
-SOURCE CODE
+## SOURCE CODE
 
 The source code is maintained in Github <http://www.github.com>.
 
@@ -43,12 +43,21 @@ Browse code at Github.com: <https://github.com/keybridge/lib-nmea-0183>
 
 If you wish to contribute new code or bug fixes, please fork and send pull requests in Github.
 
-DEVELOPERS
+## DEVELOPERS
 
  * Key Bridge
  * Some classes are based on code imported from the **Marine API** (GPL) project by Kimmo Tuukkanen <kimmo.tuukkanen@gmail.com>
 
-REFERENCES
+# Marine Automatic Identification System (AIS)
+
+AIS is composed of small bursts of data sent over normal marine VHF but using GMSK modulation instead of FM to identify vessels, their position, and telemetry. The data is encoded into a bit pattern (bit vector) to make it as small as possible.
+
+AIS Data Format: see ITU M.1371-2 
+
+ The NMEA standard uses two primary sentences to for AIS data !AIVDM (Received Data from other vessels) and !AIVDO (Your own vessels information)
+
+
+# REFERENCES
 
 The NMEA 0183 information has been acquired from following documents publicly available in the Internet (URLs checked on 2013-09-08):
 
