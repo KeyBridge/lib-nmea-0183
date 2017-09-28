@@ -7,7 +7,7 @@
   <version>1.0.0</version>
   <packaging>jar</packaging>
 
-  <name>nmea-0183</name>
+  <name>lib-nmea-0183</name>
   <description>NMEA 0183 GPS data reader and writer.
 
     NMEA 0183 is a combined electrical and data specification
