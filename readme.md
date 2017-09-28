@@ -70,8 +70,8 @@ The NMEA 0183 information has been acquired from many publicly available documen
  * [NMEA 0183 Sentences Not Recommended for New Designs by NMEA](http://www.nmea.org/Assets/100108_nmea_0183_sentences_not_recommended_for_new_designs.pdf)
  * [NMEA Sentence Information by Glenn Baddeley](http://home.mira.net/~gnb/gps/nmea.html)
  * [NMEA Data by Dale DePriest](http://www.gpsinformation.org/dale/nmea.htm)
- * [The NMEA FAQ by Peter Bennett](http://www.eoss.org/pubs/nmeafaq.htm) (archived older version)
-   * [Automatic Identification System Overview by Navigation Center of U.S. Department of Homeland Security](http://www.navcen.uscg.gov/?pageName=AISMessages)
+ * [The NMEA FAQ by Peter Bennett](http://www.eoss.org/pubs/nmeafaq.htm)
+ * [Automatic Identification System Overview by Navigation Center of U.S. Department of Homeland Security](http://www.navcen.uscg.gov/?pageName=AISMessages)
  * [SeaTalk Technical Reference (revision 3.22) by Thomas Knauf](http://www.thomasknauf.de/seatalk.htm)
  * [RS232 SeaTalk (-) NMEA Converter installation and operation manual by gadgetPool](http://www.gadgetpool.de/nuke/downloads/ManualRS232.pdf)
 
