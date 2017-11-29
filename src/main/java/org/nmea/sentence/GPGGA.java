@@ -1,40 +1,28 @@
-/**
- * <p>
- * Copyright 2010 Key Bridge Global LLC.
- * </p>
- * <p>
- * http://keybridgeglobal.com
- * </p>
- * <p>
- * This file is part of the Java package "GPSd Java Client: (GPSdClient)".
- * </p>
- * <p>
- * GPSdClient is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- * </p>
- * <p>
- * GPSdClient is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * </p>
- * <p>
- * You should have received a copy of the GNU General Public License along with
- * GPSdClient. If not, see <http://www.gnu.org/licenses/>.
- * </p>
+/*
+ * Copyright 2017 Key Bridge.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.nmea.sentence;
 
 import java.util.Calendar;
 import java.util.TimeZone;
+import org.nmea.NMEAReader;
 
 /**
  * $GPGGA: Global Positioning System Fix Data
  * <p>
  * Time, position and fix related data for a GPS receiver.
- * <p>
- * 
  * <pre>
  * eg2. $--GGA,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x,xx,x.x,x.x,M,x.x,M,x.x,xxxx
  * hhmmss.ss = UTC of position
@@ -51,7 +39,7 @@ import java.util.TimeZone;
  * M = units of geoidal separation, meters
  * x.x = Age of Differential GPS data (seconds)
  * xxxx = Differential reference station ID
- * 
+ *
  * eg3. $GPGGA,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x,xx,x.x,x.x,M,x.x,M,x.x,xxxx*hh
  * 1    = UTC of Position
  * 2    = Latitude
@@ -72,27 +60,58 @@ import java.util.TimeZone;
  */
 public class GPGGA {
 
-  private String   nmeaSentence;
-  private Calendar gpsTimestamp;
-  private double   latitude;
-  private double   longitude;
-  private int      mode;
-  private int      satellites;
-  private double   hdop;
-  private double   altitude;
-  private String   altitudeUnit;
-  private double   height_above_WGS84;
+  /**
+   * The NMEA sentence.
+   */
+  private final String nmeaSentence;
+  /**
+   * UTC of Position
+   */
+  private final Calendar gpsTimestamp;
+  /**
+   * Latitude
+   */
+  private final double latitude;
+  /**
+   * Longitude
+   */
+  private final double longitude;
+  /**
+   * GPS quality indicator (0=invalid; 1=GPS fix; 2=Diff. GPS fix)
+   */
+  private final int mode;
+  /**
+   * Number of satellites in use [not those in view]
+   */
+  private final int satellites;
+  /**
+   * Horizontal dilution of position
+   */
+  private final double hdop;
+  /**
+   * Antenna altitude above/below mean sea level (geoid)
+   */
+  private final double altitude;
+  /**
+   * Antenna height unit (e.g. Meters)
+   */
+  private final String altitudeUnit;
+  /**
+   * Geoidal separation (Diff. between WGS-84 earth ellipsoid and mean sea
+   * level. Negative number indicates geoid is below WGS-84 ellipsoid)
+   */
+  private final double height_above_WGS84;
 
   /**
    * Constructor to create a fully populated GPGGA message object
-   * 
+   *
    * @param nmeaSentence
    */
   public GPGGA(String nmeaSentence) {
     // Set the sentence
     this.nmeaSentence = nmeaSentence;
     // Tokenize
-    String[] tokens = nmeaSentence.split(",");
+    String[] tokens = NMEAReader.tokenize(nmeaSentence);
     // Set the time (requires sub-parsing)
     this.gpsTimestamp = Calendar.getInstance();
     gpsTimestamp.set(Calendar.ZONE_OFFSET, TimeZone.getTimeZone("UTC").getRawOffset());
@@ -150,19 +169,12 @@ public class GPGGA {
     return gpsTimestamp;
   }
 
-  @Override
-  public String toString() {
+  public String getDescription() {
     return "GPGGA: time [" + gpsTimestamp.getTime() + "] latitude [" + latitude + "] longitude [" + longitude + "] mode [" + mode + "] satellites [" + satellites + "] hdop [" + hdop + "] altitude [" + altitude + "] altitudeUnit [" + altitudeUnit + "] height_above_WGS84 [" + height_above_WGS84 + "] ";
   }
 
-  /**
-   * Test harness
-   * 
-   * @param args
-   */
-  public static void main(String[] args) {
-    String gga = "$GPGGA,085756,3856.6512,N,07714.3095,W,2,06,1.40,110.62,M,-33.942,M,,*7D";
-    GPGGA g = new GPGGA(gga);
-    System.out.println(g.toString());
+  @Override
+  public String toString() {
+    return nmeaSentence;
   }
 }

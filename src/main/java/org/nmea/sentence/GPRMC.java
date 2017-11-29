@@ -1,42 +1,30 @@
-/**
- * <p>
- * Copyright 2010 Key Bridge Global LLC.
- * </p>
- * <p>
- * http://keybridgeglobal.com
- * </p>
- * <p>
- * This file is part of the Java package "GPSd Java Client: (GPSdClient)".
- * </p>
- * <p>
- * GPSdClient is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- * </p>
- * <p>
- * GPSdClient is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * </p>
- * <p>
- * You should have received a copy of the GNU General Public License along with
- * GPSdClient. If not, see <http://www.gnu.org/licenses/>.
- * </p>
+/*
+ * Copyright 2017 Key Bridge.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.nmea.sentence;
 
 import java.util.Calendar;
 import java.util.TimeZone;
+import org.nmea.NMEAReader;
 
 /**
  * $GPRMC - Recommended Minimum Specific GPS/TRANSIT Data
- * <p>
- * 
  * <pre>
  * eg1. $GPRMC,081836,A,3751.65,S,14507.36,E,000.0,360.0,130998,011.3,E*62
  * eg2. $GPRMC,225446,A,4916.45,N,12311.12,W,000.5,054.7,191194,020.3,E*68
- * 
+ *
  * 225446       Time of fix 22:54:46 UTC
  * A            Navigation receiver warning A = OK, V = warning
  * 4916.45,N    Latitude 49 deg. 16.45 min North
@@ -46,10 +34,10 @@ import java.util.TimeZone;
  * 191194       Date of fix  19 November 1994
  * 020.3,E      Magnetic variation 20.3 deg East
  * 68          mandatory checksum
- * 
+ *
  * eg3. $GPRMC,220516,A,5133.82,N,00042.24,W,173.8,231.8,130694,004.2,W*70
  *               1    2    3    4    5     6    7    8      9     10  11 12
- * 
+ *
  * 1   220516     Time Stamp
  * 2   A          validity - A-ok, V-invalid
  * 3   5133.82    current Latitude
@@ -62,7 +50,7 @@ import java.util.TimeZone;
  * 10  004.2      Variation
  * 11  W          East/West
  * 12  *70        checksum
- * 
+ *
  * eg4. $GPRMC,hhmmss.ss,A,llll.ll,a,yyyyy.yy,a,x.x,x.x,ddmmyy,x.x,a*hh
  * 1    = UTC of position fix
  * 2    = Data status (V=navigation receiver warning)
@@ -80,20 +68,44 @@ import java.util.TimeZone;
  */
 public class GPRMC {
 
-  private String   nmeaSentence;
-  private Calendar gpsTimestamp;
-  private String   validity;
-  private double   latitude;
-  private double   longitude;
-  private double   speed;
-  private double   course;
-  private double   variation;
+  /**
+   * The NMEA sentence.
+   */
+  private final String nmeaSentence;
+  /**
+   * Time Stamp
+   */
+  private final Calendar gpsTimestamp;
+  /**
+   * Navigation receiver warning A = OK, V = warning validity. A-ok, V-invalid
+   */
+  private String validity;
+  /**
+   * current Latitude
+   */
+  private final double latitude;
+  /**
+   * current Longitude
+   */
+  private final double longitude;
+  /**
+   * Speed in knots
+   */
+  private final double speed;
+  /**
+   * True course
+   */
+  private final double course;
+  /**
+   * Variation
+   */
+  protected double variation;
 
   public GPRMC(String nmeaSentence) {
     // Set the sentence
     this.nmeaSentence = nmeaSentence;
     // Tokenize
-    String[] tokens = nmeaSentence.split(",");
+    String[] tokens = NMEAReader.tokenize(nmeaSentence);
     // Set the time (requires sub-parsing)
     this.gpsTimestamp = Calendar.getInstance();
     gpsTimestamp.set(Calendar.ZONE_OFFSET, TimeZone.getTimeZone("UTC").getRawOffset());
@@ -150,19 +162,13 @@ public class GPRMC {
     return variation;
   }
 
-  @Override
-  public String toString() {
+  public String getDescription() {
     return "GPRMC: time [" + gpsTimestamp.getTime() + "] latitude [" + latitude + "] longitude [" + longitude + "] speed [" + speed + "] course [" + course + "] variation [" + variation + "] ";
   }
 
-  /**
-   * Test harness
-   * 
-   * @param args
-   */
-  public static void main(String[] args) {
-    String nmea = "$GPRMC,085756,A,3856.6512,N,07714.3095,W,0.5052,174.938,030510,,*31";
-    GPRMC g = new GPRMC(nmea);
-    System.out.println(g.toString());
+  @Override
+  public String toString() {
+    return nmeaSentence;
   }
+
 }
