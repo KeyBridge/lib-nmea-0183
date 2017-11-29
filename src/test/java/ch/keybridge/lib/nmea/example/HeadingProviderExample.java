@@ -24,10 +24,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import ch.keybridge.lib.nmea.io.SentenceReader;
-import ch.keybridge.lib.provider.HeadingProvider;
-import ch.keybridge.lib.provider.event.HeadingEvent;
-import ch.keybridge.lib.provider.event.HeadingListener;
+import org.nmea.io.SentenceReader;
+import ch.keybridge.lib.nmea.provider.HeadingProvider;
+import ch.keybridge.lib.nmea.provider.event.HeadingEvent;
+import ch.keybridge.lib.nmea.provider.event.HeadingListener;
 
 /**
  * Demonstrates the usage of HeadingProvider.
@@ -36,8 +36,8 @@ import ch.keybridge.lib.provider.event.HeadingListener;
  */
 public class HeadingProviderExample implements HeadingListener {
 
-  private SentenceReader reader;
-  private HeadingProvider provider;
+  private final SentenceReader reader;
+  private final HeadingProvider provider;
 
   /**
    * Creates a new instance of FileExample
@@ -59,7 +59,7 @@ public class HeadingProviderExample implements HeadingListener {
 
   /*
    * (non-Javadoc) @see
-   * net.sf.marineapi.provider.event.HeadingListener#providerUpdate(net.sf
+   * org.nmea.provider.event.HeadingListener#providerUpdate(net.sf
    * .marineapi.provider.event.HeadingEvent)
    */
   public void providerUpdate(HeadingEvent evt) {

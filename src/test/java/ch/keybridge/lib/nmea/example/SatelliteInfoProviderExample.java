@@ -25,11 +25,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import ch.keybridge.lib.nmea.io.SentenceReader;
-import ch.keybridge.lib.nmea.util.SatelliteInfo;
-import ch.keybridge.lib.provider.SatelliteInfoProvider;
-import ch.keybridge.lib.provider.event.SatelliteInfoEvent;
-import ch.keybridge.lib.provider.event.SatelliteInfoListener;
+import org.nmea.io.SentenceReader;
+import org.nmea.util.SatelliteInfo;
+import ch.keybridge.lib.nmea.provider.SatelliteInfoProvider;
+import ch.keybridge.lib.nmea.provider.event.SatelliteInfoEvent;
+import ch.keybridge.lib.nmea.provider.event.SatelliteInfoListener;
 
 /**
  * @author Kimmo Tuukkanen
@@ -55,7 +55,7 @@ public class SatelliteInfoProviderExample implements SatelliteInfoListener {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * net.sf.marineapi.provider.event.SatelliteInfoListener#providerUpdate(net.sf.marineapi
+	 * org.nmea.provider.event.SatelliteInfoListener#providerUpdate(net.sf.marineapi
 	 * .provider.event.SatelliteInfoEvent)
 	 */
 	public void providerUpdate(SatelliteInfoEvent event) {

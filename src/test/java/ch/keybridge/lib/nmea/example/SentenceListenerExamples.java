@@ -25,16 +25,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import ch.keybridge.lib.nmea.event.AbstractSentenceListener;
-import ch.keybridge.lib.nmea.event.SentenceEvent;
-import ch.keybridge.lib.nmea.event.SentenceListener;
-import ch.keybridge.lib.nmea.io.SentenceReader;
-import ch.keybridge.lib.nmea.sentence.GGASentence;
-import ch.keybridge.lib.nmea.sentence.GLLSentence;
-import ch.keybridge.lib.nmea.sentence.GSASentence;
-import ch.keybridge.lib.nmea.sentence.GSVSentence;
-import ch.keybridge.lib.nmea.sentence.Sentence;
-import ch.keybridge.lib.nmea.sentence.SentenceId;
+import org.nmea.event.AbstractSentenceListener;
+import org.nmea.event.SentenceEvent;
+import org.nmea.event.SentenceListener;
+import org.nmea.io.SentenceReader;
+import org.nmea.sentence.GGASentence;
+import org.nmea.sentence.GLLSentence;
+import org.nmea.sentence.GSASentence;
+import org.nmea.sentence.GSVSentence;
+import org.nmea.sentence.Sentence;
+import org.nmea.sentence.SentenceId;
 
 /**
  * Demonstrates the different ways to use SentenceListeners.

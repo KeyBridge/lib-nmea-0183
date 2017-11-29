@@ -26,11 +26,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import ch.keybridge.lib.nmea.io.ExceptionListener;
-import ch.keybridge.lib.nmea.io.SentenceReader;
-import ch.keybridge.lib.provider.PositionProvider;
-import ch.keybridge.lib.provider.event.PositionEvent;
-import ch.keybridge.lib.provider.event.PositionListener;
+import org.nmea.io.ExceptionListener;
+import org.nmea.io.SentenceReader;
+import ch.keybridge.lib.nmea.provider.PositionProvider;
+import ch.keybridge.lib.nmea.provider.event.PositionEvent;
+import ch.keybridge.lib.nmea.provider.event.PositionListener;
 
 /**
  * Demonstrates the usage of PositionProvider.
@@ -54,7 +54,7 @@ public class PositionProviderExample implements PositionListener, ExceptionListe
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * net.sf.marineapi.provider.event.PositionListener#providerUpdate(net.sf.marineapi
+	 * org.nmea.provider.event.PositionListener#providerUpdate(net.sf.marineapi
 	 * .provider.event.PositionEvent)
 	 */
 	public void providerUpdate(PositionEvent evt) {

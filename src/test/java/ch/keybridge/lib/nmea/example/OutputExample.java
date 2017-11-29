@@ -1,10 +1,10 @@
 package ch.keybridge.lib.nmea.example;
 
-import ch.keybridge.lib.nmea.parser.SentenceFactory;
-import ch.keybridge.lib.nmea.sentence.MWVSentence;
-import ch.keybridge.lib.nmea.sentence.TalkerId;
-import ch.keybridge.lib.nmea.util.DataStatus;
-import ch.keybridge.lib.nmea.util.Units;
+import org.nmea.parser.SentenceFactory;
+import org.nmea.sentence.MWVSentence;
+import org.nmea.sentence.TalkerId;
+import org.nmea.util.DataStatus;
+import org.nmea.util.Units;
 
 /**
  * Demonstrates the usage of sentence parsers for data output.

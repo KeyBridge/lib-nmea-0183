@@ -5,12 +5,17 @@
  */
 package org.nmea;
 
+import org.nmea.dev.sentence.PGRME;
+import org.nmea.dev.sentence.NMEACode;
+import org.nmea.dev.sentence.GPGSA;
+import org.nmea.dev.sentence.GPRMC;
+import org.nmea.dev.sentence.GPGGA;
+import org.nmea.dev.NMEAReader;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.nmea.sentence.*;
 
 /**
  *

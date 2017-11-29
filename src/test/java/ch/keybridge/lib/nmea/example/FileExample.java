@@ -25,11 +25,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import ch.keybridge.lib.nmea.event.SentenceEvent;
-import ch.keybridge.lib.nmea.event.SentenceListener;
-import ch.keybridge.lib.nmea.io.SentenceReader;
-import ch.keybridge.lib.nmea.sentence.GGASentence;
-import ch.keybridge.lib.nmea.sentence.SentenceId;
+import org.nmea.event.SentenceEvent;
+import org.nmea.event.SentenceListener;
+import org.nmea.io.SentenceReader;
+import org.nmea.sentence.GGASentence;
+import org.nmea.sentence.SentenceId;
 
 /**
  * Simple example application that takes a filename as command-line argument and
@@ -39,7 +39,7 @@ import ch.keybridge.lib.nmea.sentence.SentenceId;
  */
 public class FileExample implements SentenceListener {
 
-	private SentenceReader reader;
+	private final SentenceReader reader;
 
 	/**
 	 * Creates a new instance of FileExample
@@ -59,7 +59,7 @@ public class FileExample implements SentenceListener {
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
+	 * @see org.nmea.event.SentenceListener#readingPaused()
 	 */
 	public void readingPaused() {
 		System.out.println("-- Paused --");
@@ -67,7 +67,7 @@ public class FileExample implements SentenceListener {
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
+	 * @see org.nmea.event.SentenceListener#readingStarted()
 	 */
 	public void readingStarted() {
 		System.out.println("-- Started --");
@@ -75,7 +75,7 @@ public class FileExample implements SentenceListener {
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
+	 * @see org.nmea.event.SentenceListener#readingStopped()
 	 */
 	public void readingStopped() {
 		System.out.println("-- Stopped --");
@@ -84,7 +84,7 @@ public class FileExample implements SentenceListener {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
+	 * org.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
 	 * .nmea.event.SentenceEvent)
 	 */
 	public void sentenceRead(SentenceEvent event) {

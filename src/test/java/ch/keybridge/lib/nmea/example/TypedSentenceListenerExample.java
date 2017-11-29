@@ -25,9 +25,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import ch.keybridge.lib.nmea.event.AbstractSentenceListener;
-import ch.keybridge.lib.nmea.io.SentenceReader;
-import ch.keybridge.lib.nmea.sentence.RMCSentence;
+import org.nmea.event.AbstractSentenceListener;
+import org.nmea.io.SentenceReader;
+import org.nmea.sentence.RMCSentence;
 
 /**
  * Example application demonstrating the usage of AbstractSentenceListener.
@@ -37,7 +37,7 @@ import ch.keybridge.lib.nmea.sentence.RMCSentence;
 public class TypedSentenceListenerExample
 	extends AbstractSentenceListener<RMCSentence> {
 
-	private SentenceReader reader;
+	private final SentenceReader reader;
 
 	/**
 	 * Creates a new instance.
