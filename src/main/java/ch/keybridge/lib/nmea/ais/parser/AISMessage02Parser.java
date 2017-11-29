@@ -25,8 +25,9 @@ import ch.keybridge.lib.nmea.ais.util.Sixbit;
 
 /**
  * AIS Message 2 implementation: Position report.
- *
- * <pre>
+ * <p>
+ * <
+ * pre>
  * Field  Name                                      Bits    (from, to )
  * ------------------------------------------------------------------------
  *  1	  messageID                               	   6	(   1,   6)
@@ -48,12 +49,12 @@ import ch.keybridge.lib.nmea.ais.util.Sixbit;
  *                                                   ---- +
  *                                               sum 168
  * </pre>
- * 
+ *
  * @author Lázár József
  */
 class AISMessage02Parser extends AISPositionReportParser implements AISMessage02 {
 
-	public AISMessage02Parser(Sixbit content) {
-		super(content);
-	}
+  public AISMessage02Parser(Sixbit content) {
+    super(content);
+  }
 }

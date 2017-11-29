@@ -24,12 +24,12 @@ import ch.keybridge.lib.nmea.ais.message.AISMessage18;
 import ch.keybridge.lib.nmea.ais.util.Sixbit;
 
 /**
- * 
+ *
  * @author Lázár József
  */
 class AISMessage18Parser extends AISPositionReportBParser implements AISMessage18 {
 
-	public AISMessage18Parser(Sixbit content) {
-		super(content);
-	}
+  public AISMessage18Parser(Sixbit content) {
+    super(content);
+  }
 }

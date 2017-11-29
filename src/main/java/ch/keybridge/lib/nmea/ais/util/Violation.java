@@ -22,7 +22,7 @@ package ch.keybridge.lib.nmea.ais.util;
 
 /**
  * Any message containing AIS rule violations.
- * 
+ *
  * @author Lázár József
  */
 public interface Violation {

@@ -7,8 +7,10 @@ package org.nmea;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.nmea.sentence.*;
 
 /**
  *
@@ -63,5 +65,50 @@ public class NMEAReaderTest {
     NMEAReader nmrmc = new NMEAReader(rmc);
     System.out.println(nmrmc.toString());
 
+  }
+
+  @Test
+  public void testPGRME() {
+    String nmea = "$PGRME,0.00,M,0.00,M,6.73,M*1C";
+    PGRME g = new PGRME(nmea);
+    System.out.println(g.toString());
+  }
+
+  @Test
+  public void testNMEACode() {
+    String GPGGA = "$GPGGA,085756,3856.6512,N,07714.3095,W,2,06,1.40,110.62,M,-33.942,M,,*7D";
+    Assert.assertEquals(NMEACode.parse(GPGGA), NMEACode.GPGGA);
+
+    String GPBWC = "$GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*11";
+    Assert.assertEquals(NMEACode.parse(GPBWC), NMEACode.GPBWC);
+
+    String GPGLL = "$GPGLL,5133.81,N,00042.25,W*75    ";
+    Assert.assertEquals(NMEACode.parse(GPGLL), NMEACode.GPGLL);
+
+    String GPGSV = "$GPGSV,1,1,13,02,02,213,,03,-3,000,,11,00,121,,14,13,172,05*67";
+    Assert.assertEquals(NMEACode.parse(GPGSV), NMEACode.GPGSV);
+
+    System.out.println("NMEA parse ok");
+  }
+
+  @Test
+  public void testGPRMC() {
+    String nmea = "$GPRMC,085756,A,3856.6512,N,07714.3095,W,0.5052,174.938,030510,,*31";
+    GPRMC g = new GPRMC(nmea);
+    System.out.println(g.getDescription());
+  }
+
+  @Test
+  public void testGPGGA() {
+    String gga = "$GPGGA,085756,3856.6512,N,07714.3095,W,2,06,1.40,110.62,M,-33.942,M,,*7D";
+    GPGGA g = new GPGGA(gga);
+    System.out.println(g.getDescription());
+  }
+
+  @Test
+  public void testGPGSA() {
+    String nmea = "$GPGSA,A,3,02,17,05,12,04,10,,,,,,,2.9,1.4,2.6*3F";
+    GPGSA g = new GPGSA(nmea);
+    System.out.println(g.getDescription());
   }
 }

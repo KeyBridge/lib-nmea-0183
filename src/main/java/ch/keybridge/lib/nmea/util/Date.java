@@ -95,7 +95,7 @@ public class Date {
     if (obj instanceof Date) {
       Date d = (Date) obj;
       if (d.getDay() == getDay() && d.getMonth() == getMonth()
-          && d.getYear() == getYear()) {
+        && d.getYear() == getYear()) {
         return true;
       }
     }

@@ -21,70 +21,72 @@
 package ch.keybridge.lib.nmea.sentence;
 
 /**
- * <p>Relative and absolute humidity with dew point.</p>
+ * <p>
+ * Relative and absolute humidity with dew point.
  * <p/>
- * <p><em>Notice: not recommended as of Oct 2008, should use <code>XDR</code>
- * instead.</em></p>
+ * <p>
+ * <em>Notice: not recommended as of Oct 2008, should use <code>XDR</code>
+ * instead.</em>
  *
  * @author Kimmo Tuukkanen
  * @see ch.keybridge.lib.nmea.sentence.XDRSentence
  */
 public interface MHUSentence extends Sentence {
 
-    /**
-     * Returns the humidity relative to temperature of air.
-     *
-     * @return Relative humitidy, percent.
-     */
-    double getRelativeHumidity();
+  /**
+   * Returns the humidity relative to temperature of air.
+   *
+   * @return Relative humitidy, percent.
+   */
+  double getRelativeHumidity();
 
-    /**
-     * Returns the absolute humidity value.
-     *
-     * @return Absolute humidity, g/m³.
-     */
-    double getAbsoluteHumidity();
+  /**
+   * Returns the absolute humidity value.
+   *
+   * @return Absolute humidity, g/m³.
+   */
+  double getAbsoluteHumidity();
 
-    /**
-     * Returns the dew point value.
-     *
-     * @return Dew point, degrees Celcius.
-     * @see #getDewPointUnit()
-     */
-    double getDewPoint();
+  /**
+   * Returns the dew point value.
+   *
+   * @return Dew point, degrees Celcius.
+   * @see #getDewPointUnit()
+   */
+  double getDewPoint();
 
-    /**
-     * Returns the unit of dew point temperature, by default degrees Celsius.
-     *
-     * @return Temperature unit char, defaults to <code>'c'</code>.
-     */
-    char getDewPointUnit();
+  /**
+   * Returns the unit of dew point temperature, by default degrees Celsius.
+   *
+   * @return Temperature unit char, defaults to <code>'c'</code>.
+   */
+  char getDewPointUnit();
 
-    /**
-     * Returns the relative humidity.
-     *
-     * @param humidity Relative humidity, percent.
-     */
-    void setRelativeHumidity(double humidity);
+  /**
+   * Returns the relative humidity.
+   *
+   * @param humidity Relative humidity, percent.
+   */
+  void setRelativeHumidity(double humidity);
 
-    /**
-     * Returns the absolute humidity value.
-     *
-     * @param humidity Absolute humidity, percent.
-     */
-    void setAbsoluteHumidity(double humidity);
+  /**
+   * Returns the absolute humidity value.
+   *
+   * @param humidity Absolute humidity, percent.
+   */
+  void setAbsoluteHumidity(double humidity);
 
-    /**
-     * Sets the dew point value.
-     *
-     * @param dewPoint Dew point in degrees Celcius.
-     */
-    void setDewPoint(double dewPoint);
+  /**
+   * Sets the dew point value.
+   *
+   * @param dewPoint Dew point in degrees Celcius.
+   */
+  void setDewPoint(double dewPoint);
 
-    /**
-     * Sets the unit of dew point temperature, by default degrees Celsius.
-     *
-     * @param unit Temperature unit char, defaults to <code>'c'</code>.
-     */
-    void setDewPointUnit(char unit);
+  /**
+   * Sets the unit of dew point temperature, by default degrees Celsius.
+   *
+   * @param unit Temperature unit char, defaults to <code>'c'</code>.
+   */
+  void setDewPointUnit(char unit);
 }

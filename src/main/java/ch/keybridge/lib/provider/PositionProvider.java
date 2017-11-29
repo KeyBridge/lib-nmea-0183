@@ -22,18 +22,8 @@ package ch.keybridge.lib.provider;
 
 import ch.keybridge.lib.nmea.io.SentenceReader;
 import ch.keybridge.lib.nmea.parser.DataNotAvailableException;
-import ch.keybridge.lib.nmea.sentence.GGASentence;
-import ch.keybridge.lib.nmea.sentence.GLLSentence;
-import ch.keybridge.lib.nmea.sentence.RMCSentence;
-import ch.keybridge.lib.nmea.sentence.Sentence;
-import ch.keybridge.lib.nmea.sentence.SentenceId;
-import ch.keybridge.lib.nmea.sentence.VTGSentence;
-import ch.keybridge.lib.nmea.util.DataStatus;
-import ch.keybridge.lib.nmea.util.Date;
-import ch.keybridge.lib.nmea.util.FaaMode;
-import ch.keybridge.lib.nmea.util.GpsFixQuality;
-import ch.keybridge.lib.nmea.util.Position;
-import ch.keybridge.lib.nmea.util.Time;
+import ch.keybridge.lib.nmea.sentence.*;
+import ch.keybridge.lib.nmea.util.*;
 import ch.keybridge.lib.provider.event.PositionEvent;
 
 /**
@@ -148,7 +138,7 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
         RMCSentence rmc = (RMCSentence) s;
         DataStatus ds = rmc.getStatus();
         if (DataStatus.VOID.equals(ds)
-            || (rmc.getFieldCount() > 11 && FaaMode.NONE.equals(rmc.getMode()))) {
+          || (rmc.getFieldCount() > 11 && FaaMode.NONE.equals(rmc.getMode()))) {
           return false;
         }
       } else if (s instanceof GGASentence) {

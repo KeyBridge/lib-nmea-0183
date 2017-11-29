@@ -25,8 +25,9 @@ import ch.keybridge.lib.nmea.ais.util.Sixbit;
 
 /**
  * AIS Message 4 implementation: Base Station Report.
- *
- * <pre>
+ * <p>
+ * <
+ * pre>
  * Field Name                                           Bits    (from, to )
  * ------------------------------------------------------------------------
  *  1	 messageID                        		       	   6	(   1,   6)
@@ -49,12 +50,12 @@ import ch.keybridge.lib.nmea.ais.util.Sixbit;
  *                                                      ---- +
  *                                                   sum 168
  * </pre>
- * 
+ *
  * @author Lázár József
  */
 class AISMessage04Parser extends AISUTCParser implements AISMessage04 {
 
-	public AISMessage04Parser(Sixbit content) {
-		super(content);
-	}
+  public AISMessage04Parser(Sixbit content) {
+    super(content);
+  }
 }

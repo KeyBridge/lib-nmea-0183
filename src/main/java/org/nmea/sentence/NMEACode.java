@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2017 Key Bridge.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

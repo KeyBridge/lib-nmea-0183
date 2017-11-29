@@ -20,13 +20,12 @@
  */
 package ch.keybridge.lib.nmea.ais.event;
 
-import ch.keybridge.lib.nmea.ais.parser.AISMessageFactory;
 import ch.keybridge.lib.nmea.ais.message.AISMessage;
+import ch.keybridge.lib.nmea.ais.parser.AISMessageFactory;
 import ch.keybridge.lib.nmea.event.SentenceEvent;
 import ch.keybridge.lib.nmea.event.SentenceListener;
 import ch.keybridge.lib.nmea.sentence.AISSentence;
 import ch.keybridge.lib.nmea.sentence.Sentence;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -38,93 +37,93 @@ import java.util.Queue;
  * for a specific AIS message type. For listening all available AIS sentences,
  * extend <code>AbstractSentenceListener&lt;AISSentence&gt;</code> or implement
  * SentenceListener interface. However, in this case you should also implement
- * AIS message concatenation to combine and parse messages that are deliverd over
- * multiple sentences.
+ * AIS message concatenation to combine and parse messages that are deliverd
+ * over multiple sentences.
  *
  * @author Kimmo Tuukkanen
  */
 public abstract class AbstractAISMessageListener<T extends AISMessage> implements SentenceListener {
 
-	private final Class<? extends AISMessage> expectedMessageType;
-	private Queue<AISSentence> queue = new LinkedList<AISSentence>();
-	private final AISMessageFactory factory = AISMessageFactory.getInstance();
+  private final Class<? extends AISMessage> expectedMessageType;
+  private Queue<AISSentence> queue = new LinkedList<AISSentence>();
+  private final AISMessageFactory factory = AISMessageFactory.getInstance();
 
-	/**
-	 * Constructor
-	 */
-	public AbstractAISMessageListener() {
-		// TODO: not DRY
-		ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
-		Type[] superClassTypeArgs = superClass.getActualTypeArguments();
-		this.expectedMessageType = (Class<T>)superClassTypeArgs[0];
-	}
+  /**
+   * Constructor
+   */
+  public AbstractAISMessageListener() {
+    // TODO: not DRY
+    ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
+    Type[] superClassTypeArgs = superClass.getActualTypeArguments();
+    this.expectedMessageType = (Class<T>) superClassTypeArgs[0];
+  }
 
-	@Override
-	public void sentenceRead(SentenceEvent event) {
-		Sentence s = event.getSentence();
-		if (s.isAISSentence()) {
-			handleAIS((AISSentence) s);
-		}
-	}
+  @Override
+  public void sentenceRead(SentenceEvent event) {
+    Sentence s = event.getSentence();
+    if (s.isAISSentence()) {
+      handleAIS((AISSentence) s);
+    }
+  }
 
-	/**
-	 * Concatenate and pre-parse AIS sentences/messages.
-	 */
-	private void handleAIS(AISSentence sentence) {
+  /**
+   * Concatenate and pre-parse AIS sentences/messages.
+   */
+  private void handleAIS(AISSentence sentence) {
 
-		if (sentence.isFirstFragment()) {
-			queue.clear();
-		}
+    if (sentence.isFirstFragment()) {
+      queue.clear();
+    }
 
-		queue.add(sentence);
+    queue.add(sentence);
 
-		if (sentence.isLastFragment()) {
-			AISSentence[] sentences = queue.toArray(new AISSentence[queue.size()]);
-			try {
-				AISMessage message = factory.create(sentences);
-				if (message != null) {
-					Class<?>[] interfaces = message.getClass().getInterfaces();
-					if (Arrays.asList(interfaces).contains(expectedMessageType)) {
-						onMessage((T) message);
-					}
-				}
-			} catch (IllegalArgumentException iae) {
-				// nevermind unsupported message types
-			}
-		}
-	}
+    if (sentence.isLastFragment()) {
+      AISSentence[] sentences = queue.toArray(new AISSentence[queue.size()]);
+      try {
+        AISMessage message = factory.create(sentences);
+        if (message != null) {
+          Class<?>[] interfaces = message.getClass().getInterfaces();
+          if (Arrays.asList(interfaces).contains(expectedMessageType)) {
+            onMessage((T) message);
+          }
+        }
+      } catch (IllegalArgumentException iae) {
+        // nevermind unsupported message types
+      }
+    }
+  }
 
-	/**
-	 * Invoked when AIS message has been parsed.
-	 *
-	 * @param msg AISMessage of subtype <code>T</code>.
-	 */
-	public abstract void onMessage(T msg);
+  /**
+   * Invoked when AIS message has been parsed.
+   *
+   * @param msg AISMessage of subtype <code>T</code>.
+   */
+  public abstract void onMessage(T msg);
 
-	/**
-	 * Empty implementation.
-	 *
-	 * @see ch.keybridge.lib.nmea.event.SentenceListener
-	 */
-	@Override
-	public void readingPaused() {
-	}
+  /**
+   * Empty implementation.
+   *
+   * @see ch.keybridge.lib.nmea.event.SentenceListener
+   */
+  @Override
+  public void readingPaused() {
+  }
 
-	/**
-	 * Empty implementation.
-	 *
-	 * @see ch.keybridge.lib.nmea.event.SentenceListener
-	 */
-	@Override
-	public void readingStarted() {
-	}
+  /**
+   * Empty implementation.
+   *
+   * @see ch.keybridge.lib.nmea.event.SentenceListener
+   */
+  @Override
+  public void readingStarted() {
+  }
 
-	/**
-	 * Empty implementation.
-	 *
-	 * @see ch.keybridge.lib.nmea.event.SentenceListener
-	 */
-	@Override
-	public void readingStopped() {
-	}
+  /**
+   * Empty implementation.
+   *
+   * @see ch.keybridge.lib.nmea.event.SentenceListener
+   */
+  @Override
+  public void readingStopped() {
+  }
 }

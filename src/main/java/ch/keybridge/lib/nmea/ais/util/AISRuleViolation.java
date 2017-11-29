@@ -22,24 +22,24 @@ package ch.keybridge.lib.nmea.ais.util;
 
 /**
  * Class holding information about a violation against an AIS rule.
- * 
+ *
  * @author Lázár József
  */
 public class AISRuleViolation implements Violation {
 
-	private String	fPlaceOfViolation;
-	private Object	fCurrentValue;
-	private String	fValidRange;
+  private String fPlaceOfViolation;
+  private Object fCurrentValue;
+  private String fValidRange;
 
-	public AISRuleViolation(String where, Object value, String range) {
-		fPlaceOfViolation = where;
-		fCurrentValue = value;
-		fValidRange = range;
-	}
-	
-	public String toString() {
-		return "Violation: Value " + fCurrentValue.toString() +
-				" in " + fPlaceOfViolation +
-				" is outside the allowed range (" + fValidRange + ")";
-	}
+  public AISRuleViolation(String where, Object value, String range) {
+    fPlaceOfViolation = where;
+    fCurrentValue = value;
+    fValidRange = range;
+  }
+
+  public String toString() {
+    return "Violation: Value " + fCurrentValue.toString()
+      + " in " + fPlaceOfViolation
+      + " is outside the allowed range (" + fValidRange + ")";
+  }
 }

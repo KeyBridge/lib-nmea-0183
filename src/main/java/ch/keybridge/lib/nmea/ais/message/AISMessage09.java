@@ -22,57 +22,58 @@ package ch.keybridge.lib.nmea.ais.message;
 
 /**
  * Standard SAR Aircraft Position Report
- *
+ * <p>
  * Tracking information for search-and-rescue aircraft.
- *
+ * <p>
  * Total number of bits is 168.
  *
  * @author Henri Laurent
  */
 public interface AISMessage09 extends AISPositionInfo {
 
-    /**
-     * Returns the Altitude of the aircraft
-     * Altitude is in meters. The special value 4095 indicates altitude is not available;
-     * 4094 indicates 4094 meters or higher.
-     */
-    int getAltitude();
+  /**
+   * Returns the Altitude of the aircraft Altitude is in meters. The special
+   * value 4095 indicates altitude is not available; 4094 indicates 4094 meters
+   * or higher.
+   */
+  int getAltitude();
 
-    /**
-     * Returns the speed over ground.
-     * Speed over ground is in knots, not deciknots as in the common navigation block; planes go faster.
-     * The special value 1023 indicates speed not available, 1022 indicates 1022 knots or higher.
-     */
-    int getSpeedOverGround();
+  /**
+   * Returns the speed over ground. Speed over ground is in knots, not deciknots
+   * as in the common navigation block; planes go faster. The special value 1023
+   * indicates speed not available, 1022 indicates 1022 knots or higher.
+   */
+  int getSpeedOverGround();
 
-    /**
-     * Returns the course over ground.
-     */
-    int getCourseOverGround();
+  /**
+   * Returns the course over ground.
+   */
+  int getCourseOverGround();
 
-    /**
-     * Returns the UTC second.
-     * @return an integer value representing the UTC second (0-59)
-     */
-    int getTimeStamp();
+  /**
+   * Returns the UTC second.
+   *
+   * @return an integer value representing the UTC second (0-59)
+   */
+  int getTimeStamp();
 
-    /**
-     * Returns the DTE
-     */
-    boolean getDTEFlag();
+  /**
+   * Returns the DTE
+   */
+  boolean getDTEFlag();
 
-    /**
-     * Returns the Assigned-mode flag
-     */
-    boolean getAssignedModeFlag();
+  /**
+   * Returns the Assigned-mode flag
+   */
+  boolean getAssignedModeFlag();
 
-    /**
-     * Returns the RAIM flag
-     */
-    boolean getRAIMFlag();
+  /**
+   * Returns the RAIM flag
+   */
+  boolean getRAIMFlag();
 
-    /**
-     * Returns the Radio status
-     */
-    int getRadioStatus();
+  /**
+   * Returns the Radio status
+   */
+  int getRadioStatus();
 }

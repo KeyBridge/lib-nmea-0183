@@ -26,74 +26,74 @@ import ch.keybridge.lib.nmea.sentence.TalkerId;
 
 /**
  * MHUParser - Humidity & dew point.
- *
+ * <p>
  * $--MHU,x.x,x.x,x.x,C*hh<CR><LF>
  *
  * @author Kimmo Tuukkanen
  */
 class MHUParser extends SentenceParser implements MHUSentence {
 
-    private static final int RELATIVE_HUMIDITY = 0;
-    private static final int ABSOLUTE_HUMIDITY = 1;
-    private static final int DEW_POINT = 2;
-    private static final int DEW_POINT_UNIT = 3;
+  private static final int RELATIVE_HUMIDITY = 0;
+  private static final int ABSOLUTE_HUMIDITY = 1;
+  private static final int DEW_POINT = 2;
+  private static final int DEW_POINT_UNIT = 3;
 
-    /**
-     * Constructor for parsing MHU sentence.
-     *
-     * @param nmea MHU sentence String
-     */
-    public MHUParser(String nmea) {
-        super(nmea, SentenceId.MHU);
-    }
+  /**
+   * Constructor for parsing MHU sentence.
+   *
+   * @param nmea MHU sentence String
+   */
+  public MHUParser(String nmea) {
+    super(nmea, SentenceId.MHU);
+  }
 
-    /**
-     * Constructor for fresh MHU sentence.
-     *
-     * @param tid Talker ID to be used.
-     */
-    public MHUParser(TalkerId tid) {
-        super(tid, SentenceId.MHU, 4);
-        setDewPointUnit('C');
-    }
+  /**
+   * Constructor for fresh MHU sentence.
+   *
+   * @param tid Talker ID to be used.
+   */
+  public MHUParser(TalkerId tid) {
+    super(tid, SentenceId.MHU, 4);
+    setDewPointUnit('C');
+  }
 
-    @Override
-    public double getRelativeHumidity() {
-        return getDoubleValue(RELATIVE_HUMIDITY);
-    }
+  @Override
+  public double getRelativeHumidity() {
+    return getDoubleValue(RELATIVE_HUMIDITY);
+  }
 
-    @Override
-    public double getAbsoluteHumidity() {
-        return getDoubleValue(ABSOLUTE_HUMIDITY);
-    }
+  @Override
+  public double getAbsoluteHumidity() {
+    return getDoubleValue(ABSOLUTE_HUMIDITY);
+  }
 
-    @Override
-    public double getDewPoint() {
-        return getDoubleValue(DEW_POINT);
-    }
+  @Override
+  public double getDewPoint() {
+    return getDoubleValue(DEW_POINT);
+  }
 
-    @Override
-    public char getDewPointUnit() {
-        return getCharValue(DEW_POINT_UNIT);
-    }
+  @Override
+  public char getDewPointUnit() {
+    return getCharValue(DEW_POINT_UNIT);
+  }
 
-    @Override
-    public void setRelativeHumidity(double humidity) {
-        setDoubleValue(RELATIVE_HUMIDITY, humidity, 1, 1);
-    }
+  @Override
+  public void setRelativeHumidity(double humidity) {
+    setDoubleValue(RELATIVE_HUMIDITY, humidity, 1, 1);
+  }
 
-    @Override
-    public void setAbsoluteHumidity(double humidity) {
-        setDoubleValue(ABSOLUTE_HUMIDITY, humidity, 1, 1);
-    }
+  @Override
+  public void setAbsoluteHumidity(double humidity) {
+    setDoubleValue(ABSOLUTE_HUMIDITY, humidity, 1, 1);
+  }
 
-    @Override
-    public void setDewPoint(double dewPoint) {
-        setDoubleValue(DEW_POINT, dewPoint, 1, 1);
-    }
+  @Override
+  public void setDewPoint(double dewPoint) {
+    setDoubleValue(DEW_POINT, dewPoint, 1, 1);
+  }
 
-    @Override
-    public void setDewPointUnit(char unit) {
-        setCharValue(DEW_POINT_UNIT, unit);
-    }
+  @Override
+  public void setDewPointUnit(char unit) {
+    setCharValue(DEW_POINT_UNIT, unit);
+  }
 }

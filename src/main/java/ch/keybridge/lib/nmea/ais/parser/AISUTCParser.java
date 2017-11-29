@@ -21,17 +21,13 @@
 package ch.keybridge.lib.nmea.ais.parser;
 
 import ch.keybridge.lib.nmea.ais.message.AISUTCReport;
-import ch.keybridge.lib.nmea.ais.util.AISRuleViolation;
-import ch.keybridge.lib.nmea.ais.util.Latitude27;
-import ch.keybridge.lib.nmea.ais.util.Longitude28;
-import ch.keybridge.lib.nmea.ais.util.PositionInfo;
-import ch.keybridge.lib.nmea.ais.util.PositioningDevice;
-import ch.keybridge.lib.nmea.ais.util.Sixbit;
+import ch.keybridge.lib.nmea.ais.util.*;
 
 /**
  * AIS Base station and Mobile Station UTC reporting
- * 
- * <pre>
+ * <p>
+ * <
+ * pre>
  * Field  Name                                          Bits    (from, to )
  * ------------------------------------------------------------------------
  *  1	  messageID                        		       	   6	(   1,   6)
@@ -54,91 +50,114 @@ import ch.keybridge.lib.nmea.ais.util.Sixbit;
  *                                                      ---- +
  *                                                  sum  168
  * </pre>
- * 
+ *
  * @author Lázár József
  */
 class AISUTCParser extends AISMessageParser implements AISUTCReport {
 
-	private final static String	SEPARATOR			= "\n\t";
-	private static final int	UTC_YEAR			= 0;
-	private static final int	UTC_MONTH			= 1;
-	private static final int	UTC_DAY				= 2;
-	private static final int	UTC_HOUR			= 3;
-	private static final int 	UTC_MINUTE			= 4;
-	private static final int 	UTC_SECOND			= 5;
-	private static final int 	POSITIONACCURACY	= 6;
-	private static final int	LONGITUDE			= 7;
-	private static final int 	LATITUDE			= 8;
-	private static final int 	FIXING_DEV_TYPE		= 9;
-	private final static int[]	FROM				= {
-		38, 52, 56, 61, 66, 72, 78,  79, 107, 134};
-	private final static int[]	TO   				= {
-		52, 56, 61, 66, 72, 78, 79, 107, 134, 138};
+  private final static String SEPARATOR = "\n\t";
+  private static final int UTC_YEAR = 0;
+  private static final int UTC_MONTH = 1;
+  private static final int UTC_DAY = 2;
+  private static final int UTC_HOUR = 3;
+  private static final int UTC_MINUTE = 4;
+  private static final int UTC_SECOND = 5;
+  private static final int POSITIONACCURACY = 6;
+  private static final int LONGITUDE = 7;
+  private static final int LATITUDE = 8;
+  private static final int FIXING_DEV_TYPE = 9;
+  private final static int[] FROM = {
+    38, 52, 56, 61, 66, 72, 78, 79, 107, 134};
+  private final static int[] TO = {
+    52, 56, 61, 66, 72, 78, 79, 107, 134, 138};
 
-	private int		fUTCYear;
-	private int		fUTCMonth;
-	private int		fUTCDay;
-	private int		fUTCHour;
-	private int		fUTCMinute;
-	private int		fUTCSecond;
-	private boolean	fPositionAccuracy;
-	private double	fLongitude;
-	private double	fLatitude;
-	private int		fTypeOfEPFD;
+  private int fUTCYear;
+  private int fUTCMonth;
+  private int fUTCDay;
+  private int fUTCHour;
+  private int fUTCMinute;
+  private int fUTCSecond;
+  private boolean fPositionAccuracy;
+  private double fLongitude;
+  private double fLatitude;
+  private int fTypeOfEPFD;
 
-	public AISUTCParser(Sixbit content) {
-		super(content);
-		if (content.length() != 168)
-			throw new IllegalArgumentException("Wrong message length");
-		
-	    fUTCYear = content.getInt(FROM[UTC_YEAR], TO[UTC_YEAR]);
-	    fUTCMonth = content.getInt(FROM[UTC_MONTH], TO[UTC_MONTH]);
-	    fUTCDay = content.getInt(FROM[UTC_DAY], TO[UTC_DAY]);
-	    fUTCHour = content.getInt(FROM[UTC_HOUR], TO[UTC_HOUR]);
-	    fUTCMinute = content.getInt(FROM[UTC_MINUTE],TO[UTC_MINUTE]);
-	    fUTCSecond = content.getInt(FROM[UTC_SECOND], TO[UTC_SECOND]);
-	    fPositionAccuracy = content.getBoolean(FROM[POSITIONACCURACY]);
-	    fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));
-	    if (!PositionInfo.isLongitudeCorrect(fLongitude))
-	    	fViolations.add(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
-	    fLatitude = Latitude27.toDegrees(content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]));
-	    if (!PositionInfo.isLatitudeCorrect(fLatitude))
-	    	fViolations.add(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
-	    fTypeOfEPFD = content.getInt(FROM[FIXING_DEV_TYPE], TO[FIXING_DEV_TYPE]);
-	}
+  public AISUTCParser(Sixbit content) {
+    super(content);
+    if (content.length() != 168) {
+      throw new IllegalArgumentException("Wrong message length");
+    }
 
-	public int getUtcYear() { return fUTCYear; }
+    fUTCYear = content.getInt(FROM[UTC_YEAR], TO[UTC_YEAR]);
+    fUTCMonth = content.getInt(FROM[UTC_MONTH], TO[UTC_MONTH]);
+    fUTCDay = content.getInt(FROM[UTC_DAY], TO[UTC_DAY]);
+    fUTCHour = content.getInt(FROM[UTC_HOUR], TO[UTC_HOUR]);
+    fUTCMinute = content.getInt(FROM[UTC_MINUTE], TO[UTC_MINUTE]);
+    fUTCSecond = content.getInt(FROM[UTC_SECOND], TO[UTC_SECOND]);
+    fPositionAccuracy = content.getBoolean(FROM[POSITIONACCURACY]);
+    fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));
+    if (!PositionInfo.isLongitudeCorrect(fLongitude)) {
+      fViolations.add(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
+    }
+    fLatitude = Latitude27.toDegrees(content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]));
+    if (!PositionInfo.isLatitudeCorrect(fLatitude)) {
+      fViolations.add(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
+    }
+    fTypeOfEPFD = content.getInt(FROM[FIXING_DEV_TYPE], TO[FIXING_DEV_TYPE]);
+  }
 
-	public int getUtcMonth() { return fUTCMonth; }
+  public int getUtcYear() {
+    return fUTCYear;
+  }
 
-	public int getUtcDay() { return fUTCDay; }
+  public int getUtcMonth() {
+    return fUTCMonth;
+  }
 
-	public int getUtcHour() { return fUTCHour; }
+  public int getUtcDay() {
+    return fUTCDay;
+  }
 
-	public int getUtcMinute() { return fUTCMinute; }
+  public int getUtcHour() {
+    return fUTCHour;
+  }
 
-	public int getUtcSecond() { return fUTCSecond; }
+  public int getUtcMinute() {
+    return fUTCMinute;
+  }
 
-	public boolean getPositionAccuracy() { return fPositionAccuracy; }
+  public int getUtcSecond() {
+    return fUTCSecond;
+  }
 
-	public double getLongitudeInDegrees() { return fLongitude; }
+  public boolean getPositionAccuracy() {
+    return fPositionAccuracy;
+  }
 
-	public double getLatitudeInDegrees() { return fLatitude; }
+  public double getLongitudeInDegrees() {
+    return fLongitude;
+  }
 
-	public int getTypeOfEPFD() { return fTypeOfEPFD; }
-	
-	@Override
-	public String toString() {
-		String result =     "\tYear:    " + getUtcYear();
-		result += SEPARATOR + "Month:   " + getUtcMonth();
-		result += SEPARATOR + "Day:     " + getUtcDay();
-		result += SEPARATOR + "Hour:    " + getUtcHour();
-		result += SEPARATOR + "Minute:  " + getUtcMinute();
-		result += SEPARATOR + "Sec:     " + getUtcSecond();
-		result += SEPARATOR + "Pos acc: " + (fPositionAccuracy ? "high" : "low") + " accuracy";
-		result += SEPARATOR + "Lon:     " + PositionInfo.longitudeToString(fLongitude);
-		result += SEPARATOR + "Lat:     " + PositionInfo.latitudeToString(fLatitude);
-		result += SEPARATOR + "EPFD:    " + PositioningDevice.toString(fTypeOfEPFD);
-		return result;
-	}
+  public double getLatitudeInDegrees() {
+    return fLatitude;
+  }
+
+  public int getTypeOfEPFD() {
+    return fTypeOfEPFD;
+  }
+
+  @Override
+  public String toString() {
+    String result = "\tYear:    " + getUtcYear();
+    result += SEPARATOR + "Month:   " + getUtcMonth();
+    result += SEPARATOR + "Day:     " + getUtcDay();
+    result += SEPARATOR + "Hour:    " + getUtcHour();
+    result += SEPARATOR + "Minute:  " + getUtcMinute();
+    result += SEPARATOR + "Sec:     " + getUtcSecond();
+    result += SEPARATOR + "Pos acc: " + (fPositionAccuracy ? "high" : "low") + " accuracy";
+    result += SEPARATOR + "Lon:     " + PositionInfo.longitudeToString(fLongitude);
+    result += SEPARATOR + "Lat:     " + PositionInfo.latitudeToString(fLatitude);
+    result += SEPARATOR + "EPFD:    " + PositioningDevice.toString(fTypeOfEPFD);
+    return result;
+  }
 }

@@ -36,45 +36,42 @@ import ch.keybridge.lib.provider.event.HeadingEvent;
  */
 public class HeadingProvider extends AbstractProvider<HeadingEvent> {
 
-	/**
-	 * Creates a new intance of HeadingProvider.
-	 *
-	 * @param reader Reader for capturing heading sentences.
-	 */
-	public HeadingProvider(SentenceReader reader) {
-		super(reader, SentenceId.HDT, SentenceId.HDM, SentenceId.HDG);
-	}
+  /**
+   * Creates a new intance of HeadingProvider.
+   *
+   * @param reader Reader for capturing heading sentences.
+   */
+  public HeadingProvider(SentenceReader reader) {
+    super(reader, SentenceId.HDT, SentenceId.HDM, SentenceId.HDG);
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.sf.marineapi.provider.AbstractProvider#createEvent()
-	 */
-	@Override
-	protected HeadingEvent createProviderEvent() {
-		for (Sentence s : getSentences()) {
-			if (s instanceof HeadingSentence) {
-				return new HeadingEvent(this, (HeadingSentence) s);
-			}
-		}
-		return null;
-	}
+  /*
+   * (non-Javadoc) @see net.sf.marineapi.provider.AbstractProvider#createEvent()
+   */
+  @Override
+  protected HeadingEvent createProviderEvent() {
+    for (Sentence s : getSentences()) {
+      if (s instanceof HeadingSentence) {
+        return new HeadingEvent(this, (HeadingSentence) s);
+      }
+    }
+    return null;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.sf.marineapi.provider.AbstractProvider#isReady()
-	 */
-	@Override
-	protected boolean isReady() {
-		return hasOne("HDT", "HDM", "HDG");
-	}
+  /*
+   * (non-Javadoc) @see net.sf.marineapi.provider.AbstractProvider#isReady()
+   */
+  @Override
+  protected boolean isReady() {
+    return hasOne("HDT", "HDM", "HDG");
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.sf.marineapi.provider.AbstractProvider#isValid()
-	 */
-	@Override
-	protected boolean isValid() {
-		return true;
-	}
+  /*
+   * (non-Javadoc) @see net.sf.marineapi.provider.AbstractProvider#isValid()
+   */
+  @Override
+  protected boolean isValid() {
+    return true;
+  }
 
 }

@@ -22,7 +22,7 @@ package ch.keybridge.lib.nmea.ais.message;
 
 /**
  * Position Report Class A.
- * 
+ *
  * @author Lázár József
  */
 public interface AISMessage01 extends AISPositionReport {
