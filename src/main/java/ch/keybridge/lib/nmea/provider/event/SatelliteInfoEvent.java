@@ -21,9 +21,9 @@
 package ch.keybridge.lib.nmea.provider.event;
 
 import org.nmea.sentence.GSASentence;
-import org.nmea.util.FaaMode;
-import org.nmea.util.GpsFixStatus;
-import org.nmea.util.SatelliteInfo;
+import org.nmea.type.FaaModeType;
+import org.nmea.type.GpsFixStatusType;
+import org.nmea.type.Satellite;
 import java.util.List;
 
 /**
@@ -33,20 +33,20 @@ import java.util.List;
  * @author Kimmo Tuukkanen
  * @see org.nmea.sentence.GSASentence
  * @see org.nmea.sentence.GSVSentence
- * @see org.nmea.util.SatelliteInfo
+ * @see org.nmea.type.Satellite
  */
 public class SatelliteInfoEvent extends ProviderEvent {
 
   private static final long serialVersionUID = -5243047395130051907L;
 
   private final GSASentence gsa;
-  private final List<SatelliteInfo> info;
+  private final List<Satellite> info;
 
   /**
    * @param source
    */
   public SatelliteInfoEvent(
-    Object source, GSASentence gsa, List<SatelliteInfo> info) {
+    Object source, GSASentence gsa, List<Satellite> info) {
     super(source);
     this.gsa = gsa;
     this.info = info;
@@ -66,7 +66,7 @@ public class SatelliteInfoEvent extends ProviderEvent {
    *
    * @return List of SatelliteInfo objects from latest GSV sequence.
    */
-  public List<SatelliteInfo> getSatelliteInfo() {
+  public List<Satellite> getSatelliteInfo() {
     return this.info;
   }
 
@@ -102,7 +102,7 @@ public class SatelliteInfoEvent extends ProviderEvent {
    *
    * @return FaaMode enum value
    */
-  public FaaMode getGpsMode() {
+  public FaaModeType getGpsMode() {
     return gsa.getMode();
   }
 
@@ -111,7 +111,7 @@ public class SatelliteInfoEvent extends ProviderEvent {
    *
    * @return GpsFixStatus enum value
    */
-  public GpsFixStatus getGpsFixStatus() {
+  public GpsFixStatusType getGpsFixStatus() {
     return gsa.getFixStatus();
   }
 }

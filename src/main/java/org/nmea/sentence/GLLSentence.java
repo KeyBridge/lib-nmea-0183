@@ -20,7 +20,9 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.DataStatus;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.parser.ParseException;
+import org.nmea.type.DataStatusType;
 
 /**
  * Current geographic position and time.
@@ -35,31 +37,21 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
   /**
    * Get the data quality status, valid or invalid.
    *
-   * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @return {@link DataStatusType#ACTIVE} or {@link DataStatusType#VOID}
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  DataStatus getStatus();
+  DataStatusType getStatus();
 
   /**
    * Set the data quality status, valid or invalid.
    *
    * @param status DataStatus to set
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  void setStatus(DataStatus status);
+  void setStatus(DataStatusType status);
 
 }

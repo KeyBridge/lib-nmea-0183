@@ -21,10 +21,10 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.GSASentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.FaaMode;
-import org.nmea.util.GpsFixStatus;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.FaaModeType;
+import org.nmea.type.GpsFixStatusType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +51,7 @@ class GSAParser extends SentenceParser implements GSASentence {
    * @throws IllegalArgumentException If specified sentence is invalid.
    */
   public GSAParser(String nmea) {
-    super(nmea, SentenceId.GSA);
+    super(nmea, SentenceType.GSA);
   }
 
   /**
@@ -59,16 +59,16 @@ class GSAParser extends SentenceParser implements GSASentence {
    *
    * @param talker TalkerId to set
    */
-  public GSAParser(TalkerId talker) {
-    super(talker, SentenceId.GSA, 17);
+  public GSAParser(TalkerType talker) {
+    super(talker, SentenceType.GSA, 17);
   }
 
   /*
    * (non-Javadoc) @see
    * org.nmea.sentence.GSASentence#getFixStatus()
    */
-  public GpsFixStatus getFixStatus() {
-    return GpsFixStatus.valueOf(getIntValue(FIX_MODE));
+  public GpsFixStatusType getFixStatus() {
+    return GpsFixStatusType.valueOf(getIntValue(FIX_MODE));
   }
 
   /*
@@ -82,8 +82,8 @@ class GSAParser extends SentenceParser implements GSASentence {
   /*
    * (non-Javadoc) @see org.nmea.sentence.GSASentence#getMode()
    */
-  public FaaMode getMode() {
-    return FaaMode.valueOf(getCharValue(GPS_MODE));
+  public FaaModeType getMode() {
+    return FaaModeType.valueOf(getCharValue(GPS_MODE));
   }
 
   /*
@@ -121,8 +121,8 @@ class GSAParser extends SentenceParser implements GSASentence {
    * org.nmea.sentence.GSASentence#setFixStatus(net.sf.marineapi
    * .nmea.util.GpsFixStatus)
    */
-  public void setFixStatus(GpsFixStatus status) {
-    setIntValue(FIX_MODE, status.toInt());
+  public void setFixStatus(GpsFixStatusType status) {
+    setIntValue(FIX_MODE, status.getCode());
   }
 
   /*
@@ -138,8 +138,8 @@ class GSAParser extends SentenceParser implements GSASentence {
    * org.nmea.sentence.GSASentence#setFaaMode(net.sf.marineapi
    * .nmea.util.FaaMode)
    */
-  public void setMode(FaaMode mode) {
-    setCharValue(GPS_MODE, mode.toChar());
+  public void setMode(FaaModeType mode) {
+    setCharValue(GPS_MODE, mode.getCode());
   }
 
   /*

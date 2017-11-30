@@ -20,7 +20,7 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.SatelliteInfo;
+import org.nmea.type.Satellite;
 import java.util.List;
 
 /**
@@ -51,7 +51,7 @@ public interface GSVSentence extends Sentence {
    *
    * @return List of SatelliteInfo objects.
    */
-  List<SatelliteInfo> getSatelliteInfo();
+  List<Satellite> getSatelliteInfo();
 
   /**
    * Get the total number of sentences in GSV sequence.
@@ -101,7 +101,7 @@ public interface GSVSentence extends Sentence {
    *                                  maximum allowed number of satellites per
    *                                  sentence (4).
    */
-  void setSatelliteInfo(List<SatelliteInfo> info);
+  void setSatelliteInfo(List<Satellite> info);
 
   /**
    * Set the total number of sentences in GSV sequence.

@@ -20,10 +20,10 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.CompassPoint;
-import org.nmea.util.Position;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.CompassPointType;
+import org.nmea.type.Position;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
@@ -41,14 +41,14 @@ abstract class PositionParser extends SentenceParser {
   /**
    * @see SentenceParser#SentenceParser(String, SentenceId)
    */
-  protected PositionParser(String nmea, SentenceId type) {
+  protected PositionParser(String nmea, SentenceType type) {
     super(nmea, type);
   }
 
   /**
    * @see SentenceParser#SentenceParser(TalkerId, SentenceId, int)
    */
-  protected PositionParser(TalkerId talker, SentenceId type, int size) {
+  protected PositionParser(TalkerType talker, SentenceType type, int size) {
     super(talker, type, size);
   }
 
@@ -58,10 +58,10 @@ abstract class PositionParser extends SentenceParser {
    * @param index Index of field that contains the latitude hemisphere value.
    * @return Hemisphere of latitude
    */
-  protected CompassPoint parseHemisphereLat(int index) {
+  protected CompassPointType parseHemisphereLat(int index) {
     char ch = getCharValue(index);
-    CompassPoint d = CompassPoint.valueOf(ch);
-    if (d != CompassPoint.NORTH && d != CompassPoint.SOUTH) {
+    CompassPointType d = CompassPointType.valueOf(ch);
+    if (d != CompassPointType.NORTH && d != CompassPointType.SOUTH) {
       throw new ParseException("Invalid latitude hemisphere '" + ch + "'");
     }
     return d;
@@ -73,10 +73,10 @@ abstract class PositionParser extends SentenceParser {
    * @param index Field index for longitude hemisphere indicator
    * @return Hemisphere of longitude
    */
-  protected CompassPoint parseHemisphereLon(int index) {
+  protected CompassPointType parseHemisphereLon(int index) {
     char ch = getCharValue(index);
-    CompassPoint d = CompassPoint.valueOf(ch);
-    if (d != CompassPoint.EAST && d != CompassPoint.WEST) {
+    CompassPointType d = CompassPointType.valueOf(ch);
+    if (d != CompassPointType.EAST && d != CompassPointType.WEST) {
       throw new ParseException("Invalid longitude hemisphere " + ch + "'");
     }
     return d;
@@ -124,12 +124,12 @@ abstract class PositionParser extends SentenceParser {
 
     double lat = parseLatitude(latIndex);
     double lon = parseLongitude(lonIndex);
-    CompassPoint lath = parseHemisphereLat(latHemIndex);
-    CompassPoint lonh = parseHemisphereLon(lonHemIndex);
-    if (lath.equals(CompassPoint.SOUTH)) {
+    CompassPointType lath = parseHemisphereLat(latHemIndex);
+    CompassPointType lonh = parseHemisphereLon(lonHemIndex);
+    if (lath.equals(CompassPointType.SOUTH)) {
       lat = -lat;
     }
-    if (lonh.equals(CompassPoint.WEST)) {
+    if (lonh.equals(CompassPointType.WEST)) {
       lon = -lon;
     }
     return new Position(lat, lon);
@@ -143,12 +143,12 @@ abstract class PositionParser extends SentenceParser {
    * @throws IllegalArgumentException If specified Direction is other than NORTH
    *                                  or SOUTH.
    */
-  protected void setLatHemisphere(int field, CompassPoint hem) {
-    if (hem != CompassPoint.NORTH && hem != CompassPoint.SOUTH) {
+  protected void setLatHemisphere(int field, CompassPointType hem) {
+    if (hem != CompassPointType.NORTH && hem != CompassPointType.SOUTH) {
       throw new IllegalArgumentException("Invalid latitude hemisphere: "
         + hem);
     }
-    setCharValue(field, hem.toChar());
+    setCharValue(field, hem.getCode());
   }
 
   /**
@@ -202,12 +202,12 @@ abstract class PositionParser extends SentenceParser {
    * @throws IllegalArgumentException If specified Direction is other than EAST
    *                                  or WEST.
    */
-  protected void setLonHemisphere(int field, CompassPoint hem) {
-    if (hem != CompassPoint.EAST && hem != CompassPoint.WEST) {
+  protected void setLonHemisphere(int field, CompassPointType hem) {
+    if (hem != CompassPointType.EAST && hem != CompassPointType.WEST) {
       throw new IllegalArgumentException("Invalid longitude hemisphere: "
         + hem);
     }
-    setCharValue(field, hem.toChar());
+    setCharValue(field, hem.getCode());
   }
 
   /**

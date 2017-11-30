@@ -20,10 +20,10 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 import org.nmea.sentence.VTGSentence;
-import org.nmea.util.FaaMode;
+import org.nmea.type.FaaModeType;
 
 /**
  * VTG sentence parser.
@@ -49,7 +49,7 @@ class VTGParser extends SentenceParser implements VTGSentence {
    * @throws IllegalArgumentException If specified sentence is invalid
    */
   public VTGParser(String nmea) {
-    super(nmea, SentenceId.VTG);
+    super(nmea, SentenceType.VTG);
   }
 
   /**
@@ -57,8 +57,8 @@ class VTGParser extends SentenceParser implements VTGSentence {
    *
    * @param talker TalkerId to set
    */
-  public VTGParser(TalkerId talker) {
-    super(talker, SentenceId.VTG, 9);
+  public VTGParser(TalkerType talker) {
+    super(talker, SentenceType.VTG, 9);
     setCharValue(TRUE_INDICATOR, VTGSentence.TRUE);
     setCharValue(MAGNETIC_INDICATOR, VTGSentence.MAGNETIC);
     setCharValue(KNOTS_INDICATOR, VTGSentence.KNOT);
@@ -76,8 +76,8 @@ class VTGParser extends SentenceParser implements VTGSentence {
   /*
    * (non-Javadoc) @see org.nmea.sentence.VTGSentence#getMode()
    */
-  public FaaMode getMode() {
-    return FaaMode.valueOf(getCharValue(MODE));
+  public FaaModeType getMode() {
+    return FaaModeType.valueOf(getCharValue(MODE));
   }
 
   /*
@@ -116,9 +116,9 @@ class VTGParser extends SentenceParser implements VTGSentence {
    * org.nmea.sentence.VTGSentence#setMode(org.nmea
    * .util.FaaMode)
    */
-  public void setMode(FaaMode mode) {
+  public void setMode(FaaModeType mode) {
     setFieldCount(9);
-    setCharValue(MODE, mode.toChar());
+    setCharValue(MODE, mode.getCode());
   }
 
   /*

@@ -18,10 +18,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
- * <p>
  * FAA operating modes reported by APB, BWC, BWR, GLL, RMA, RMB, RMC, VTG, WCV
  * and XTE sentences since NMEA 2.3. Also, the mode field in GGA was extended to
  * contain these statuses.
@@ -35,7 +34,7 @@ package org.nmea.util;
  * @see GpsFixStatus
  * @see DataStatus
  */
-public enum FaaMode {
+public enum FaaModeType {
 
   /**
    * Operating in autonomous mode (automatic 2D/3D).
@@ -67,10 +66,10 @@ public enum FaaMode {
    */
   NONE('N');
 
-  private final char mode;
+  private final char code;
 
-  FaaMode(char modeCh) {
-    mode = modeCh;
+  FaaModeType(char modeCh) {
+    code = modeCh;
   }
 
   /**
@@ -78,23 +77,23 @@ public enum FaaMode {
    *
    * @return Mode char used in sentences.
    */
-  public char toChar() {
-    return mode;
+  public char getCode() {
+    return code;
   }
 
   /**
    * Returns the FaaMode enum corresponding the actual char indicator used in
    * the sentencess.
    *
-   * @param ch Char mode indicator
+   * @param code Char mode indicator
    * @return FaaMode enum
    */
-  public static FaaMode valueOf(char ch) {
-    for (FaaMode gm : values()) {
-      if (gm.toChar() == ch) {
+  public static FaaModeType valueOf(char code) {
+    for (FaaModeType gm : values()) {
+      if (gm.getCode() == code) {
         return gm;
       }
     }
-    return valueOf(String.valueOf(ch));
+    throw new IllegalArgumentException("Unrecognized code " + code);
   }
 }

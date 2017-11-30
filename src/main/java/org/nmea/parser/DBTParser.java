@@ -21,9 +21,9 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.DBTSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.Units;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.UnitType;
 
 /**
  * DBT sentence parser.
@@ -46,7 +46,7 @@ class DBTParser extends SentenceParser implements DBTSentence {
    * @param nmea
    */
   public DBTParser(String nmea) {
-    super(nmea, SentenceId.DBT);
+    super(nmea, SentenceType.DBT);
   }
 
   /**
@@ -54,11 +54,11 @@ class DBTParser extends SentenceParser implements DBTSentence {
    *
    * @param talker TalkerId to set
    */
-  public DBTParser(TalkerId talker) {
-    super(talker, SentenceId.DBT, 6);
-    setCharValue(FEET, Units.FEET.toChar());
-    setCharValue(METERS, Units.METER.toChar());
-    setCharValue(FATHOMS, Units.FATHOMS.toChar());
+  public DBTParser(TalkerType talker) {
+    super(talker, SentenceType.DBT, 6);
+    setCharValue(FEET, UnitType.FEET.getCode());
+    setCharValue(METERS, UnitType.METER.getCode());
+    setCharValue(FATHOMS, UnitType.FATHOMS.getCode());
   }
 
   /*

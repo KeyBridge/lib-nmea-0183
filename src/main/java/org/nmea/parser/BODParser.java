@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.BODSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * BOD sentence parser.
@@ -48,7 +48,7 @@ class BODParser extends SentenceParser implements BODSentence {
    *                                  contain a BOD sentence.
    */
   public BODParser(String nmea) {
-    super(nmea, SentenceId.BOD);
+    super(nmea, SentenceType.BOD);
   }
 
   /**
@@ -56,8 +56,8 @@ class BODParser extends SentenceParser implements BODSentence {
    *
    * @param talker TalkerId to set
    */
-  public BODParser(TalkerId talker) {
-    super(talker, SentenceId.BOD, 6);
+  public BODParser(TalkerType talker) {
+    super(talker, SentenceType.BOD, 6);
     setCharValue(TRUE_INDICATOR, 'T');
     setCharValue(MAGN_INDICATOR, 'M');
   }

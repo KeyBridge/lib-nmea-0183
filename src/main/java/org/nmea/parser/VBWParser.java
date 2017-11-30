@@ -20,10 +20,10 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 import org.nmea.sentence.VBWSentence;
-import org.nmea.util.DataStatus;
+import org.nmea.type.DataStatusType;
 
 /**
  * VBW sentence parser.
@@ -50,7 +50,7 @@ class VBWParser extends SentenceParser implements VBWSentence {
    * @throws IllegalArgumentException If specified sentence is invalid.
    */
   public VBWParser(String nmea) {
-    super(nmea, SentenceId.VBW);
+    super(nmea, SentenceType.VBW);
   }
 
   /**
@@ -58,20 +58,20 @@ class VBWParser extends SentenceParser implements VBWSentence {
    *
    * @param talker TalkerId to set
    */
-  public VBWParser(TalkerId talker) {
-    super(talker, SentenceId.VBW, 10);
+  public VBWParser(TalkerType talker) {
+    super(talker, SentenceType.VBW, 10);
   }
 
   public double getLongWaterSpeed() {
     return getDoubleValue(LONG_WATERSPEED);
   }
 
-  public DataStatus getWaterSpeedStatus() {
-    return DataStatus.valueOf(getCharValue(WATER_SPEED_STATUS));
+  public DataStatusType getWaterSpeedStatus() {
+    return DataStatusType.valueOf(getCharValue(WATER_SPEED_STATUS));
   }
 
-  public DataStatus getGroundSpeedStatus() {
-    return DataStatus.valueOf(getCharValue(GROUND_SPEED_STATUS));
+  public DataStatusType getGroundSpeedStatus() {
+    return DataStatusType.valueOf(getCharValue(GROUND_SPEED_STATUS));
   }
 
   public double getLongGroundSpeed() {
@@ -90,16 +90,16 @@ class VBWParser extends SentenceParser implements VBWSentence {
     return getDoubleValue(STERN_WATERSPEED);
   }
 
-  public DataStatus getSternWaterSpeedStatus() {
-    return DataStatus.valueOf(getCharValue(STERN_SPEED_STATUS));
+  public DataStatusType getSternWaterSpeedStatus() {
+    return DataStatusType.valueOf(getCharValue(STERN_SPEED_STATUS));
   }
 
   public double getSternGroundSpeed() {
     return getDoubleValue(STERN_GROUNDSPEED);
   }
 
-  public DataStatus getSternGroundSpeedStatus() {
-    return DataStatus.valueOf(getCharValue(STERN_GROUNDSPEED_STATUS));
+  public DataStatusType getSternGroundSpeedStatus() {
+    return DataStatusType.valueOf(getCharValue(STERN_GROUNDSPEED_STATUS));
   }
 
   public void setLongWaterSpeed(double speed) {
@@ -118,27 +118,27 @@ class VBWParser extends SentenceParser implements VBWSentence {
     setDoubleValue(TRAV_GROUNDSPEED, speed, 2, 1);
   }
 
-  public void setWaterSpeedStatus(DataStatus status) {
-    setCharValue(WATER_SPEED_STATUS, status.toChar());
+  public void setWaterSpeedStatus(DataStatusType status) {
+    setCharValue(WATER_SPEED_STATUS, status.getCode());
   }
 
-  public void setGroundSpeedStatus(DataStatus status) {
-    setCharValue(GROUND_SPEED_STATUS, status.toChar());
+  public void setGroundSpeedStatus(DataStatusType status) {
+    setCharValue(GROUND_SPEED_STATUS, status.getCode());
   }
 
   public void setSternWaterSpeed(double speed) {
     setDoubleValue(STERN_WATERSPEED, speed, 2, 1);
   }
 
-  public void setSternWaterSpeedStatus(DataStatus status) {
-    setCharValue(STERN_SPEED_STATUS, status.toChar());
+  public void setSternWaterSpeedStatus(DataStatusType status) {
+    setCharValue(STERN_SPEED_STATUS, status.getCode());
   }
 
   public void setSternGroundSpeed(double speed) {
     setDoubleValue(STERN_GROUNDSPEED, speed, 2, 1);
   }
 
-  public void setSternGroundSpeedStatus(DataStatus status) {
-    setCharValue(STERN_GROUNDSPEED_STATUS, status.toChar());
+  public void setSternGroundSpeedStatus(DataStatusType status) {
+    setCharValue(STERN_GROUNDSPEED_STATUS, status.getCode());
   }
 }

@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.Sentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -42,7 +42,7 @@ import java.util.*;
  * parameter, i.e. the sentence to be parsed. Pass this parameter to
  * {@link SentenceParser#SentenceParser(String, String)} with expected sentence
  * type (e.g. <code>"XYZ"</code>).</li>
- * <li>Add another constructor with {@link TalkerId} parameter. Pass this
+ * <li>Add another constructor with {@link TalkerType} parameter. Pass this
  * parameter to {@link SentenceParser#SentenceParser(TalkerId, String, int)}
  * with sentence type and number of data fields.</li>
  * <li>Register <code>XYZParser</code> in <code>SentenceFactory</code> by using
@@ -87,7 +87,7 @@ public final class SentenceFactory {
    *                                  otherwise unusable.
    */
   public Sentence createParser(String nmea) {
-    String sid = SentenceId.parseStr(nmea);
+    String sid = SentenceType.parseStr(nmea);
     return createParserImpl(sid, nmea);
   }
 
@@ -102,7 +102,7 @@ public final class SentenceFactory {
    *                                  parser registered for given sentence type.
    * @throws IllegalStateException    If parser instantiation fails.
    */
-  public Sentence createParser(TalkerId talker, SentenceId type) {
+  public Sentence createParser(TalkerType talker, SentenceType type) {
     return createParser(talker, type.toString());
   }
 
@@ -121,7 +121,7 @@ public final class SentenceFactory {
    *                                  implement expected constructors or is
    *                                  otherwise unusable.
    */
-  public Sentence createParser(TalkerId talker, String type) {
+  public Sentence createParser(TalkerType talker, String type) {
     if (talker == null) {
       throw new IllegalArgumentException("TalkerId cannot be null");
     }
@@ -130,7 +130,7 @@ public final class SentenceFactory {
 
   /**
    * Tells if the factory is able to create parser for specified sentence type.
-   * All {@link SentenceId} enum values should result returning
+   * All {@link SentenceType} enum values should result returning
    * <code>true</code> at all times.
    *
    * @param type Sentence type id, e.g. "GLL" or "GGA".
@@ -168,7 +168,7 @@ public final class SentenceFactory {
 
     try {
       parser.getConstructor(new Class[]{String.class});
-      parser.getConstructor(new Class[]{TalkerId.class});
+      parser.getConstructor(new Class[]{TalkerType.class});
       parsers.put(type, parser);
     } catch (SecurityException e) {
       String msg = "Unable to register parser due security violation";

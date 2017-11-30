@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.RPMSentence;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.DataStatus;
+import org.nmea.type.TalkerType;
+import org.nmea.type.DataStatusType;
 
 /**
  * RPM parser
@@ -51,7 +51,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
    *
    * @param talker TalkerId to set.
    */
-  public RPMParser(TalkerId talker) {
+  public RPMParser(TalkerType talker) {
     super(talker, "RPM", 5);
   }
 
@@ -101,8 +101,8 @@ class RPMParser extends SentenceParser implements RPMSentence {
    * @see org.nmea.sentence.RPMSentence#getStatus()
    */
   @Override
-  public DataStatus getStatus() {
-    return DataStatus.valueOf(getCharValue(STATUS));
+  public DataStatusType getStatus() {
+    return DataStatusType.valueOf(getCharValue(STATUS));
   }
 
   /*
@@ -176,8 +176,8 @@ class RPMParser extends SentenceParser implements RPMSentence {
    * .nmea.util.DataStatus)
    */
   @Override
-  public void setStatus(DataStatus status) {
-    setCharValue(STATUS, status.toChar());
+  public void setStatus(DataStatusType status) {
+    setCharValue(STATUS, status.getCode());
   }
 
 }

@@ -1,0 +1,21 @@
+
+NMEA 0183 sentence parser/builder
+https://www.codeproject.com/articles/279647/nmea-sentence-parser-builder
+
+parser in C# using lambda
+
+ A common NMEA sentence format is listed below:
+
+$<talker ID><sentence ID,>[parameter 1],[parameter 2],...[<*checksum>]<CR><LF>
+
+It is necessary to specify:
+
+NMEA defines two types of sentences: proprietary and non-proprietary. 
+
+Non-proprietary sentences have a one of standard two-letter talker ID (e.g., GP for GPS unit, GL for glonass unit, etc.), and one of standard three-letter sentence ID (e.g., GLL for geographic location GPS data, DBK - depth below keel, and so on). All of these talker IDs and sentence IDs can be found in the official paper. 
+
+Proprietary sentences have a 'P' letter instead of the standard talker ID, followed by a three-letter standard manufacturer code (GRM for Garmin, MTK for MTK, etc.), and further follows any string - name of proprietary command (depends on the specific manufacturer). 
+
+Maximum length for sentences – 82 characters.
+
+

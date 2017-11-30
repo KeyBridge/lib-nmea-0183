@@ -18,17 +18,14 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.DataStatus;
+import org.nmea.type.DataStatusType;
 
 /**
- * <p>
  * VBW Dual Ground/Water Speed Longitudinal, Transverse and Stern Ground/Water
  * Speed with Status.
- * 
  * <p>
  * Example:<br>
  * <code>$IIVBW,11.0,02.0,A,06.0,03.0,A,05.3,A,01.0,A*43</code>
- * 
  *
  * @author Jeremy Wilson
  */
@@ -67,14 +64,14 @@ public interface VBWSentence extends Sentence {
    *
    * @return DataStatus Water Speed Status
    */
-  DataStatus getWaterSpeedStatus();
+  DataStatusType getWaterSpeedStatus();
 
   /**
    * Returns the Ground Speed Status.
    *
    * @return DataStatus Ground Speed Status
    */
-  DataStatus getGroundSpeedStatus();
+  DataStatusType getGroundSpeedStatus();
 
   /**
    * Returns the Stern Water Speed.
@@ -88,7 +85,7 @@ public interface VBWSentence extends Sentence {
    *
    * @return DataStatus Stern Water Speed Status
    */
-  DataStatus getSternWaterSpeedStatus();
+  DataStatusType getSternWaterSpeedStatus();
 
   /**
    * Returns the Stern Ground Speed.
@@ -103,7 +100,7 @@ public interface VBWSentence extends Sentence {
    *
    * @return DataStatus Stern Ground Speed Status
    */
-  DataStatus getSternGroundSpeedStatus();
+  DataStatusType getSternGroundSpeedStatus();
 
   /**
    * Sets Longitudinal Water Speed.
@@ -138,14 +135,14 @@ public interface VBWSentence extends Sentence {
    *
    * @param status Water Speed Status
    */
-  void setWaterSpeedStatus(DataStatus status);
+  void setWaterSpeedStatus(DataStatusType status);
 
   /**
    * Sets Ground Speed Status.
    *
    * @param status Ground Speed Status
    */
-  void setGroundSpeedStatus(DataStatus status);
+  void setGroundSpeedStatus(DataStatusType status);
 
   /**
    * Sets Stern Water Speed.
@@ -159,7 +156,7 @@ public interface VBWSentence extends Sentence {
    *
    * @param status Stern Water Speed Status.
    */
-  void setSternWaterSpeedStatus(DataStatus status);
+  void setSternWaterSpeedStatus(DataStatusType status);
 
   /**
    * Sets Stern Ground Speed.
@@ -173,6 +170,6 @@ public interface VBWSentence extends Sentence {
    *
    * @param status Stern Ground Speed Status.
    */
-  void setSternGroundSpeedStatus(DataStatus status);
+  void setSternGroundSpeedStatus(DataStatusType status);
 
 }

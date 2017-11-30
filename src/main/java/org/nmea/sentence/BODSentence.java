@@ -21,7 +21,7 @@
 package org.nmea.sentence;
 
 /**
- * True and magnetic bearing from origin to destination in degrees. This
+ * True and magnetic Bearing from Origin to Destination in degrees. This
  * sentence is transmitted by a GPS in the GOTO mode (with or without active
  * route).
  * <p>
@@ -37,14 +37,9 @@ public interface BODSentence extends Sentence {
    * in GOTO mode.
    *
    * @return waypoint id
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   String getDestinationWaypointId();
 
@@ -55,14 +50,9 @@ public interface BODSentence extends Sentence {
    * and it is <b>not</b> updated dynamically.</i>
    *
    * @return magnetic bearing value
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getMagneticBearing();
 
@@ -71,14 +61,9 @@ public interface BODSentence extends Sentence {
    * active.
    *
    * @return waypoint id
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   String getOriginWaypointId();
 
@@ -89,14 +74,9 @@ public interface BODSentence extends Sentence {
    * and it is <strong>not</strong> updated dynamically.</i>
    *
    * @return True bearing
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getTrueBearing();
 

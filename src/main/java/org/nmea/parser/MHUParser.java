@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.MHUSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * MHUParser - Humidity & dew point.
@@ -44,7 +44,7 @@ class MHUParser extends SentenceParser implements MHUSentence {
    * @param nmea MHU sentence String
    */
   public MHUParser(String nmea) {
-    super(nmea, SentenceId.MHU);
+    super(nmea, SentenceType.MHU);
   }
 
   /**
@@ -52,8 +52,8 @@ class MHUParser extends SentenceParser implements MHUSentence {
    *
    * @param tid Talker ID to be used.
    */
-  public MHUParser(TalkerId tid) {
-    super(tid, SentenceId.MHU, 4);
+  public MHUParser(TalkerType tid) {
+    super(tid, SentenceType.MHU, 4);
     setDewPointUnit('C');
   }
 

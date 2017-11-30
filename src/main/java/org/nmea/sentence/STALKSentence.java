@@ -1,15 +1,12 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * Raymarine/Autohelm SeaTalk sentence. See
  * <a href="http://www.thomasknauf.de/seatalk.htm">SeaTalk Technical
  * Reference</a>
  * by Thomas Knauf for more information on the protocol.
- * 
  * <p>
- * <p>
- * Example:<br/><code>$STALK,52,A1,00,00*36</code>
+ * Example:<br><code>$STALK,52,A1,00,00*36</code>
  */
 public interface STALKSentence extends Sentence {
 

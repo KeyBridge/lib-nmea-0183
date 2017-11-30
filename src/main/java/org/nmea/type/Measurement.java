@@ -18,22 +18,33 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
- * Sensor measurement data delivered by
- * {@link org.nmea.sentence.XDRSentence}. Notice that any of the
- * fields may be empty (<code>null</code>), depending on sentence and sensor
- * that produced it.
+ * Sensor measurement data delivered by XDR - Transducer Measurement
+ * {@link org.nmea.sentence.XDRSentence}. Notice that any of the fields may be
+ * empty (<code>null</code>), depending on sentence and sensor that produced it.
  *
  * @author Robert Huitema, Kimmo Tuukkanen
  */
 public class Measurement {
 
-  private String name;
+  /**
+   * the type of transducer
+   */
   private String type;
+  /**
+   * the units of measurement
+   */
   private String units;
-  private Double value;
+  /**
+   * the measurement value
+   */
+  private double value;
+  /**
+   * the name of transducer
+   */
+  private String name;
 
   /**
    * Creates a new empty instance of Measurement.
@@ -43,6 +54,11 @@ public class Measurement {
 
   /**
    * Creates a new instance of Measurement with given values.
+   *
+   * @param type  the type of transducer
+   * @param value the measurement value
+   * @param units the units of measurement
+   * @param name  the name of transducer
    */
   public Measurement(String type, double value, String units, String name) {
     this.type = type;
@@ -129,7 +145,16 @@ public class Measurement {
    * @return true if empty, otherwise false.
    */
   public boolean isEmpty() {
-    return name == null && type == null && value == null && units == null;
+    return name == null && type == null && units == null;
+  }
+
+  /**
+   * Indicator that that this measurement is usable.
+   *
+   * @return TRUE if the type and units are configured.
+   */
+  public boolean isValid() {
+    return type != null && !type.isEmpty() && units != null && !units.isEmpty();
   }
 
 }

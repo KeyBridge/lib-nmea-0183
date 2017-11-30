@@ -21,9 +21,7 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * Vessel heading in degrees, relative to true north.
- * <p>
  * <p>
  * Example:<br><code>$HCHDT,202.5,T*26</code>
  *

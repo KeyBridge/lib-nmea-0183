@@ -21,9 +21,7 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * Air temperature in degrees Celsius.
- * <p>
  * <p>
  * Example:<br><code>$IIMTA,16.7,C*05</code>
  *

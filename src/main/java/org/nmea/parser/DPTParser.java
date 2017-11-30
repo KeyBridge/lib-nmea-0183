@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.DPTSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * DPT sentence parser.
@@ -41,7 +41,7 @@ class DPTParser extends SentenceParser implements DPTSentence {
    * @param nmea DPT sentence String
    */
   public DPTParser(String nmea) {
-    super(nmea, SentenceId.DPT);
+    super(nmea, SentenceType.DPT);
   }
 
   /**
@@ -49,8 +49,8 @@ class DPTParser extends SentenceParser implements DPTSentence {
    *
    * @param talker TalkerId to set
    */
-  public DPTParser(TalkerId talker) {
-    super(talker, SentenceId.DPT, 3);
+  public DPTParser(TalkerType talker) {
+    super(talker, SentenceType.DPT, 3);
   }
 
   /*

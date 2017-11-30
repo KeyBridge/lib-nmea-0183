@@ -21,18 +21,15 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * Base interface for all AIS sentences (Automatic Identification System).
  * Notice that &quot;AIS&quot; does not refer to NMEA sentence type, but another
  * system/standard that transmits it's messages using NMEA 0183.
- * 
  * <p>
  * AIS sentences are parsed in two phases and they all share the same NMEA
  * sentence layout, so there is no dedicated interfaces for each AIS sentence
  * type (VDM, VDO etc).
- * 
  * <p>
- * Example:</br>
+ * Example:<br>
  * <code>!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C</code>
  *
  * @author Lázár József, Kimmo Tuukkanen
@@ -109,11 +106,11 @@ public interface AISSentence extends Sentence {
   /**
    * <p>
    * Tells if given sentence is part of message sequence.
-   * 
+   * <p>
    * <p>
    * Sentences are considered to belong in same sequence when the given sentence
    * meets the following conditions:
-   * 
+   * <p>
    * <ul>
    * <li>Same number of fragments, higher fragment #, same channel and same
    * message id</li>

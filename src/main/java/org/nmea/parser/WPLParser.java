@@ -20,11 +20,11 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 import org.nmea.sentence.WPLSentence;
-import org.nmea.util.Position;
-import org.nmea.util.Waypoint;
+import org.nmea.type.Position;
+import org.nmea.type.Waypoint;
 
 /**
  * WPL sentence parser.
@@ -47,7 +47,7 @@ class WPLParser extends PositionParser implements WPLSentence {
    * @throws IllegalArgumentException If specified sentence is invalid.
    */
   public WPLParser(String nmea) {
-    super(nmea, SentenceId.WPL);
+    super(nmea, SentenceType.WPL);
   }
 
   /**
@@ -55,8 +55,8 @@ class WPLParser extends PositionParser implements WPLSentence {
    *
    * @param talker TalkerId to set
    */
-  public WPLParser(TalkerId talker) {
-    super(talker, SentenceId.WPL, 5);
+  public WPLParser(TalkerType talker) {
+    super(talker, SentenceType.WPL, 5);
   }
 
   /*

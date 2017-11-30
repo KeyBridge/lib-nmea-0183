@@ -23,23 +23,20 @@ package org.nmea.sentence;
 import java.util.regex.Pattern;
 
 /**
- * SentenceValidator for detecting and validation of sentence Strings.
+ * Sentence validation utility for detecting and validation of sentence Strings.
  *
  * @author Kimmo Tuukkanen
  */
 public final class SentenceValidator {
 
-  private static final Pattern reChecksum = Pattern.compile(
-    "^[$|!]{1}[A-Z0-9]{3,10}[,][\\x20-\\x7F]*[*][A-F0-9]{2}(\\r|\\n|\\r\\n|\\n\\r){0,1}$");
+  private static final Pattern WITH_CHECKSUM = Pattern.compile("^[$|!]{1}[A-Z0-9]{3,10}[,][\\x20-\\x7F]*[*][A-F0-9]{2}(\\r|\\n|\\r\\n|\\n\\r){0,1}$");
 
-  private static final Pattern reNoChecksum = Pattern.compile(
-    "^[$|!]{1}[A-Z0-9]{3,10}[,][\\x20-\\x7F]*(\\r|\\n|\\r\\n|\\n\\r){0,1}$");
+  private static final Pattern WITHOUT_CHECKSUM = Pattern.compile("^[$|!]{1}[A-Z0-9]{3,10}[,][\\x20-\\x7F]*(\\r|\\n|\\r\\n|\\n\\r){0,1}$");
 
   private SentenceValidator() {
   }
 
   /**
-   * <p>
    * Tells if the specified String matches the NMEA 0183 sentence format.
    * <p>
    * String is considered as a sentence if it meets the following criteria:
@@ -57,7 +54,6 @@ public final class SentenceValidator {
    * perhaps deliberately, some by mistake. Thus, assuming the formatting is
    * otherwise valid, it is not feasible to strictly validate length and discard
    * sentences that just exceed the 80 chars limit.
-   * 
    *
    * @param nmea String to inspect
    * @return true if recognized as sentence, otherwise false.
@@ -67,12 +63,10 @@ public final class SentenceValidator {
     if (nmea == null || "".equals(nmea)) {
       return false;
     }
-
-    if (Checksum.index(nmea) == nmea.length()) {
-      return reNoChecksum.matcher(nmea).matches();
+    if (Checksum.indexOfDelimiter(nmea) == nmea.length()) {
+      return WITHOUT_CHECKSUM.matcher(nmea).matches();
     }
-
-    return reChecksum.matcher(nmea).matches();
+    return WITH_CHECKSUM.matcher(nmea).matches();
   }
 
   /**
@@ -84,7 +78,7 @@ public final class SentenceValidator {
    * @param nmea String to validate
    * @return <code>true</code> if valid, otherwise <code>false</code>.
    */
-  public static boolean isValid(String nmea) {
+  public static boolean isValidSentence(String nmea) {
 
     boolean isValid = false;
 
@@ -98,7 +92,6 @@ public final class SentenceValidator {
         isValid = true;
       }
     }
-
     return isValid;
   }
 }

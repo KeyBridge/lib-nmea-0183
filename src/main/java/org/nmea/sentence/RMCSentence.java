@@ -20,9 +20,11 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.CompassPoint;
-import org.nmea.util.DataStatus;
-import org.nmea.util.FaaMode;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.parser.ParseException;
+import org.nmea.type.CompassPointType;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.FaaModeType;
 
 /**
  * Recommended minimum navigation information type C. Current time and date,
@@ -44,17 +46,10 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
    * @return Corrected true course
    * @see #getCourse()
    * @see #getVariation()
-   * @throws org.nmea.parser.DataNotAvailableException If course or
-   *                                                                variation
-   *                                                                data is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If course or
-   *                                                                variation
-   *                                                                field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If course or variation data is not
+   *                                   available.
+   * @throws ParseException            If course or variation field contains
+   *                                   unexpected or illegal value.
    */
   double getCorrectedCourse();
 
@@ -62,14 +57,9 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
    * Get true course over ground (COG).
    *
    * @return True course in degrees
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getCourse();
 
@@ -77,75 +67,50 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
    * Get the direction of magnetic variation; east or west.
    *
    * @return Direction.EAST or Direction.WEST
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  CompassPoint getDirectionOfVariation();
+  CompassPointType getDirectionOfVariation();
 
   /**
    * Get the FAA operating mode for GPS.
    *
    * @return FaaMode enum
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  FaaMode getMode();
+  FaaModeType getMode();
 
   /**
    * Get current speed over ground (SOG).
    *
    * @return Speed in knots (nautical miles per hour).
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getSpeed();
 
   /**
    * Gets the data status, valid or invalid.
    *
-   * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @return {@link DataStatusType#ACTIVE} or {@link DataStatusType#VOID}
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  DataStatus getStatus();
+  DataStatusType getStatus();
 
   /**
    * Get the magnetic variation. Easterly variation subtracts from true course,
    * and is thus returned as negative value. Otherwise, the value is positive.
    *
    * @return Magnetic variation in degrees
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getVariation();
 
@@ -159,19 +124,19 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
   /**
    * Set the direction of magnetic variation, east or west.
    *
-   * @param dir {@link CompassPoint#EAST} or {@link CompassPoint#WEST}
+   * @param dir {@link CompassPointType#EAST} or {@link CompassPointType#WEST}
    * @throws IllegalArgumentException If specified Direction is other than
    *                                  defined as valid for param
    *                                  <code>dir</code>.
    */
-  void setDirectionOfVariation(CompassPoint dir);
+  void setDirectionOfVariation(CompassPointType dir);
 
   /**
    * Set the FAA operation mode of GPS.
    *
    * @param mode Mode to set
    */
-  void setMode(FaaMode mode);
+  void setMode(FaaModeType mode);
 
   /**
    * Set current speed over ground (SOG).
@@ -183,9 +148,9 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
   /**
    * Set the data status, valid or invalid.
    *
-   * @param status {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
+   * @param status {@link DataStatusType#ACTIVE} or {@link DataStatusType#VOID}
    */
-  void setStatus(DataStatus status);
+  void setStatus(DataStatusType status);
 
   /**
    * Set the magnetic variation.

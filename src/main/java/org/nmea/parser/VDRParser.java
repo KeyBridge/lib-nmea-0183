@@ -20,10 +20,10 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 import org.nmea.sentence.VDRSentence;
-import org.nmea.util.Units;
+import org.nmea.type.UnitType;
 
 /**
  * VDR sentence parser.
@@ -53,11 +53,11 @@ class VDRParser extends SentenceParser implements VDRSentence {
    *
    * @param tid TalkerId to set
    */
-  public VDRParser(TalkerId tid) {
-    super(tid, SentenceId.VDR, 6);
+  public VDRParser(TalkerType tid) {
+    super(tid, SentenceType.VDR, 6);
     setCharValue(TRUE_INDICATOR, 'T');
     setCharValue(MAGN_INDICATOR, 'M');
-    setCharValue(SPEED_UNITS, Units.KNOT.toChar());
+    setCharValue(SPEED_UNITS, UnitType.KNOT.getCode());
   }
 
   /*

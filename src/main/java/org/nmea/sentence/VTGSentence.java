@@ -20,7 +20,9 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.FaaMode;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.parser.ParseException;
+import org.nmea.type.FaaModeType;
 
 /**
  * Course and speed over the ground. True and magnetic COG, speed provided in
@@ -63,14 +65,9 @@ public interface VTGSentence extends Sentence {
    * Get the magnetic course over ground.
    *
    * @return Magnetic course
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getMagneticCourse();
 
@@ -79,30 +76,20 @@ public interface VTGSentence extends Sentence {
    * depending on the NMEA version.
    *
    * @since NMEA 2.3
-   * @return {@link FaaMode} enum
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @return {@link FaaModeType} enum
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  FaaMode getMode();
+  FaaModeType getMode();
 
   /**
    * Get current speed over ground, in kilometers per hour.
    *
    * @return Speed in km/h
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getSpeedKmh();
 
@@ -110,14 +97,9 @@ public interface VTGSentence extends Sentence {
    * Get speed over ground in knots.
    *
    * @return Speed in knots (nautical miles per hour)
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getSpeedKnots();
 
@@ -125,14 +107,9 @@ public interface VTGSentence extends Sentence {
    * Get the true course over ground.
    *
    * @return True course, in degrees
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getTrueCourse();
 
@@ -149,7 +126,7 @@ public interface VTGSentence extends Sentence {
    * @param mode Mode to set
    * @since NMEA 2.3
    */
-  void setMode(FaaMode mode);
+  void setMode(FaaModeType mode);
 
   /**
    * Set the current speed over ground.

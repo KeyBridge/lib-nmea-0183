@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.MMBSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * MMBParser - Barometer.
@@ -44,7 +44,7 @@ class MMBParser extends SentenceParser implements MMBSentence {
    * @param nmea MMB sentence String.
    */
   public MMBParser(String nmea) {
-    super(nmea, SentenceId.MMB);
+    super(nmea, SentenceType.MMB);
   }
 
   /**
@@ -52,8 +52,8 @@ class MMBParser extends SentenceParser implements MMBSentence {
    *
    * @param tid TalkerId to use in sentence.
    */
-  public MMBParser(TalkerId tid) {
-    super(tid, SentenceId.MMB, 4);
+  public MMBParser(TalkerType tid) {
+    super(tid, SentenceType.MMB, 4);
     setCharValue(UNIT_INHG, 'I');
     setCharValue(UNIT_BARS, 'B');
   }

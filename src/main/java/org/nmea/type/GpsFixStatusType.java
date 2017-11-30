@@ -1,5 +1,5 @@
 /*
- * Direction.java
+ * GpsFixStatus.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
@@ -18,59 +18,59 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
- * Defines the supported compass and relative directions.
+ * GpsFixStatus defines the status of current GPS fix.
  *
  * @author Kimmo Tuukkanen
+ * @see FaaMode
+ * @see GpsFixQuality
+ * @see DataStatus
  */
-public enum CompassPoint {
+public enum GpsFixStatusType {
 
   /**
-   * North
+   * No GPS fix available
    */
-  NORTH('N'),
+  GPS_NA(1),
   /**
-   * East
+   * 2D GPS fix (lat/lon)
    */
-  EAST('E'),
+  GPS_2D(2),
   /**
-   * South
+   * 3D GPS fix (lat/lon/alt)
    */
-  SOUTH('S'),
-  /**
-   * West
-   */
-  WEST('W');
+  GPS_3D(3);
 
-  private final char ch;
+  private final int code;
 
-  private CompassPoint(char c) {
-    this.ch = c;
+  GpsFixStatusType(int code) {
+    this.code = code;
   }
 
   /**
-   * Returns the corresponding char constant.
+   * Returns the corresponding int value for fix status enum.
    *
-   * @return Char indicator for Direction
+   * @return Fix status integer values as in sentences
    */
-  public char toChar() {
-    return ch;
+  public int getCode() {
+    return code;
   }
 
   /**
-   * Get the enum corresponding to specified char.
+   * Returns the GpsFixStatus enum corresponding to actual int identifier used
+   * in the sentences.
    *
-   * @param c Char indicator for Direction
-   * @return Direction
+   * @param code Fix status indentifier int
+   * @return GpsFixStatus enum
    */
-  public static CompassPoint valueOf(char c) {
-    for (CompassPoint d : values()) {
-      if (d.toChar() == c) {
-        return d;
+  public static GpsFixStatusType valueOf(int code) {
+    for (GpsFixStatusType st : values()) {
+      if (st.getCode() == code) {
+        return st;
       }
     }
-    return valueOf(String.valueOf(c));
+    throw new IllegalArgumentException("Unrecognized code " + code);
   }
 }

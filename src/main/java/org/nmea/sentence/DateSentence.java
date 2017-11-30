@@ -20,7 +20,9 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.Date;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.parser.ParseException;
+import org.nmea.type.Date;
 
 /**
  * Sentences that contains date information. Notice that some sentences may
@@ -36,14 +38,9 @@ public interface DateSentence extends Sentence {
    * {@link Date}.
    *
    * @return Date object
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   Date getDate();
 

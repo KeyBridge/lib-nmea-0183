@@ -20,16 +20,16 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.Sentence;
-import org.nmea.sentence.TalkerId;
-import org.nmea.sentence.Checksum;
-import org.nmea.sentence.SentenceValidator;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.nmea.sentence.Checksum;
+import org.nmea.sentence.Sentence;
+import org.nmea.sentence.SentenceValidator;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * Base class for all NMEA 0183 sentence parsers. Contains generic methods such
@@ -59,16 +59,24 @@ import java.util.List;
  */
 public class SentenceParser implements Sentence {
 
-  // The first character which will be '$' most of the times but could be '!'.
+  /**
+   * The first character which will be '$' most of the times but could be '!'.
+   */
   private char beginChar;
 
-  // The first two characters after '$'.
-  private TalkerId talkerId;
+  /*
+   * The first two characters after '$'.
+   */
+  private TalkerType talkerId;
 
-  // The next three characters after talker id.
+  /**
+   * The next three characters after talker id.
+   */
   private final String sentenceId;
 
-  // actual data fields (sentence id and checksum omitted)
+  /**
+   * Actual sentence data fields (sentence id and checksum omitted)
+   */
   private List<String> fields = new ArrayList<>();
 
   /**
@@ -81,17 +89,17 @@ public class SentenceParser implements Sentence {
    */
   public SentenceParser(String nmea) {
 
-    if (!SentenceValidator.isValid(nmea)) {
+    if (!SentenceValidator.isValidSentence(nmea)) {
       String msg = String.format("Invalid data [%s]", nmea);
       throw new IllegalArgumentException(msg);
     }
 
     beginChar = nmea.charAt(0);
-    talkerId = TalkerId.parse(nmea);
-    sentenceId = SentenceId.parseStr(nmea);
+    talkerId = TalkerType.parse(nmea);
+    sentenceId = SentenceType.parseStr(nmea);
 
     int begin = nmea.indexOf(Sentence.FIELD_DELIMITER) + 1;
-    int end = Checksum.index(nmea);
+    int end = Checksum.indexOfDelimiter(nmea);
 
     String csv = nmea.substring(begin, end);
     String[] values = csv.split(String.valueOf(FIELD_DELIMITER), -1);
@@ -107,7 +115,7 @@ public class SentenceParser implements Sentence {
    * @param sid   SentenceId to set
    * @param size  Number of sentence data fields
    */
-  protected SentenceParser(char begin, TalkerId tid, SentenceId sid, int size) {
+  protected SentenceParser(char begin, TalkerType tid, SentenceType sid, int size) {
     this(begin, tid, sid.toString(), size);
   }
 
@@ -120,7 +128,7 @@ public class SentenceParser implements Sentence {
    * @param type   Sentence id as String, e.g. "GGA or "GLL".
    * @param size   Number of sentence data fields
    */
-  protected SentenceParser(char begin, TalkerId talker, String type, int size) {
+  protected SentenceParser(char begin, TalkerType talker, String type, int size) {
     if (size < 1) {
       throw new IllegalArgumentException("Minimum number of fields is 1");
     }
@@ -171,7 +179,7 @@ public class SentenceParser implements Sentence {
    * @param type   Sentence type Id, e.g. "GGA or "GLL".
    * @param size   Number of data fields
    */
-  protected SentenceParser(TalkerId talker, String type, int size) {
+  protected SentenceParser(TalkerType talker, String type, int size) {
     this(Sentence.BEGIN_CHAR, talker, type, size);
   }
 
@@ -182,7 +190,7 @@ public class SentenceParser implements Sentence {
    * @param nmea Sentence String
    * @param type Sentence type enum
    */
-  SentenceParser(String nmea, SentenceId type) {
+  SentenceParser(String nmea, SentenceType type) {
     this(nmea, type.toString());
   }
 
@@ -193,7 +201,7 @@ public class SentenceParser implements Sentence {
    * @param sid  Sentence id to set in sentence
    * @param size Number of data fields following the sentence id field
    */
-  SentenceParser(TalkerId tid, SentenceId sid, int size) {
+  SentenceParser(TalkerType tid, SentenceType sid, int size) {
     this(tid, sid.toString(), size);
   }
 
@@ -239,7 +247,7 @@ public class SentenceParser implements Sentence {
   /*
    * (non-Javadoc) @see org.nmea.sentence.Sentence#getTalkerId()
    */
-  public final TalkerId getTalkerId() {
+  public final TalkerType getTalkerId() {
     return talkerId;
   }
 
@@ -260,14 +268,14 @@ public class SentenceParser implements Sentence {
    * (non-Javadoc) @see org.nmea.sentence.Sentence#isProprietary()
    */
   public boolean isProprietary() {
-    return TalkerId.P.equals(getTalkerId());
+    return TalkerType.P.equals(getTalkerId());
   }
 
   /*
    * (non-Javadoc) @see org.nmea.sentence.Sentence#isValid()
    */
   public boolean isValid() {
-    return SentenceValidator.isValid(toString());
+    return SentenceValidator.isValidSentence(toString());
   }
 
   /*
@@ -280,8 +288,7 @@ public class SentenceParser implements Sentence {
   }
 
   /*
-   * (non-Javadoc) @see
-   * org.nmea.sentence.Sentence#setBeginChar(char)
+   * (non-Javadoc) @see org.nmea.sentence.Sentence#setBeginChar(char)
    */
   public void setBeginChar(char ch) {
     if (ch != BEGIN_CHAR && ch != ALTERNATIVE_BEGIN_CHAR) {
@@ -292,11 +299,10 @@ public class SentenceParser implements Sentence {
   }
 
   /*
-   * (non-Javadoc) @see
-   * org.nmea.sentence.Sentence#setTalkerId(org.
+   * (non-Javadoc) @see org.nmea.sentence.Sentence#setTalkerId(org.
    * nmea.util.TalkerId)
    */
-  public final void setTalkerId(TalkerId id) {
+  public final void setTalkerId(TalkerType id) {
     this.talkerId = id;
   }
 
@@ -305,7 +311,7 @@ public class SentenceParser implements Sentence {
    */
   public final String toSentence() {
     String s = toString();
-    if (!SentenceValidator.isValid(s)) {
+    if (!SentenceValidator.isValidSentence(s)) {
       String msg = String.format("Validation failed [%s]", toString());
       throw new IllegalStateException(msg);
     }
@@ -352,8 +358,8 @@ public class SentenceParser implements Sentence {
    *
    * @param index Data field index in sentence
    * @return Character contained in the field
-   * @throws org.nmea.parser.ParseException If field contains more
-   *                                                     than one character
+   * @throws org.nmea.parser.ParseException If field contains more than one
+   *                                        character
    */
   protected final char getCharValue(int index) {
     String val = getStringValue(index);
@@ -407,8 +413,7 @@ public class SentenceParser implements Sentence {
    *
    * @param index Field index
    * @return Field value as String
-   * @throws org.nmea.parser.DataNotAvailableException If the field
-   *                                                                is empty
+   * @throws org.nmea.parser.DataNotAvailableException If the field is empty
    */
   protected final String getStringValue(int index) {
     String value = fields.get(index);
@@ -425,8 +430,7 @@ public class SentenceParser implements Sentence {
    * @return True if field contains value, otherwise false.
    */
   protected final boolean hasValue(int index) {
-    return fields.size() > index
-      && fields.get(index) != null && !fields.get(index).isEmpty();
+    return fields.size() > index && fields.get(index) != null && !fields.get(index).isEmpty();
   }
 
   /**
@@ -476,8 +480,7 @@ public class SentenceParser implements Sentence {
    * @param decimals Maximum number of digits after decimal separator
    * @see #setDoubleValue(int, double)
    */
-  protected final void setDoubleValue(int index, double value, int leading,
-                                      int decimals) {
+  protected final void setDoubleValue(int index, double value, int leading, int decimals) {
 
     StringBuilder pattern = new StringBuilder();
     for (int i = 0; i < leading; i++) {
@@ -576,10 +579,8 @@ public class SentenceParser implements Sentence {
    * @param newFields Array of Strings to set
    */
   protected final void setStringValues(int first, String[] newFields) {
-
     List<String> temp = new ArrayList<>();
     temp.addAll(fields.subList(0, first));
-
     for (String field : newFields) {
       temp.add(field == null ? "" : field);
     }
@@ -592,6 +593,7 @@ public class SentenceParser implements Sentence {
    * of sentence.
    *
    * @param first Index of first field to get.
+   * @return a string array
    */
   protected final String[] getStringValues(int first) {
     String[] values = new String[fields.size() - first];

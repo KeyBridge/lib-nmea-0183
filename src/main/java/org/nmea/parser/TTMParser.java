@@ -20,13 +20,13 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
+import org.nmea.type.SentenceType;
 import org.nmea.sentence.TTMSentence;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.AcquisitionType;
-import org.nmea.util.TargetStatus;
-import org.nmea.util.Time;
-import org.nmea.util.Units;
+import org.nmea.type.TalkerType;
+import org.nmea.type.AcquisitionType;
+import org.nmea.type.TargetStatusType;
+import org.nmea.type.Time;
+import org.nmea.type.UnitType;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
@@ -60,7 +60,7 @@ class TTMParser extends SentenceParser implements TTMSentence {
    * @throws IllegalArgumentException If specified sentence is invalid.
    */
   public TTMParser(String nmea) {
-    super(nmea, SentenceId.TTM);
+    super(nmea, SentenceType.TTM);
   }
 
   /**
@@ -68,8 +68,8 @@ class TTMParser extends SentenceParser implements TTMSentence {
    *
    * @param talker TalkerId to set
    */
-  public TTMParser(TalkerId talker) {
-    super(talker, SentenceId.TTM, 15);
+  public TTMParser(TalkerType talker) {
+    super(talker, SentenceType.TTM, 15);
   }
 
   /*
@@ -181,8 +181,8 @@ class TTMParser extends SentenceParser implements TTMSentence {
    * @see org.nmea.sentence.TTMSentence#getTimeToCPA()
    */
   @Override
-  public Units getUnits() {
-    return Units.valueOf(getCharValue(UNITS));
+  public UnitType getUnits() {
+    return UnitType.valueOf(getCharValue(UNITS));
   }
 
   /*
@@ -201,8 +201,8 @@ class TTMParser extends SentenceParser implements TTMSentence {
    * @see org.nmea.sentence.TTMSentence#getStatus()
    */
   @Override
-  public TargetStatus getStatus() {
-    return TargetStatus.valueOf(getCharValue(STATUS));
+  public TargetStatusType getStatus() {
+    return TargetStatusType.valueOf(getCharValue(STATUS));
   }
 
   /*
@@ -316,8 +316,8 @@ class TTMParser extends SentenceParser implements TTMSentence {
    * @see org.nmea.sentence.TTMSentence#setStatus()
    */
   @Override
-  public void setStatus(TargetStatus status) {
-    setCharValue(STATUS, status.toChar());
+  public void setStatus(TargetStatusType status) {
+    setCharValue(STATUS, status.getCode());
   }
 
   /*
@@ -339,6 +339,6 @@ class TTMParser extends SentenceParser implements TTMSentence {
    */
   @Override
   public void setAcquisitionType(AcquisitionType acquisitionType) {
-    setCharValue(ACQUISITON_TYPE, acquisitionType.toChar());
+    setCharValue(ACQUISITON_TYPE, acquisitionType.getCode());
   }
 }

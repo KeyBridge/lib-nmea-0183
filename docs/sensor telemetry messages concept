@@ -1,0 +1,73 @@
+Talker Id 
+
+PX    Proprietary Receiver
+
+Sentences
+
+ANT   Antenna information
+CFG   Trace configuratoin
+TRA   Trace data
+TRZ   Trace data (compressed)
+CHS   Channel status information
+
+
+
+
+ANT
+  Time stamp
+  Latitude
+  Longitude
+  Elevation
+  Azimuthal pointing angle (degrees from true North)
+  
+  eg2. $PXANT,225444,4916.45,N,12311.12,W,085.5,213.0,
+
+  225444       Fix taken at 22:54:44 UTC
+  4916.46,N    Latitude 49 deg. 16.45 min. North
+  12311.12,W   Longitude 123 deg. 11.12 min. West
+  85.2         Elevation -5 degrees horizontal, 000 to 180 maximum
+  213.0        Azimuth, degrees from true north, 000 to 359
+
+CFG
+   
+   
+CHD   Hardware description
+  Time stamp
+  Product ID
+  FW major version
+  FW minor version
+  Serial number
+  Board temp
+    
+
+CTR   Trace configuration
+Time stamp
+Configuration Id
+Center frequency     [MHz]
+Span                 [MHz]
+Reference level      [-10, -30, -50 dB]
+Resolution BW        [1 MHz, 300 KHz, 100 kHz, 10 kHz]
+    
+TRA   Trace data
+  Time stamp
+  Configuration Id
+  Data                 [320 bytes fixed ]
+
+
+TRZ   Trace data
+  Time stamp
+  Configuration Id
+  Data                 [up to 320 bytes]
+
+
+CHS   Channel status
+  Time stamp
+  Channel count         [e.g. 12]
+  Channel[i] RSSI value [dBmW]
+ 
+ANT – Antenna information
+CHD – Configuration, hardware
+CTR – Configuration, trace
+TRA – Trace data (raw)
+TRZ – Trace data (compressed)
+CHS – Channel status information

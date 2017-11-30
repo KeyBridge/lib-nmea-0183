@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.DTMSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * DTM parser.
@@ -44,11 +44,11 @@ class DTMParser extends SentenceParser implements DTMSentence {
    * Creates a new instance of DTMParser.
    */
   public DTMParser(String nmea) {
-    super(nmea, SentenceId.DTM);
+    super(nmea, SentenceType.DTM);
   }
 
-  public DTMParser(TalkerId talker) {
-    super(talker, SentenceId.DTM, 8);
+  public DTMParser(TalkerType talker) {
+    super(talker, SentenceType.DTM, 8);
   }
 
   /*

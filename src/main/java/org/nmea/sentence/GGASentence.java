@@ -20,8 +20,10 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.GpsFixQuality;
-import org.nmea.util.Units;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.parser.ParseException;
+import org.nmea.type.GpsFixQualityType;
+import org.nmea.type.UnitType;
 
 /**
  * Global Positioning System fix data. Current position, time and other fix
@@ -48,14 +50,9 @@ public interface GGASentence extends PositionSentence, TimeSentence {
    * Get antenna altitude above mean sea level.
    *
    * @return Altitude value
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getAltitude();
 
@@ -63,29 +60,19 @@ public interface GGASentence extends PositionSentence, TimeSentence {
    * Gets the altitude units, meters or feet.
    *
    * @return Units enum
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  Units getAltitudeUnits();
+  UnitType getAltitudeUnits();
 
   /**
    * Gets the age of differential GPS data (DGPS).
    *
    * @return Seconds since last valid RTCM transmission
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getDgpsAge();
 
@@ -93,14 +80,9 @@ public interface GGASentence extends PositionSentence, TimeSentence {
    * Gets the ID of DGPS station.
    *
    * @return Station ID (0000-1024)
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   String getDgpsStationId();
 
@@ -108,16 +90,11 @@ public interface GGASentence extends PositionSentence, TimeSentence {
    * Get the GPS fix quality.
    *
    * @return GpsFixQuality enum
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  GpsFixQuality getFixQuality();
+  GpsFixQualityType getFixQuality();
 
   /**
    * Get height/separation of geoid above WGS84 ellipsoid, i.e. difference
@@ -125,14 +102,9 @@ public interface GGASentence extends PositionSentence, TimeSentence {
    * below WGS-84 ellipsoid.
    *
    * @return Height value
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getGeoidalHeight();
 
@@ -140,30 +112,20 @@ public interface GGASentence extends PositionSentence, TimeSentence {
    * Get units of height above geoid.
    *
    * @return Units of geoidal height value
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  Units getGeoidalHeightUnits();
+  UnitType getGeoidalHeightUnits();
 
   /**
    * Get the horizontal dilution of precision (HDOP), i.e. the relative accuracy
    * of horizontal position.
    *
    * @return Horizontal dilution
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getHorizontalDOP();
 
@@ -171,14 +133,9 @@ public interface GGASentence extends PositionSentence, TimeSentence {
    * Get the number of active satellites in use.
    *
    * @return Number of satellites
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   int getSatelliteCount();
 
@@ -194,7 +151,7 @@ public interface GGASentence extends PositionSentence, TimeSentence {
    *
    * @param unit Units to set
    */
-  void setAltitudeUnits(Units unit);
+  void setAltitudeUnits(UnitType unit);
 
   /**
    * Sets the age of differential GPS data (DGPS).
@@ -215,7 +172,7 @@ public interface GGASentence extends PositionSentence, TimeSentence {
    *
    * @param quality Fix quality to set
    */
-  void setFixQuality(GpsFixQuality quality);
+  void setFixQuality(GpsFixQualityType quality);
 
   /**
    * Set height/separation of geoid above WGS84 ellipsoid, i.e. difference
@@ -231,7 +188,7 @@ public interface GGASentence extends PositionSentence, TimeSentence {
    *
    * @param unit Unit to set
    */
-  void setGeoidalHeightUnits(Units unit);
+  void setGeoidalHeightUnits(UnitType unit);
 
   /**
    * Set the horizontal dilution of precision (HDOP), i.e. the relative accuracy

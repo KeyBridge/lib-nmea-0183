@@ -20,13 +20,11 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.DataStatus;
+import org.nmea.type.DataStatusType;
 
 /**
- * <p>
  * Vessel's rate of turn given in degrees per minute. Negative values indicate
  * bow turning to port.
- * <p>
  * <p>
  * Example:<br><code>$GPROT,35.6,A*4E</code>
  *
@@ -53,12 +51,12 @@ public interface ROTSentence extends Sentence {
    *
    * @return True means data is valid
    */
-  DataStatus getStatus();
+  DataStatusType getStatus();
 
   /**
    * Sets the data status.
    *
    * @param status DataStatus to set.
    */
-  void setStatus(DataStatus status);
+  void setStatus(DataStatusType status);
 }

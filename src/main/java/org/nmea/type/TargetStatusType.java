@@ -1,5 +1,5 @@
 /*
- * AcquisitionType.java
+ * TargetStatus.java
  * Copyright (C) 2014 Johan Bergkvist
  *
  * This file is part of Java Marine API.
@@ -18,47 +18,48 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
- * Aquisition types.
+ * Defines the status of a target reported in a TTM - (Tracked Target Message)
+ * sentence. Target Status is one of Lost, Query, Tracking
  *
  * @author Johan Bergkvist
  * @see org.nmea.sentence.TTMSentence
  */
-public enum AcquisitionType {
+public enum TargetStatusType {
 
-  AUTO('A'),
-  MANUAL('M'),
-  REPORTED('R');
+  LOST('L'),
+  QUERY('Q'),
+  TRACKING('T');
 
-  private final char ch;
+  private final char code;
 
-  private AcquisitionType(char ch) {
-    this.ch = ch;
+  private TargetStatusType(char ch) {
+    this.code = ch;
   }
 
   /**
    * Returns the corresponding char constant.
    *
-   * @return Char indicator for AcquisitionType
+   * @return Char indicator for Status
    */
-  public char toChar() {
-    return ch;
+  public char getCode() {
+    return code;
   }
 
   /**
    * Get the enum corresponding to specified char.
    *
-   * @param c Char indicator for AcquisitionType
-   * @return AcquisitionType
+   * @param code Char indicator for Status
+   * @return the TargetStatus instance
    */
-  public static AcquisitionType valueOf(char c) {
-    for (AcquisitionType d : values()) {
-      if (d.toChar() == c) {
+  public static TargetStatusType valueOf(char code) {
+    for (TargetStatusType d : values()) {
+      if (d.getCode() == code) {
         return d;
       }
     }
-    return valueOf(String.valueOf(c));
+    throw new IllegalArgumentException("Unrecognized code " + code);
   }
 }

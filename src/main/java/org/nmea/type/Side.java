@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
  * Defines the sides of a boat, i.e. "port" and "starboard".
@@ -28,18 +28,18 @@ package org.nmea.util;
 public enum Side {
 
   /**
-   * Port
+   * Port (left)
    */
   PORT('P'),
   /**
-   * Right
+   * Starboard (right)
    */
   STARBOARD('S');
 
-  private final char ch;
+  private final char code;
 
   private Side(char c) {
-    ch = c;
+    this.code = c;
   }
 
   /**
@@ -47,22 +47,22 @@ public enum Side {
    *
    * @return Char indicator for Direction
    */
-  public char toChar() {
-    return ch;
+  public char getCode() {
+    return code;
   }
 
   /**
    * Get the enum corresponding to specified char.
    *
-   * @param c Char indicator for Side
+   * @param code Char indicator for Side
    * @return Side
    */
-  public static Side valueOf(char c) {
+  public static Side valueOf(char code) {
     for (Side d : values()) {
-      if (d.toChar() == c) {
+      if (d.getCode() == code) {
         return d;
       }
     }
-    return valueOf(String.valueOf(c));
+    throw new IllegalArgumentException("Unrecognized code " + code);
   }
 }

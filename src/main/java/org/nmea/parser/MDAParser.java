@@ -21,7 +21,7 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.MDASentence;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.TalkerType;
 
 /**
  * Meteorological Composite - Barometric pressure, air and water temperature,
@@ -148,7 +148,7 @@ class MDAParser extends SentenceParser implements MDASentence {
    *
    * @param talker Talker id to set
    */
-  public MDAParser(TalkerId talker) {
+  public MDAParser(TalkerType talker) {
     super(talker, MDA_SENTENCE_ID, 20);
     setCharValue(AIR_TEMPERATURE_UNIT, 'C');
     setCharValue(WATER_TEMPERATURE_UNIT, 'C');

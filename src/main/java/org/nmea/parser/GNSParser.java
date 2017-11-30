@@ -21,10 +21,10 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.GNSSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.Position;
-import org.nmea.util.Time;
+import org.nmea.type.Position;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.Time;
 
 /**
  * GNS sentence parser.
@@ -58,7 +58,7 @@ class GNSParser extends PositionParser implements GNSSentence {
    * @param nmea GNS sentence String
    */
   public GNSParser(String nmea) {
-    super(nmea, SentenceId.GNS);
+    super(nmea, SentenceType.GNS);
   }
 
   /**
@@ -66,8 +66,8 @@ class GNSParser extends PositionParser implements GNSSentence {
    *
    * @param tid Talker ID to set
    */
-  public GNSParser(TalkerId tid) {
-    super(tid, SentenceId.GNS, 12);
+  public GNSParser(TalkerType tid) {
+    super(tid, SentenceType.GNS, 12);
     setTime(new Time());
     setStringValue(MODE, "NN");
   }
@@ -93,31 +93,31 @@ class GNSParser extends PositionParser implements GNSSentence {
   }
 
   @Override
-  public Mode getGpsMode() {
+  public ModeType getGpsMode() {
     String modes = getStringValue(MODE);
-    return Mode.valueOf(modes.charAt(GPS_MODE));
+    return ModeType.valueOf(modes.charAt(GPS_MODE));
   }
 
   @Override
-  public void setGpsMode(Mode gps) {
+  public void setGpsMode(ModeType gps) {
     String modes = getStringValue(MODE);
-    setStringValue(MODE, gps.toChar() + modes.substring(GNS_MODE));
+    setStringValue(MODE, gps.getCode() + modes.substring(GNS_MODE));
   }
 
   @Override
-  public Mode getGlonassMode() {
+  public ModeType getGlonassMode() {
     String modes = getStringValue(MODE);
-    return Mode.valueOf(modes.charAt(GNS_MODE));
+    return ModeType.valueOf(modes.charAt(GNS_MODE));
   }
 
   @Override
-  public void setGlonassMode(Mode gns) {
+  public void setGlonassMode(ModeType gns) {
 
     String modes = getStringValue(MODE);
 
     StringBuffer sb = new StringBuffer(modes.length());
     sb.append(modes.charAt(GPS_MODE));
-    sb.append(gns.toChar());
+    sb.append(gns.getCode());
 
     if (modes.length() > 2) {
       sb.append(modes.substring(VAR_MODE));
@@ -127,26 +127,26 @@ class GNSParser extends PositionParser implements GNSSentence {
   }
 
   @Override
-  public Mode[] getAdditionalModes() {
+  public ModeType[] getAdditionalModes() {
     String mode = getStringValue(MODE);
     if (mode.length() == 2) {
-      return new Mode[0];
+      return new ModeType[0];
     }
     String additional = mode.substring(VAR_MODE);
-    Mode[] modes = new Mode[additional.length()];
+    ModeType[] modes = new ModeType[additional.length()];
     for (int i = 0; i < additional.length(); i++) {
-      modes[i] = Mode.valueOf(additional.charAt(i));
+      modes[i] = ModeType.valueOf(additional.charAt(i));
     }
     return modes;
   }
 
   @Override
-  public void setAdditionalModes(Mode... modes) {
+  public void setAdditionalModes(ModeType... modes) {
     String current = getStringValue(MODE);
     StringBuffer sb = new StringBuffer(modes.length + 2);
     sb.append(current.substring(0, VAR_MODE));
-    for (Mode m : modes) {
-      sb.append(m.toChar());
+    for (ModeType m : modes) {
+      sb.append(m.getCode());
     }
     setStringValue(MODE, sb.toString());
   }

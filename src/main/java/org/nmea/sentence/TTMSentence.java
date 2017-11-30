@@ -20,9 +20,10 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.AcquisitionType;
-import org.nmea.util.TargetStatus;
-import org.nmea.util.Units;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.type.AcquisitionType;
+import org.nmea.type.TargetStatusType;
+import org.nmea.type.UnitType;
 
 /**
  * Tracked Target Message. Range and bearing from radar to target. Course and
@@ -40,9 +41,7 @@ public interface TTMSentence extends TimeSentence {
    * mandate a two digit number, so valid numbers are 0 to 99 inclusive.
    *
    * @return Target number in the range 0 - 99.
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
+   * @throws DataNotAvailableException If the data is not available.
    */
   int getNumber();
 
@@ -93,7 +92,7 @@ public interface TTMSentence extends TimeSentence {
    *
    * @return The unit of measure.
    */
-  Units getUnits();
+  UnitType getUnits();
 
   /**
    * Get the name of the target as assigned by the radar.
@@ -111,7 +110,7 @@ public interface TTMSentence extends TimeSentence {
    *
    * @return The state (QUERY, TRACKING, LOST)
    */
-  TargetStatus getStatus();
+  TargetStatusType getStatus();
 
   /**
    * A target may be used to calculate own ship position.
@@ -192,7 +191,7 @@ public interface TTMSentence extends TimeSentence {
    * @see org.nmea.sentence.TTMSentence#getStatus()
    * @param status The status
    */
-  void setStatus(TargetStatus status);
+  void setStatus(TargetStatusType status);
 
   /**
    * A target may be used to calculate own ship position.

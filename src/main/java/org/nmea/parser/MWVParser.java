@@ -21,10 +21,10 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.MWVSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.DataStatus;
-import org.nmea.util.Units;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.UnitType;
 
 /**
  * MWV sentence parser.
@@ -45,7 +45,7 @@ class MWVParser extends SentenceParser implements MWVSentence {
    * @param nmea MWV sentence String
    */
   public MWVParser(String nmea) {
-    super(nmea, SentenceId.MWV);
+    super(nmea, SentenceType.MWV);
   }
 
   /**
@@ -53,9 +53,9 @@ class MWVParser extends SentenceParser implements MWVSentence {
    *
    * @param talker Talker id to set
    */
-  public MWVParser(TalkerId talker) {
-    super(talker, SentenceId.MWV, 5);
-    setCharValue(DATA_STATUS, DataStatus.VOID.toChar());
+  public MWVParser(TalkerType talker) {
+    super(talker, SentenceType.MWV, 5);
+    setCharValue(DATA_STATUS, DataStatusType.VOID.getCode());
   }
 
   /*
@@ -76,15 +76,15 @@ class MWVParser extends SentenceParser implements MWVSentence {
    * (non-Javadoc) @see
    * org.nmea.sentence.MWVSentence#getSpeedUnit()
    */
-  public Units getSpeedUnit() {
-    return Units.valueOf(getCharValue(SPEED_UNITS));
+  public UnitType getSpeedUnit() {
+    return UnitType.valueOf(getCharValue(SPEED_UNITS));
   }
 
   /*
    * (non-Javadoc) @see org.nmea.sentence.MWVSentence#getStatus()
    */
-  public DataStatus getStatus() {
-    return DataStatus.valueOf(getCharValue(DATA_STATUS));
+  public DataStatusType getStatus() {
+    return DataStatusType.valueOf(getCharValue(DATA_STATUS));
   }
 
   /*
@@ -119,9 +119,9 @@ class MWVParser extends SentenceParser implements MWVSentence {
    * org.nmea.sentence.MWVSentence#setSpeedUnit(net.sf.marineapi
    * .nmea.util.Units)
    */
-  public void setSpeedUnit(Units unit) {
-    if (unit == Units.METER || unit == Units.KMH || unit == Units.KNOT) {
-      setCharValue(SPEED_UNITS, unit.toChar());
+  public void setSpeedUnit(UnitType unit) {
+    if (unit == UnitType.METER || unit == UnitType.KMH || unit == UnitType.KNOT) {
+      setCharValue(SPEED_UNITS, unit.getCode());
       return;
     }
     throw new IllegalArgumentException("Invalid unit for speed");
@@ -132,8 +132,8 @@ class MWVParser extends SentenceParser implements MWVSentence {
    * org.nmea.sentence.MWVSentence#setStatus(net.sf.marineapi
    * .nmea.util.DataStatus)
    */
-  public void setStatus(DataStatus status) {
-    setCharValue(DATA_STATUS, status.toChar());
+  public void setStatus(DataStatusType status) {
+    setCharValue(DATA_STATUS, status.getCode());
   }
 
   /*

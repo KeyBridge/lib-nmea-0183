@@ -33,8 +33,7 @@ public class Angle12 {
   private static final int MINVALUE = 0;
   private static final int MAXVALUE = 3599;
 
-  public static final String RANGE
-                             = "[" + MINVALUE + "," + MAXVALUE + "] + {" + DEFAULTVALUE + "}";
+  public static final String RANGE = "[" + MINVALUE + "," + MAXVALUE + "] + {" + DEFAULTVALUE + "}";
 
   /**
    * @return true if the value is correct

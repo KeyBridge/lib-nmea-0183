@@ -20,12 +20,12 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.DataStatus;
-import org.nmea.util.Direction;
-import org.nmea.util.FaaMode;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.DirectionType;
+import org.nmea.type.FaaModeType;
 
 /**
- * Measured cross-track error when navigating towards waypoint.
+ * Measured cross-track error when navigating towards a way point.
  *
  * @author Kimmo Tuukkanen
  */
@@ -33,8 +33,10 @@ public interface XTESentence extends Sentence {
 
   /**
    * Returns the Loran-C cycle lock status, not used for GPS.
+   *
+   * @return the Loran-C cycle lock status
    */
-  DataStatus getCycleLockStatus();
+  DataStatusType getCycleLockStatus();
 
   /**
    * Returns the cross-track error magnitude/distance.
@@ -48,29 +50,29 @@ public interface XTESentence extends Sentence {
    *
    * @return FaaMode
    */
-  FaaMode getMode();
+  FaaModeType getMode();
 
   /**
    * Returns the signal/fix status.
    *
    * @return DataStatus
    */
-  DataStatus getStatus();
+  DataStatusType getStatus();
 
   /**
    * Returns the direction in which to steer in order to get back on route.
    *
-   * @return {@link Direction#LEFT} or {@link Direction#RIGHT}
+   * @return {@link DirectionType#LEFT} or {@link DirectionType#RIGHT}
    */
-  Direction getSteerTo();
+  DirectionType getSteerTo();
 
   /**
    * Sets the Loran-C cycle lock status. Not used for GPS, may be omitted or
-   * {@link DataStatus#VOID}.
+   * {@link DataStatusType#VOID}.
    *
    * @param status DataStatus to set
    */
-  void setCycleLockStatus(DataStatus status);
+  void setCycleLockStatus(DataStatusType status);
 
   /**
    * Sets the cross-track error magnitude/distance.
@@ -84,19 +86,19 @@ public interface XTESentence extends Sentence {
    *
    * @param mode FaaMode to set
    */
-  void setMode(FaaMode mode);
+  void setMode(FaaModeType mode);
 
   /**
    * Sets the signal/fix status.
    *
    * @param status DataStatus to set
    */
-  void setStatus(DataStatus status);
+  void setStatus(DataStatusType status);
 
   /**
    * Set direction in which to steer in order to get back on route.
    *
-   * @param direction {@link Direction#RIGHT} or {@link Direction#LEFT}
+   * @param direction {@link DirectionType#RIGHT} or {@link DirectionType#LEFT}
    */
-  void setSteerTo(Direction direction);
+  void setSteerTo(DirectionType direction);
 }

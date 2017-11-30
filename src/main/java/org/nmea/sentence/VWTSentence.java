@@ -20,7 +20,9 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.Direction;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.parser.ParseException;
+import org.nmea.type.DirectionType;
 
 /**
  * True Wind Speed and Angle True wind angle in relation to the vessel's heading
@@ -28,7 +30,7 @@ import org.nmea.util.Direction;
  * Second and Kilometers Per Hour
  * <p>
  * Example: <br>
- * <code>---</code> $--VWT,x.x,a,x.x,N,x.x,M,x.x,K*hh<CR><LF>
+ * <code>$--VWT,x.x,a,x.x,N,x.x,M,x.x,K*hh-</code>
  *
  * @author Henri Laurent
  */
@@ -51,12 +53,9 @@ public interface VWTSentence extends Sentence {
    * Get the Wind angle magnitude in degrees
    *
    * @return Wind angle
-   * @throws org.parser.DataNotAvailableException If the data is
-   *                                                           not available.
-   * @throws org.parser.ParseException            If the field
-   *                                                           contains
-   *                                                           unexpected or
-   *                                                           illegal value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getWindAngle();
 
@@ -64,26 +63,20 @@ public interface VWTSentence extends Sentence {
    * Get the Wind angle Left/Right of bow
    *
    * @since NMEA 2.3
-   * @return {@link Direction} enum
-   * @throws org.parser.DataNotAvailableException If the data is
-   *                                                           not available.
-   * @throws org.parser.ParseException            If the field
-   *                                                           contains
-   *                                                           unexpected or
-   *                                                           illegal value.
+   * @return {@link DirectionType} enum
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  Direction getDirectionLeftRight();
+  DirectionType getDirectionLeftRight();
 
   /**
    * Get relative wind speed, in kilometers per hour.
    *
    * @return Speed in km/h
-   * @throws org.parser.DataNotAvailableException If the data is
-   *                                                           not available.
-   * @throws org.parser.ParseException            If the field
-   *                                                           contains
-   *                                                           unexpected or
-   *                                                           illegal value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getSpeedKmh();
 
@@ -91,12 +84,9 @@ public interface VWTSentence extends Sentence {
    * Get relative wind speed in knots.
    *
    * @return Speed in knots (nautical miles per hour)
-   * @throws org.parser.DataNotAvailableException If the data is
-   *                                                           not available.
-   * @throws org.parser.ParseException            If the field
-   *                                                           contains
-   *                                                           unexpected or
-   *                                                           illegal value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getSpeedKnots();
 
@@ -113,7 +103,7 @@ public interface VWTSentence extends Sentence {
    * @param direction Direction to set
    * @since NMEA 2.3
    */
-  void setDirectionLeftRight(Direction direction);
+  void setDirectionLeftRight(DirectionType direction);
 
   /**
    * Set the relative wind speed in kmh

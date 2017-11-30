@@ -21,11 +21,11 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.GLLSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.DataStatus;
-import org.nmea.util.Position;
-import org.nmea.util.Time;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.Position;
+import org.nmea.type.Time;
 
 /**
  * GLL Sentence parser.
@@ -50,7 +50,7 @@ class GLLParser extends PositionParser implements GLLSentence {
    *                                  not contain GLL sentence.
    */
   public GLLParser(String nmea) {
-    super(nmea, SentenceId.GLL);
+    super(nmea, SentenceType.GLL);
   }
 
   /**
@@ -58,8 +58,8 @@ class GLLParser extends PositionParser implements GLLSentence {
    *
    * @param talker TalkerId to set
    */
-  public GLLParser(TalkerId talker) {
-    super(talker, SentenceId.GLL, 6);
+  public GLLParser(TalkerType talker) {
+    super(talker, SentenceType.GLL, 6);
   }
 
   /*
@@ -74,8 +74,8 @@ class GLLParser extends PositionParser implements GLLSentence {
    * (non-Javadoc) @see
    * org.nmea.sentence.GLLSentence#getDataStatus()
    */
-  public DataStatus getStatus() {
-    return DataStatus.valueOf(getCharValue(DATA_STATUS));
+  public DataStatusType getStatus() {
+    return DataStatusType.valueOf(getCharValue(DATA_STATUS));
   }
 
   /*
@@ -101,8 +101,8 @@ class GLLParser extends PositionParser implements GLLSentence {
    * org.nmea.sentence.GLLSentence#setDataStatus(net.sf.marineapi
    * .nmea.util.DataStatus)
    */
-  public void setStatus(DataStatus status) {
-    setCharValue(DATA_STATUS, status.toChar());
+  public void setStatus(DataStatusType status) {
+    setCharValue(DATA_STATUS, status.getCode());
   }
 
   /*

@@ -20,11 +20,11 @@
  */
 package ch.keybridge.lib.nmea.provider.event;
 
-import org.nmea.util.GpsFixQuality;
-import org.nmea.util.FaaMode;
-import org.nmea.util.Position;
-import org.nmea.util.Date;
-import org.nmea.util.Time;
+import org.nmea.type.GpsFixQualityType;
+import org.nmea.type.FaaModeType;
+import org.nmea.type.Position;
+import org.nmea.type.Date;
+import org.nmea.type.Time;
 
 /**
  * GPS time/position/velocity report with current position, altitude, speed,
@@ -44,8 +44,8 @@ public class PositionEvent extends ProviderEvent implements Cloneable {
   private final Position position;
   private final Double speed;
   private final Time time;
-  private final FaaMode mode;
-  private final GpsFixQuality fix;
+  private final FaaModeType mode;
+  private final GpsFixQualityType fix;
 
   /**
    * Creates a new instance of PositionEvent.
@@ -53,7 +53,7 @@ public class PositionEvent extends ProviderEvent implements Cloneable {
    * @param source Source object of event
    */
   public PositionEvent(Object source, Position p, double sog, Double cog, Date d,
-                       Time t, FaaMode m, GpsFixQuality fq) {
+                       Time t, FaaModeType m, GpsFixQualityType fq) {
     super(source);
     position = p;
     speed = sog;
@@ -96,7 +96,7 @@ public class PositionEvent extends ProviderEvent implements Cloneable {
    *
    * @return GpsFixQuality
    */
-  public GpsFixQuality getFixQuality() {
+  public GpsFixQualityType getFixQuality() {
     return fix;
   }
 
@@ -109,7 +109,7 @@ public class PositionEvent extends ProviderEvent implements Cloneable {
    *
    * @return FaaMode
    */
-  public FaaMode getMode() {
+  public FaaModeType getMode() {
     return mode;
   }
 

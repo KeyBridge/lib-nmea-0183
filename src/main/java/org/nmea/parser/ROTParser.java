@@ -21,9 +21,9 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.ROTSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.DataStatus;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.DataStatusType;
 
 /**
  * ROT sentence parser.
@@ -41,7 +41,7 @@ class ROTParser extends SentenceParser implements ROTSentence {
    * @param nmea ROT sentence String to parse.
    */
   public ROTParser(String nmea) {
-    super(nmea, SentenceId.ROT);
+    super(nmea, SentenceType.ROT);
   }
 
   /**
@@ -49,8 +49,8 @@ class ROTParser extends SentenceParser implements ROTSentence {
    *
    * @param talker Talker id to set
    */
-  public ROTParser(TalkerId talker) {
-    super(talker, SentenceId.ROT, 2);
+  public ROTParser(TalkerType talker) {
+    super(talker, SentenceType.ROT, 2);
   }
 
   /*
@@ -67,8 +67,8 @@ class ROTParser extends SentenceParser implements ROTSentence {
    *
    * @see org.nmea.sentence.RateOfTurnSentance#getStatus()
    */
-  public DataStatus getStatus() {
-    return DataStatus.valueOf(getCharValue(STATUS));
+  public DataStatusType getStatus() {
+    return DataStatusType.valueOf(getCharValue(STATUS));
   }
 
   /*
@@ -86,7 +86,7 @@ class ROTParser extends SentenceParser implements ROTSentence {
    * @see org.nmea.sentence.ROTSentence#setStatus(net.sf.marineapi
    * .nmea.util.DataStatus)
    */
-  public void setStatus(DataStatus status) {
-    setCharValue(STATUS, status.toChar());
+  public void setStatus(DataStatusType status) {
+    setCharValue(STATUS, status.getCode());
   }
 }

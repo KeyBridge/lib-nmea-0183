@@ -21,12 +21,12 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.GGASentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.GpsFixQuality;
-import org.nmea.util.Position;
-import org.nmea.util.Time;
-import org.nmea.util.Units;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.GpsFixQualityType;
+import org.nmea.type.Position;
+import org.nmea.type.Time;
+import org.nmea.type.UnitType;
 
 /**
  * GGA sentence parser.
@@ -59,7 +59,7 @@ class GGAParser extends PositionParser implements GGASentence {
    *                                  not a GGA sentence.
    */
   public GGAParser(String nmea) {
-    super(nmea, SentenceId.GGA);
+    super(nmea, SentenceType.GGA);
   }
 
   /**
@@ -67,8 +67,8 @@ class GGAParser extends PositionParser implements GGASentence {
    *
    * @param talker TalkerId to set
    */
-  public GGAParser(TalkerId talker) {
-    super(talker, SentenceId.GGA, 14);
+  public GGAParser(TalkerType talker) {
+    super(talker, SentenceType.GGA, 14);
   }
 
   /*
@@ -82,13 +82,13 @@ class GGAParser extends PositionParser implements GGASentence {
    * (non-Javadoc) @see
    * org.nmea.sentence.GGASentence#getAltitudeUnits()
    */
-  public Units getAltitudeUnits() {
+  public UnitType getAltitudeUnits() {
     char ch = getCharValue(ALTITUDE_UNITS);
     if (ch != ALT_UNIT_METERS && ch != ALT_UNIT_FEET) {
       String msg = "Invalid altitude unit indicator: %s";
       throw new ParseException(String.format(msg, ch));
     }
-    return Units.valueOf(ch);
+    return UnitType.valueOf(ch);
   }
 
   /*
@@ -110,8 +110,8 @@ class GGAParser extends PositionParser implements GGASentence {
    * (non-Javadoc) @see
    * org.nmea.sentence.GGASentence#getFixQuality()
    */
-  public GpsFixQuality getFixQuality() {
-    return GpsFixQuality.valueOf(getIntValue(FIX_QUALITY));
+  public GpsFixQualityType getFixQuality() {
+    return GpsFixQualityType.valueOf(getIntValue(FIX_QUALITY));
   }
 
   /*
@@ -126,8 +126,8 @@ class GGAParser extends PositionParser implements GGASentence {
    * (non-Javadoc) @see
    * org.nmea.sentence.GGASentence#getGeoidalHeightUnits()
    */
-  public Units getGeoidalHeightUnits() {
-    return Units.valueOf(getCharValue(HEIGHT_UNITS));
+  public UnitType getGeoidalHeightUnits() {
+    return UnitType.valueOf(getCharValue(HEIGHT_UNITS));
   }
 
   /*
@@ -149,7 +149,7 @@ class GGAParser extends PositionParser implements GGASentence {
 
     if (hasValue(ALTITUDE) && hasValue(ALTITUDE_UNITS)) {
       double alt = getAltitude();
-      if (getAltitudeUnits().equals(Units.FEET)) {
+      if (getAltitudeUnits().equals(UnitType.FEET)) {
         alt = (alt / 0.3048);
       }
       pos.setAltitude(alt);
@@ -187,8 +187,8 @@ class GGAParser extends PositionParser implements GGASentence {
    * org.nmea.sentence.GGASentence#setAltitudeUnits(net.sf.marineapi
    * .nmea.util.Units)
    */
-  public void setAltitudeUnits(Units unit) {
-    setCharValue(ALTITUDE_UNITS, unit.toChar());
+  public void setAltitudeUnits(UnitType unit) {
+    setCharValue(ALTITUDE_UNITS, unit.getCode());
   }
 
   /*
@@ -213,8 +213,8 @@ class GGAParser extends PositionParser implements GGASentence {
    * org.nmea.sentence.GGASentence#setFixQuality(net.sf.marineapi
    * .nmea.util.GpsFixQuality)
    */
-  public void setFixQuality(GpsFixQuality quality) {
-    setIntValue(FIX_QUALITY, quality.toInt());
+  public void setFixQuality(GpsFixQualityType quality) {
+    setIntValue(FIX_QUALITY, quality.getCode());
   }
 
   /*
@@ -230,8 +230,8 @@ class GGAParser extends PositionParser implements GGASentence {
    * org.nmea.sentence.GGASentence#setGeoidalHeightUnits(net.
    * sf.marineapi.nmea.util.Units)
    */
-  public void setGeoidalHeightUnits(Units unit) {
-    setCharValue(HEIGHT_UNITS, unit.toChar());
+  public void setGeoidalHeightUnits(UnitType unit) {
+    setCharValue(HEIGHT_UNITS, unit.getCode());
   }
 
   /*
@@ -252,7 +252,7 @@ class GGAParser extends PositionParser implements GGASentence {
       pos, LATITUDE, LAT_HEMISPHERE, LONGITUDE, LON_HEMISPHERE);
 
     setAltitude(pos.getAltitude());
-    setAltitudeUnits(Units.METER);
+    setAltitudeUnits(UnitType.METER);
   }
 
   /*

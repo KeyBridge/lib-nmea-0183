@@ -29,7 +29,7 @@ import org.nmea.event.SentenceEvent;
 import org.nmea.event.SentenceListener;
 import org.nmea.io.SentenceReader;
 import org.nmea.sentence.GGASentence;
-import org.nmea.sentence.SentenceId;
+import org.nmea.type.SentenceType;
 
 /**
  * Simple example application that takes a filename as command-line argument and
@@ -53,7 +53,7 @@ public class FileExample implements SentenceListener {
 		reader = new SentenceReader(stream);
 
 		// register self as a listener for GGA sentences
-		reader.addSentenceListener(this, SentenceId.GGA);
+		reader.addSentenceListener(this, SentenceType.GGA);
 		reader.start();
 	}
 

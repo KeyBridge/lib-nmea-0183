@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.HDTSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * HDT sentence parser.
@@ -40,7 +40,7 @@ class HDTParser extends SentenceParser implements HDTSentence {
    * @param nmea HDT sentence String to parse.
    */
   public HDTParser(String nmea) {
-    super(nmea, SentenceId.HDT);
+    super(nmea, SentenceType.HDT);
   }
 
   /**
@@ -48,8 +48,8 @@ class HDTParser extends SentenceParser implements HDTSentence {
    *
    * @param talker Talker id to set
    */
-  public HDTParser(TalkerId talker) {
-    super(talker, SentenceId.HDT, 2);
+  public HDTParser(TalkerType talker) {
+    super(talker, SentenceType.HDT, 2);
     setCharValue(TRUE_INDICATOR, 'T');
   }
 

@@ -21,9 +21,9 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.RTESentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.RouteType;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.RouteType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +47,7 @@ class RTEParser extends SentenceParser implements RTESentence {
    * @param nmea RTE sentence string.
    */
   public RTEParser(String nmea) {
-    super(nmea, SentenceId.RTE);
+    super(nmea, SentenceType.RTE);
   }
 
   /**
@@ -56,8 +56,8 @@ class RTEParser extends SentenceParser implements RTESentence {
    *
    * @param talker TalkerId to set
    */
-  public RTEParser(TalkerId talker) {
-    super(talker, SentenceId.RTE, 4);
+  public RTEParser(TalkerType talker) {
+    super(talker, SentenceType.RTE, 4);
   }
 
   /*
@@ -131,7 +131,7 @@ class RTEParser extends SentenceParser implements RTESentence {
    * org.nmea.sentence.RTESentence#isActiveRoute()
    */
   public boolean isActiveRoute() {
-    return getCharValue(STATUS) == RouteType.ACTIVE.toChar();
+    return getCharValue(STATUS) == RouteType.ACTIVE.getCode();
   }
 
   /*
@@ -153,7 +153,7 @@ class RTEParser extends SentenceParser implements RTESentence {
    * org.nmea.sentence.RTESentence#isWorkingRoute()
    */
   public boolean isWorkingRoute() {
-    return getCharValue(STATUS) == RouteType.WORKING.toChar();
+    return getCharValue(STATUS) == RouteType.WORKING.getCode();
   }
 
   /*
@@ -170,7 +170,7 @@ class RTEParser extends SentenceParser implements RTESentence {
    * .nmea.util.RouteType)
    */
   public void setRouteType(RouteType type) {
-    setCharValue(STATUS, type.toChar());
+    setCharValue(STATUS, type.getCode());
   }
 
   /*

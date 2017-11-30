@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 import java.util.Date;
 
@@ -26,12 +26,21 @@ import java.util.Date;
  * Waypoint represents a named geographic location.
  *
  * @author Kimmo Tuukkanen
- * @see org.nmea.util.Position
+ * @see org.nmea.type.Position
  */
 public class Waypoint extends Position {
 
+  /**
+   * id of Waypoint
+   */
   private String id;
+  /**
+   * the waypoint description/comment
+   */
   private String description = "";
+  /**
+   * the time stamp when <code>Waypoint</code> was created
+   */
   private final Date timeStamp = new Date();
 
   /**
@@ -67,7 +76,7 @@ public class Waypoint extends Position {
    * @param lon   Longitude degrees of waypoint location
    * @param datum Position datum, i.e. the coordinate system.
    */
-  public Waypoint(String id, double lat, double lon, Datum datum) {
+  public Waypoint(String id, double lat, double lon, DatumType datum) {
     super(lat, lon, datum);
     this.id = id;
   }
@@ -82,7 +91,7 @@ public class Waypoint extends Position {
    * @param alt   Altitude value, in meters above/below mean sea level
    * @param datum Position datum, i.e. the coordinate system.
    */
-  public Waypoint(String id, double lat, double lon, double alt, Datum datum) {
+  public Waypoint(String id, double lat, double lon, double alt, DatumType datum) {
     super(lat, lon, alt, datum);
     this.id = id;
   }

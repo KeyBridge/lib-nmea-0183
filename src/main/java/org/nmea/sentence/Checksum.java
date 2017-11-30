@@ -37,7 +37,7 @@ public final class Checksum {
    * @return The specified String with checksum added.
    */
   public static String add(String nmea) {
-    String str = nmea.substring(0, index(nmea));
+    String str = nmea.substring(0, indexOfDelimiter(nmea));
     String sum = calculate(str);
     return String.format("%s%c%s", str, Sentence.CHECKSUM_DELIMITER, sum);
   }
@@ -50,7 +50,7 @@ public final class Checksum {
    * @return Hexadecimal checksum
    */
   public static String calculate(String nmea) {
-    return xor(nmea.substring(1, index(nmea)));
+    return xor(nmea.substring(1, indexOfDelimiter(nmea)));
   }
 
   /**
@@ -75,8 +75,9 @@ public final class Checksum {
    * @param nmea Sentence String
    * @return Index of checksum separator or String length.
    */
-  public static int index(String nmea) {
+  public static int indexOfDelimiter(String nmea) {
     return nmea.indexOf(Sentence.CHECKSUM_DELIMITER) > 0
-           ? nmea.indexOf(Sentence.CHECKSUM_DELIMITER) : nmea.length();
+           ? nmea.indexOf(Sentence.CHECKSUM_DELIMITER)
+           : nmea.length();
   }
 }

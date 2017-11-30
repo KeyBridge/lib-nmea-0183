@@ -30,8 +30,7 @@ public class Angle9 {
   private static final int DEFAULTVALUE = 511;
   private static final int MINVALUE = 0;
   private static final int MAXVALUE = 359;
-  public static final String RANGE
-                             = "[" + MINVALUE + "," + MAXVALUE + "] + {" + DEFAULTVALUE + "}";
+  public static final String RANGE = "[" + MINVALUE + "," + MAXVALUE + "] + {" + DEFAULTVALUE + "}";
 
   /**
    * @return true if the value is in the correct range

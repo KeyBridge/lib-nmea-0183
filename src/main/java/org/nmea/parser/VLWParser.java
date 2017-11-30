@@ -20,7 +20,7 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.TalkerType;
 import org.nmea.sentence.VLWSentence;
 
 /**
@@ -49,7 +49,7 @@ class VLWParser extends SentenceParser implements VLWSentence {
    *
    * @param talker TalkerId to set.
    */
-  public VLWParser(TalkerId talker) {
+  public VLWParser(TalkerType talker) {
     super(talker, "VLW", 4);
   }
 

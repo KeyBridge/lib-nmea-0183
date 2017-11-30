@@ -20,11 +20,11 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 import org.nmea.sentence.ZDASentence;
-import org.nmea.util.Date;
-import org.nmea.util.Time;
+import org.nmea.type.Date;
+import org.nmea.type.Time;
 
 /**
  * ZDA sentence parser.
@@ -48,7 +48,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
    * @throws IllegalArgumentException If specified sentence is invalid.
    */
   public ZDAParser(String nmea) {
-    super(nmea, SentenceId.ZDA);
+    super(nmea, SentenceType.ZDA);
   }
 
   /**
@@ -56,8 +56,8 @@ class ZDAParser extends SentenceParser implements ZDASentence {
    *
    * @param talker TalkerId to set
    */
-  public ZDAParser(TalkerId talker) {
-    super(talker, SentenceId.ZDA, 6);
+  public ZDAParser(TalkerType talker) {
+    super(talker, SentenceType.ZDA, 6);
   }
 
   /*
@@ -71,16 +71,14 @@ class ZDAParser extends SentenceParser implements ZDASentence {
   }
 
   /*
-   * (non-Javadoc) @see
-   * org.nmea.sentence.ZDASentence#getLocalZoneHours()
+   * (non-Javadoc) @see org.nmea.sentence.ZDASentence#getLocalZoneHours()
    */
   public int getLocalZoneHours() {
     return getIntValue(LOCAL_ZONE_HOURS);
   }
 
   /*
-   * (non-Javadoc) @see
-   * org.nmea.sentence.ZDASentence#getLocalZoneMinutes()
+   * (non-Javadoc) @see org.nmea.sentence.ZDASentence#getLocalZoneMinutes()
    */
   public int getLocalZoneMinutes() {
     return getIntValue(LOCAL_ZONE_MINUTES);
@@ -103,8 +101,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
   }
 
   /*
-   * (non-Javadoc) @see
-   * org.nmea.sentence.DateSentence#setDate(org.
+   * (non-Javadoc) @see org.nmea.sentence.DateSentence#setDate(org.
    * nmea.util.Date)
    */
   public void setDate(Date date) {
@@ -114,8 +111,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
   }
 
   /*
-   * (non-Javadoc) @see
-   * org.nmea.sentence.ZDASentence#setLocalZoneHours(int)
+   * (non-Javadoc) @see org.nmea.sentence.ZDASentence#setLocalZoneHours(int)
    */
   public void setLocalZoneHours(int hours) {
     if (hours < -13 || hours > 13) {
@@ -126,8 +122,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
   }
 
   /*
-   * (non-Javadoc) @see
-   * org.nmea.sentence.ZDASentence#setLocalZoneMinutes()
+   * (non-Javadoc) @see org.nmea.sentence.ZDASentence#setLocalZoneMinutes()
    */
   public void setLocalZoneMinutes(int minutes) {
     if (minutes < -59 || minutes > 59) {
@@ -138,8 +133,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
   }
 
   /*
-   * (non-Javadoc) @see
-   * org.nmea.sentence.TimeSentence#setTime(org.
+   * (non-Javadoc) @see org.nmea.sentence.TimeSentence#setTime(org.
    * nmea.util.Time)
    */
   public void setTime(Time t) {
@@ -147,8 +141,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
   }
 
   /*
-   * (non-Javadoc) @see
-   * org.nmea.sentence.TimeSentence#setTimeAndLocalZone(org.
+   * (non-Javadoc) @see org.nmea.sentence.TimeSentence#setTimeAndLocalZone(org.
    * nmea.util.Time)
    */
   public void setTimeAndLocalZone(Time t) {

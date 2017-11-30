@@ -21,18 +21,14 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * Barometer - Barometric pressure in bars and inches of mercury.
  * <p>
- * <p>
- * <em>Notice: not recommended as of Oct 2008, should use <code>XDR</code>
- * instead.</em>
- * <p>
- * <p>
- * Example:<br/>
+ * Example:<br>
  * <code>$IIMMB,29.9870,I,1.0154,B*75</code>
  *
  * @author Kimmo Tuukkanen
+ * @deprecated Notice: not recommended as of Oct 2008, should use
+ * <code>XDR</code> instead.
  */
 public interface MMBSentence extends Sentence {
 

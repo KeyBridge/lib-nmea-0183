@@ -20,7 +20,9 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.Direction;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.parser.ParseException;
+import org.nmea.type.DirectionType;
 
 /**
  * Relative Wind Speed and Angle. Wind direction magnitude in degrees Wind
@@ -51,14 +53,9 @@ public interface VWRSentence extends Sentence {
    * Get the Wind angle magnitude in degrees
    *
    * @return Wind angle
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getWindAngle();
 
@@ -66,30 +63,20 @@ public interface VWRSentence extends Sentence {
    * Get the Wind direction Left/Right of bow
    *
    * @since NMEA 2.3
-   * @return {@link Direction} enum
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @return {@link DirectionType} enum
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  Direction getDirectionLeftRight();
+  DirectionType getDirectionLeftRight();
 
   /**
    * Get relative wind speed, in kilometers per hour.
    *
    * @return Speed in km/h
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getSpeedKmh();
 
@@ -97,14 +84,9 @@ public interface VWRSentence extends Sentence {
    * Get relative wind speed in knots.
    *
    * @return Speed in knots (nautical miles per hour)
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getSpeedKnots();
 
@@ -121,7 +103,7 @@ public interface VWRSentence extends Sentence {
    * @param direction Direction to set
    * @since NMEA 2.3
    */
-  void setDirectionLeftRight(Direction direction);
+  void setDirectionLeftRight(DirectionType direction);
 
   /**
    * Set the relative wind speed in kmh

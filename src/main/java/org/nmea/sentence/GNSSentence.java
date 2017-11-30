@@ -21,12 +21,10 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * GNSS capable receivers will always output this message with the
  * <code>GN</code> talker ID. GNSS capable receivers will also output this
  * message with the <code>GP</code> and/or <code>GL</code> talker ID when using
  * more than one constellation for the position fix.
- * <p>
  * <p>
  * Example:
  * <pre>
@@ -34,18 +32,16 @@ package org.nmea.sentence;
  * $GPGNS,014035.00,,,,,,8,,,,1.0,23*76
  * $GLGNS,014035.00,,,,,,5,,,,1.0,23*67
  * </pre>
- * 
  *
  * @author Kimmo Tuukkanen
  */
 public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
 
   /**
-   * GNS operational modes, a mix of {@link org.nmea.util.FaaMode}
-   * and {@link org.nmea.util.GpsFixQuality} with some values
-   * omitted.
+   * GNS operational modes, a mix of {@link org.nmea.util.FaaMode} and
+   * {@link org.nmea.util.GpsFixQuality} with some values omitted.
    */
-  enum Mode {
+  public static enum ModeType {
     /**
      * Operating in autonomous mode (automatic 2D/3D).
      */
@@ -85,23 +81,23 @@ public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
      */
     NONE('N');
 
-    private final char ch;
+    private final char code;
 
-    Mode(char c) {
-      this.ch = c;
+    private ModeType(char c) {
+      this.code = c;
     }
 
-    public char toChar() {
-      return ch;
+    public char getCode() {
+      return code;
     }
 
-    public static Mode valueOf(char ch) {
-      for (Mode m : values()) {
-        if (m.toChar() == ch) {
+    public static ModeType valueOf(char code) {
+      for (ModeType m : values()) {
+        if (m.getCode() == code) {
           return m;
         }
       }
-      return valueOf(String.valueOf(ch));
+      throw new IllegalArgumentException("Unrecognized code " + code);
     }
   }
 
@@ -110,35 +106,35 @@ public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
    *
    * @return GPS operational mode
    */
-  Mode getGpsMode();
+  ModeType getGpsMode();
 
   /**
    * Sets the current GPS mode.
    *
    * @param gps GPS operational mode to set.
    */
-  void setGpsMode(Mode gps);
+  void setGpsMode(ModeType gps);
 
   /**
    * Gets the current GLONASS mode.
    *
    * @return GLONASS operational mode
    */
-  Mode getGlonassMode();
+  ModeType getGlonassMode();
 
   /**
    * Sets the current GLONASS mode.
    *
    * @param gns GLONASS operational mode to set.
    */
-  void setGlonassMode(Mode gns);
+  void setGlonassMode(ModeType gns);
 
   /**
    * Returns all additional operation modes, excluding GPS and GLONASS.
    *
    * @return Array of additional modes or empty array if no modes are set.
    */
-  Mode[] getAdditionalModes();
+  ModeType[] getAdditionalModes();
 
   /**
    * Sets the additional operational modes, leaving GPS and GLONASS modes
@@ -146,7 +142,7 @@ public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
    *
    * @param modes Array of additional modes to set
    */
-  void setAdditionalModes(Mode... modes);
+  void setAdditionalModes(ModeType... modes);
 
   /**
    * Get the number of active satellites in use for currect fix.

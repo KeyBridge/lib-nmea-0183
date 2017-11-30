@@ -23,7 +23,7 @@ package ch.keybridge.lib.nmea.provider;
 import org.nmea.io.SentenceReader;
 import org.nmea.sentence.HeadingSentence;
 import org.nmea.sentence.Sentence;
-import org.nmea.sentence.SentenceId;
+import org.nmea.type.SentenceType;
 import ch.keybridge.lib.nmea.provider.event.HeadingEvent;
 
 /**
@@ -42,7 +42,7 @@ public class HeadingProvider extends AbstractProvider<HeadingEvent> {
    * @param reader Reader for capturing heading sentences.
    */
   public HeadingProvider(SentenceReader reader) {
-    super(reader, SentenceId.HDT, SentenceId.HDM, SentenceId.HDG);
+    super(reader, SentenceType.HDT, SentenceType.HDM, SentenceType.HDG);
   }
 
   /*

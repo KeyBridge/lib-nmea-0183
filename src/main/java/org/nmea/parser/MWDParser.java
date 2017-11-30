@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.MWDSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * Wind speed and direction.
@@ -77,7 +77,7 @@ class MWDParser extends SentenceParser implements MWDSentence {
    * @param nmea MWV sentence String
    */
   public MWDParser(String nmea) {
-    super(nmea, SentenceId.MWD);
+    super(nmea, SentenceType.MWD);
   }
 
   /**
@@ -85,8 +85,8 @@ class MWDParser extends SentenceParser implements MWDSentence {
    *
    * @param talker Talker id to set
    */
-  public MWDParser(TalkerId talker) {
-    super(talker, SentenceId.MWD, 8);
+  public MWDParser(TalkerType talker) {
+    super(talker, SentenceType.MWD, 8);
     setCharValue(WIND_DIRECTION_TRUE_UNIT, 'T');
     setCharValue(WIND_DIRECTION_MAGNETIC_UNIT, 'M');
     setCharValue(WIND_SPEED_METERS_UNIT, 'M');

@@ -24,7 +24,7 @@ import org.nmea.event.SentenceEvent;
 import org.nmea.event.SentenceListener;
 import org.nmea.io.SentenceReader;
 import org.nmea.sentence.Sentence;
-import org.nmea.sentence.SentenceId;
+import org.nmea.type.SentenceType;
 import ch.keybridge.lib.nmea.provider.event.ProviderEvent;
 import ch.keybridge.lib.nmea.provider.event.ProviderListener;
 import java.util.ArrayList;
@@ -69,9 +69,9 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
    * @param reader Sentence reader to be used as data source
    * @param ids    Types of sentences to capture for creating provider events
    */
-  public AbstractProvider(SentenceReader reader, SentenceId... ids) {
+  public AbstractProvider(SentenceReader reader, SentenceType... ids) {
     this.reader = reader;
-    for (SentenceId id : ids) {
+    for (SentenceType id : ids) {
       reader.addSentenceListener(this, id);
     }
   }

@@ -20,12 +20,12 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 import org.nmea.sentence.XTESentence;
-import org.nmea.util.DataStatus;
-import org.nmea.util.Direction;
-import org.nmea.util.FaaMode;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.DirectionType;
+import org.nmea.type.FaaModeType;
 
 /**
  * XTE sentence parser.
@@ -51,11 +51,11 @@ class XTEParser extends SentenceParser implements XTESentence {
     setFieldCount(6);
   }
 
-  public XTEParser(TalkerId talker) {
-    super(talker, SentenceId.XTE, 6);
-    setMode(FaaMode.NONE);
-    setStatus(DataStatus.VOID);
-    setCycleLockStatus(DataStatus.VOID);
+  public XTEParser(TalkerType talker) {
+    super(talker, SentenceType.XTE, 6);
+    setMode(FaaModeType.NONE);
+    setStatus(DataStatusType.VOID);
+    setCycleLockStatus(DataStatusType.VOID);
     setCharValue(DISTANCE_UNIT, 'N');
   }
 
@@ -65,8 +65,8 @@ class XTEParser extends SentenceParser implements XTESentence {
    * @see org.nmea.sentence.XTESentence#getCycleLockStatus()
    */
   @Override
-  public DataStatus getCycleLockStatus() {
-    return DataStatus.valueOf(getCharValue(CYCLE_LOCK_STATUS));
+  public DataStatusType getCycleLockStatus() {
+    return DataStatusType.valueOf(getCharValue(CYCLE_LOCK_STATUS));
   }
 
   /*
@@ -85,8 +85,8 @@ class XTEParser extends SentenceParser implements XTESentence {
    * @see org.nmea.sentence.XTESentence#getMode()
    */
   @Override
-  public FaaMode getMode() {
-    return FaaMode.valueOf(getCharValue(FAA_MODE));
+  public FaaModeType getMode() {
+    return FaaModeType.valueOf(getCharValue(FAA_MODE));
   }
 
   /*
@@ -95,8 +95,8 @@ class XTEParser extends SentenceParser implements XTESentence {
    * @see org.nmea.sentence.XTESentence#getStatus()
    */
   @Override
-  public DataStatus getStatus() {
-    return DataStatus.valueOf(getCharValue(SIGNAL_STATUS));
+  public DataStatusType getStatus() {
+    return DataStatusType.valueOf(getCharValue(SIGNAL_STATUS));
   }
 
   /*
@@ -105,8 +105,8 @@ class XTEParser extends SentenceParser implements XTESentence {
    * @see org.nmea.sentence.XTESentence#getSteerTo()
    */
   @Override
-  public Direction getSteerTo() {
-    return Direction.valueOf(getCharValue(DIRECTION));
+  public DirectionType getSteerTo() {
+    return DirectionType.valueOf(getCharValue(DIRECTION));
   }
 
   /*
@@ -116,8 +116,8 @@ class XTEParser extends SentenceParser implements XTESentence {
    * marineapi.nmea.util.DataStatus)
    */
   @Override
-  public void setCycleLockStatus(DataStatus status) {
-    setCharValue(CYCLE_LOCK_STATUS, status.toChar());
+  public void setCycleLockStatus(DataStatusType status) {
+    setCharValue(CYCLE_LOCK_STATUS, status.getCode());
   }
 
   /*
@@ -138,8 +138,8 @@ class XTEParser extends SentenceParser implements XTESentence {
    * .util.FaaMode)
    */
   @Override
-  public void setMode(FaaMode mode) {
-    setCharValue(FAA_MODE, mode.toChar());
+  public void setMode(FaaModeType mode) {
+    setCharValue(FAA_MODE, mode.getCode());
   }
 
   /*
@@ -149,8 +149,8 @@ class XTEParser extends SentenceParser implements XTESentence {
    * .nmea.util.DataStatus)
    */
   @Override
-  public void setStatus(DataStatus status) {
-    setCharValue(SIGNAL_STATUS, status.toChar());
+  public void setStatus(DataStatusType status) {
+    setCharValue(SIGNAL_STATUS, status.getCode());
   }
 
   /*
@@ -160,8 +160,8 @@ class XTEParser extends SentenceParser implements XTESentence {
    * .nmea.util.Direction)
    */
   @Override
-  public void setSteerTo(Direction direction) {
-    setCharValue(DIRECTION, direction.toChar());
+  public void setSteerTo(DirectionType direction) {
+    setCharValue(DIRECTION, direction.getCode());
   }
 
 }

@@ -31,12 +31,10 @@ public class PositionInfo {
 
   private static final DecimalFormat COORD_FORMAT = new DecimalFormat("##0.000000;-##0.000000");
   private static final int LONGITUDE_NOTAVAILABLE = 181;
-  public static final String LONGITUDE_RANGE
-                             = "[-180.0, 180.0] + {" + LONGITUDE_NOTAVAILABLE + "}";
+  public static final String LONGITUDE_RANGE = "[-180.0, 180.0] + {" + LONGITUDE_NOTAVAILABLE + "}";
 
   private static final int LATITUDE_NOTAVAILABLE = 91;
-  public static final String LATITUDE_RANGE
-                             = "[-90.0, 90.0] + {" + LATITUDE_NOTAVAILABLE + "}";
+  public static final String LATITUDE_RANGE = "[-90.0, 90.0] + {" + LATITUDE_NOTAVAILABLE + "}";
 
   /**
    * @return true true if the value is correct

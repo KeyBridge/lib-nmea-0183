@@ -24,7 +24,7 @@ import org.nmea.io.SentenceReader;
 import org.nmea.sentence.GSASentence;
 import org.nmea.sentence.GSVSentence;
 import org.nmea.sentence.Sentence;
-import org.nmea.util.SatelliteInfo;
+import org.nmea.type.Satellite;
 import ch.keybridge.lib.nmea.provider.event.SatelliteInfoEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class SatelliteInfoProvider extends AbstractProvider<SatelliteInfoEvent> 
   protected SatelliteInfoEvent createProviderEvent() {
 
     GSASentence gsa = null;
-    List<SatelliteInfo> info = new ArrayList<>();
+    List<Satellite> info = new ArrayList<>();
 
     for (Sentence sentence : getSentences()) {
       if ("GSA".equals(sentence.getSentenceId())) {

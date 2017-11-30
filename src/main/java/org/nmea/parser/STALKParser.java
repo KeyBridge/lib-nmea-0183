@@ -1,8 +1,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.STALKSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +23,7 @@ class STALKParser extends SentenceParser implements STALKSentence {
    * @param nmea <code>$STALK</code> sentence String.
    */
   public STALKParser(String nmea) {
-    super(nmea, SentenceId.ALK);
+    super(nmea, SentenceType.ALK);
   }
 
   /**
@@ -35,9 +35,9 @@ class STALKParser extends SentenceParser implements STALKSentence {
    *            "talker id" as sentence identifier is always
    *            <code>$STALK</code>.
    */
-  public STALKParser(TalkerId tid) {
-    super(TalkerId.ST, SentenceId.ALK, 2);
-    if (!tid.equals(TalkerId.ST)) {
+  public STALKParser(TalkerType tid) {
+    super(TalkerType.ST, SentenceType.ALK, 2);
+    if (!tid.equals(TalkerType.ST)) {
       throw new IllegalArgumentException("$STALK talker id 'ST' is mandatory (got " + tid + ")");
     }
   }

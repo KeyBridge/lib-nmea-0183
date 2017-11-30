@@ -1,5 +1,5 @@
 /*
- * DataStatus.java
+ * RouteType.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
@@ -18,52 +18,54 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
- * DataStatus defines the validity of data being broadcasted by an NMEA device.
+ * Defines the supported route types.
  *
  * @author Kimmo Tuukkanen
+ * @see org.nmea.sentence.RTESentence
  */
-public enum DataStatus {
+public enum RouteType {
 
   /**
-   * Valid data available. May also indicate boolean value <code>true</code>.
+   * Active route: complete, all waypoints in route order.
    */
-  ACTIVE('A'),
+  ACTIVE('c'),
   /**
-   * No valid data available. May also indicate boolean value
-   * <code>false</code>.
+   * Working route: the waypoint you just left, the waypoint you're heading to
+   * and then all the rest.
    */
-  VOID('V');
+  WORKING('w');
 
-  private final char character;
+  private final char code;
 
-  DataStatus(char ch) {
-    character = ch;
+  private RouteType(char c) {
+    code = c;
   }
 
   /**
-   * Returns the character used in NMEA sentences to indicate the status.
+   * Get the corresponding char indicator of enum.
    *
-   * @return Char indicator for DataStatus
+   * @return Char
    */
-  public char toChar() {
-    return character;
+  public char getCode() {
+    return code;
   }
 
   /**
-   * Returns the DataStatus enum for status char used in sentences.
+   * Get the char indicator corresponding to enum.
    *
-   * @param ch Status char
-   * @return DataStatus
+   * @param ch Char
+   * @return ReturnType corresponding to specified char.
    */
-  public static DataStatus valueOf(char ch) {
-    for (DataStatus ds : values()) {
-      if (ds.toChar() == ch) {
-        return ds;
+  public RouteType valueOf(char ch) {
+    for (RouteType type : values()) {
+      if (type.getCode() == ch) {
+        return type;
       }
     }
-    return valueOf(String.valueOf(ch));
+    throw new IllegalArgumentException("Unrecognized code " + code);
   }
+
 }

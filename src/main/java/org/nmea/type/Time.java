@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -28,12 +28,11 @@ import java.util.GregorianCalendar;
 
 /**
  * Represents a time of day in 24-hour clock, i.e. the UTC time used as default
- * in NMEA 0183. Transmitted by
- * {@link org.nmea.sentence.TimeSentence}.
+ * in NMEA 0183. Transmitted by {@link org.nmea.sentence.TimeSentence}.
  *
  * @author Kimmo Tuukkanen
  * @see org.nmea.sentence.TimeSentence
- * @see org.nmea.util.Date
+ * @see org.nmea.type.Date
  */
 public final class Time {
 
@@ -116,6 +115,15 @@ public final class Time {
   }
 
   /*
+   * (non-Javadoc) @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    String s = String.format("%2d%2d%2f", hour, minutes, seconds);
+    return s.hashCode();
+  }
+
+  /*
    * (non-Javadoc) @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -185,15 +193,6 @@ public final class Time {
    */
   public double getSeconds() {
     return seconds;
-  }
-
-  /*
-   * (non-Javadoc) @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode() {
-    String s = String.format("%2d%2d%2f", hour, minutes, seconds);
-    return s.hashCode();
   }
 
   /**

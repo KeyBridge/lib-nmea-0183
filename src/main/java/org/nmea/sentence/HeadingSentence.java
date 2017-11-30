@@ -38,7 +38,6 @@ public interface HeadingSentence extends Sentence {
   /**
    * Tells if the heading returned and set by {@link #getHeading()} and
    * {@link #setHeading(double)} methods is <em>true</em> or <em>magnetic</em>
-   * .
    *
    * @return <code>true</code> if true heading, otherwise <code>false</code> for
    *         magnetic heading.

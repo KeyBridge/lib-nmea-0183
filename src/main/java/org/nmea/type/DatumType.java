@@ -1,5 +1,5 @@
 /*
- * Direction.java
+ * Datum.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
@@ -18,51 +18,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
- * Defines the relative directions, e.g. "left" and "right".
+ * Defines the supported datums, i.e. the coordinate systems used to specify
+ * geographic positions.
  *
  * @author Kimmo Tuukkanen
+ * @see org.nmea.type.Position
  */
-public enum Direction {
+public enum DatumType {
 
   /**
-   * Left
+   * World Geodetic System 1984, the default datum in GPS systems.
    */
-  LEFT('L'),
+  WGS84,
   /**
-   * Right
+   * North American Datum 1983
    */
-  RIGHT('R');
-
-  private final char ch;
-
-  private Direction(char c) {
-    ch = c;
-  }
-
+  NAD83,
   /**
-   * Returns the corresponding char constant.
-   *
-   * @return Char indicator for Direction
+   * North American Datum 1927
    */
-  public char toChar() {
-    return ch;
-  }
-
-  /**
-   * Get the enum corresponding to specified char.
-   *
-   * @param c Char indicator for Direction
-   * @return Direction
-   */
-  public static Direction valueOf(char c) {
-    for (Direction d : values()) {
-      if (d.toChar() == c) {
-        return d;
-      }
-    }
-    return valueOf(String.valueOf(c));
-  }
+  NAD27;
 }

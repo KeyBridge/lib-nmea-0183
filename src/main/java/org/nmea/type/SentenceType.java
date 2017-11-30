@@ -18,7 +18,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.sentence;
+package org.nmea.type;
+
+import org.nmea.sentence.SentenceValidator;
 
 /**
  * Defines the supported NMEA 0831 sentence types. Sentence address field is a
@@ -27,176 +29,181 @@ package org.nmea.sentence;
  * @author Kimmo Tuukkanen
  * @see org.nmea.sentence.TalkerId
  */
-public enum SentenceId {
-
+public enum SentenceType {
   /**
    * Raymarine SeaTalk ($STALK).
    */
-  ALK,
+  ALK("Raymarine SeaTalk ($STALK)"),
   /**
-   * Autopilot sentence "B"; xte, bearings and heading toward destination
+   * Autopilot sentence 'B'; bearings and heading toward destination
    */
-  APB,
+  APB("Autopilot sentence 'B' bearings and heading toward destination"),
   /**
    * Bearing Origin to Destination
    */
-  BOD,
+  BOD("Bearing Origin to Destination"),
   /**
    * Current
    */
-  CUR,
+  CUR("Current"),
   /**
    * Depth of water below transducer; in meters, feet and fathoms
    */
-  DBT,
+  DBT("Depth of water below transducer; in meters, feet and fathoms"),
   /**
    * Depth of water below transducer; in meters.
    */
-  DPT,
+  DPT("Depth of water below transducer; in meters"),
   /**
    * Datum reference.
    */
-  DTM,
+  DTM("Datum reference"),
   /**
    * Global Positioning System fix data
    */
-  GGA,
+  GGA("Global Positioning System fix data"),
   /**
    * Geographic position (latitude/longitude)
    */
-  GLL,
+  GLL("Geographic position (latitude/longitude)"),
   /**
    * GNSS fix data (GPS, GLONASS and future constellations).
    */
-  GNS,
+  GNS("GNSS fix data (GPS, GLONASS and future constellations)"),
   /**
    * Dilution of precision (DOP) of GPS fix and active satellites
    */
-  GSA,
+  GSA("Dilution of precision (DOP) of GPS fix and active satellites"),
   /**
    * Detailed satellite data
    */
-  GSV,
+  GSV("Detailed satellite data"),
   /**
    * Vessel heading in degrees with magnetic variation and deviation.
    */
-  HDG,
+  HDG("Vessel heading in degrees with magnetic variation and deviation"),
   /**
    * Vessel heading in degrees with respect to true north.
    */
-  HDM,
+  HDM("Vessel heading in degrees with respect to true north"),
   /**
    * Vessel heading in degrees true
    */
-  HDT,
-  /**
-   * Relative and absolute humidity with dew point
-   */
-  MHU,
-  /**
-   * Barometric pressure in inches of mercury and bars.
-   */
-  MMB,
-  /**
-   * Air temperature in degrees centigrade (Celsius).
-   */
-  MTA,
-  /**
-   * Water temperature in degrees centigrade (Celsius).
-   */
-  MTW,
-  /**
-   * Wind speed and angle
-   */
-  MWV,
-  /**
-   * Recommended minimum navigation information
-   */
-  RMB,
-  /**
-   * Recommended minimum specific GPS/TRANSIT data
-   */
-  RMC,
-  /**
-   * Rate of Turn
-   */
-  ROT,
-  /**
-   * Revolutions measured from engine or shaft.
-   */
-  RPM,
-  /**
-   * Rudder angle, measured in degrees
-   */
-  RSA,
-  /**
-   * Route data and waypoint list
-   */
-  RTE,
-  /**
-   * Tracked target
-   */
-  TTM,
-  /**
-   * Dual ground/water speed and stern ground/water speed.
-   */
-  VBW,
-  /**
-   * AIS - Received data from other vessels
-   */
-  VDM,
-  /**
-   * AIS - Own vessel data
-   */
-  VDO,
-  /**
-   * Set and drift, direction and speed of current.
-   */
-  VDR,
-  /**
-   * Distance traveled through water, cumulative and since reset.
-   */
-  VLW,
-  /**
-   * Track made good and ground speed
-   */
-  VTG,
-  /**
-   * Water speed and heading
-   */
-  VHW,
-  /**
-   * Waypoint location (latitude/longitude)
-   */
-  WPL,
-  /**
-   * Relative Wind Speed and Angle
-   */
-  VWR,
-  /**
-   * True Wind Speed and Angle
-   */
-  VWT,
-  /**
-   * Transducer measurements (sensor data)
-   */
-  XDR,
-  /**
-   * Cross-track error, measured
-   */
-  XTE,
+  HDT("Vessel heading in degrees true"),
   /**
    * Meteorological Composite
    */
-  MDA,
+  MDA("Meteorological Composite"),
+  /**
+   * Relative and absolute humidity with dew point
+   */
+  MHU("Relative and absolute humidity with dew point"),
+  /**
+   * Barometric pressure in inches of mercury and bars.
+   */
+  MMB("Barometric pressure in inches of mercury and bars"),
+  /**
+   * Air temperature in degrees centigrade (Celsius).
+   */
+  MTA("Air temperature in degrees centigrade (Celsius)"),
+  /**
+   * Water temperature in degrees centigrade (Celsius).
+   */
+  MTW("Water temperature in degrees centigrade (Celsius)"),
   /**
    * Wind speed and direction
    */
-  MWD,
+  MWD("Wind speed and direction"),
+  /**
+   * Wind speed and angle
+   */
+  MWV("Wind speed and angle"),
+  /**
+   * Recommended minimum navigation information
+   */
+  RMB("Recommended minimum navigation information"),
+  /**
+   * Recommended minimum specific GPS/TRANSIT data
+   */
+  RMC("Recommended minimum specific GPS/TRANSIT data"),
+  /**
+   * Rate of Turn
+   */
+  ROT("Rate of Turn"),
+  /**
+   * Revolutions measured from engine or shaft.
+   */
+  RPM("Revolutions measured from engine or shaft"),
+  /**
+   * Rudder angle, measured in degrees
+   */
+  RSA("Rudder angle, measured in degrees"),
+  /**
+   * Route data and waypoint list
+   */
+  RTE("Route data and waypoint list"),
+  /**
+   * Tracked target
+   */
+  TTM("Tracked target"),
+  /**
+   * Dual ground/water speed and stern ground/water speed.
+   */
+  VBW("Dual ground/water speed and stern ground/water speed"),
+  /**
+   * AIS - Received data from other vessels
+   */
+  VDM("AIS - Received data from other vessels"),
+  /**
+   * AIS - Own vessel data
+   */
+  VDO("AIS - Own vessel data"),
+  /**
+   * Set and drift, direction and speed of current.
+   */
+  VDR("Set and drift, direction and speed of current"),
+  /**
+   * Water speed and heading
+   */
+  VHW("Water speed and heading"),
+  /**
+   * Distance traveled through water, cumulative and since reset.
+   */
+  VLW("Distance traveled through water, cumulative and since reset"),
+  /**
+   * Track made good and ground speed
+   */
+  VTG("Track made good and ground speed"),
+  /**
+   * Relative Wind Speed and Angle
+   */
+  VWR("Relative Wind Speed and Angle"),
+  /**
+   * True Wind Speed and Angle
+   */
+  VWT("True Wind Speed and Angle"),
+  /**
+   * Waypoint location (latitude/longitude)
+   */
+  WPL("Waypoint location (latitude/longitude)"),
+  /**
+   * Transducer measurements (sensor data)
+   */
+  XDR("Transducer measurements (sensor data)"),
+  /**
+   * Cross-track error, measured
+   */
+  XTE("Cross-track error, measured"),
   /**
    * UTC time and date with local time zone offset
    */
-  ZDA;
+  ZDA("UTC time and date with local time zone offset");
+
+  private final String label;
+
+  private SentenceType(String label) {
+    this.label = label;
+  }
 
   /**
    * Parses the sentence id from specified sentence String and returns a
@@ -206,9 +213,18 @@ public enum SentenceId {
    * @return SentenceId enum
    * @throws IllegalArgumentException If specified String is not valid sentence
    */
-  public static SentenceId parse(String nmea) {
+  public static SentenceType parse(String nmea) {
     String sid = parseStr(nmea);
-    return SentenceId.valueOf(sid);
+    return SentenceType.valueOf(sid);
+  }
+
+  /**
+   * Get a human readable label for this type.
+   *
+   * @return the label.
+   */
+  public String getLabel() {
+    return label;
   }
 
   /**
@@ -216,22 +232,15 @@ public enum SentenceId {
    * String.
    *
    * @param nmea Sentence String
-   * @return Sentence Id, e.g. "GGA" or "GLL"
-   * @throws IllegalArgumentException If specified String is not recognized as
-   *                                  NMEA sentence
+   * @return Sentence Id, e.g. "GGA"or "GLL" * @throws IllegalArgumentException
+   *         If specified String is not recognized as NMEA sentence
    */
   public static String parseStr(String nmea) {
-
     if (!SentenceValidator.isSentence(nmea)) {
       throw new IllegalArgumentException("String is not a sentence");
     }
-
-    String id = null;
-    if (nmea.startsWith("$P")) {
-      id = nmea.substring(2, nmea.indexOf(','));
-    } else {
-      id = nmea.substring(3, nmea.indexOf(','));
-    }
-    return id;
+    return nmea.startsWith("$P")
+           ? nmea.substring(2, nmea.indexOf(','))
+           : nmea.substring(3, nmea.indexOf(','));
   }
 }

@@ -20,18 +20,18 @@
  */
 package ch.keybridge.lib.nmea.provider;
 
-import org.nmea.sentence.SentenceId;
+import org.nmea.type.SentenceType;
 import org.nmea.sentence.Sentence;
 import org.nmea.sentence.GGASentence;
 import org.nmea.sentence.VTGSentence;
 import org.nmea.sentence.GLLSentence;
 import org.nmea.sentence.RMCSentence;
-import org.nmea.util.DataStatus;
-import org.nmea.util.GpsFixQuality;
-import org.nmea.util.FaaMode;
-import org.nmea.util.Position;
-import org.nmea.util.Date;
-import org.nmea.util.Time;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.GpsFixQualityType;
+import org.nmea.type.FaaModeType;
+import org.nmea.type.Position;
+import org.nmea.type.Date;
+import org.nmea.type.Time;
 import org.nmea.io.SentenceReader;
 import org.nmea.parser.DataNotAvailableException;
 import ch.keybridge.lib.nmea.provider.event.PositionEvent;
@@ -44,7 +44,7 @@ import ch.keybridge.lib.nmea.provider.event.PositionEvent;
  * case, there is no altitude included in the
  * {@link ch.keybridge.lib.nmea.util.Position}. GPS data statuses are also
  * captured and events are dispatched only when sentences report
- * {@link org.nmea.util.DataStatus#ACTIVE}. FAA mode transmitted in
+ * {@link org.nmea.util.DataStatusType#ACTIVE}. FAA mode transmitted in
  * RMC is also checked and captured when available, but may be <code>null</code>
  * depending on used NMEA version.
  *
@@ -61,7 +61,7 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
    * @param reader SentenceReader that provides the required sentences.
    */
   public PositionProvider(SentenceReader reader) {
-    super(reader, SentenceId.RMC, SentenceId.GGA, SentenceId.GLL, SentenceId.VTG);
+    super(reader, SentenceType.RMC, SentenceType.GGA, SentenceType.GLL, SentenceType.VTG);
   }
 
   /*
@@ -75,8 +75,8 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
     Double cog = null;
     Date d = null;
     Time t = null;
-    FaaMode mode = null;
-    GpsFixQuality fix = null;
+    FaaModeType mode = null;
+    GpsFixQualityType fix = null;
 
     for (Sentence s : getSentences()) {
       if (s instanceof RMCSentence) {
@@ -146,19 +146,19 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
 
       if (s instanceof RMCSentence) {
         RMCSentence rmc = (RMCSentence) s;
-        DataStatus ds = rmc.getStatus();
-        if (DataStatus.VOID.equals(ds)
-          || (rmc.getFieldCount() > 11 && FaaMode.NONE.equals(rmc.getMode()))) {
+        DataStatusType ds = rmc.getStatus();
+        if (DataStatusType.VOID.equals(ds)
+          || (rmc.getFieldCount() > 11 && FaaModeType.NONE.equals(rmc.getMode()))) {
           return false;
         }
       } else if (s instanceof GGASentence) {
-        GpsFixQuality fq = ((GGASentence) s).getFixQuality();
-        if (GpsFixQuality.INVALID.equals(fq)) {
+        GpsFixQualityType fq = ((GGASentence) s).getFixQuality();
+        if (GpsFixQualityType.INVALID.equals(fq)) {
           return false;
         }
       } else if (s instanceof GLLSentence) {
-        DataStatus ds = ((GLLSentence) s).getStatus();
-        if (DataStatus.VOID.equals(ds)) {
+        DataStatusType ds = ((GLLSentence) s).getStatus();
+        if (DataStatusType.VOID.equals(ds)) {
           return false;
         }
       }

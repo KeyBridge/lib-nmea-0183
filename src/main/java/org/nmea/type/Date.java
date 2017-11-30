@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -29,7 +29,7 @@ import java.util.GregorianCalendar;
  *
  * @author Kimmo Tuukkanen
  * @see org.nmea.sentence.DateSentence
- * @see org.nmea.util.Time
+ * @see org.nmea.type.Time
  */
 public class Date {
 
@@ -43,11 +43,17 @@ public class Date {
    */
   public static final int PIVOT_YEAR = 50;
 
-  // day of month 1..31
+  /**
+   * day of month 1..31
+   */
   private int day;
-  // month 1..12
+  /**
+   * month 1..12
+   */
   private int month;
-  // four-digit year
+  /**
+   * four-digit year
+   */
   private int year;
 
   /**
@@ -63,6 +69,8 @@ public class Date {
   /**
    * Creates a new instance of <code>Date</code>, assumes the default NMEA 0183
    * date formatting, <code>ddmmyy</code> or <code>ddmmyyyy</code>.
+   *
+   * @param date the date string to parse
    */
   public Date(String date) {
     setDay(Integer.parseInt(date.substring(0, 2)));
@@ -148,7 +156,7 @@ public class Date {
    *
    * @param day the day to set
    */
-  public void setDay(int day) {
+  public final void setDay(int day) {
     if (day < 1 || day > 31) {
       throw new IllegalArgumentException("Day out of bounds [1..31]");
     }
@@ -163,7 +171,7 @@ public class Date {
    * @throws IllegalArgumentException If specified value is out of bounds
    *                                  [1..12]
    */
-  public void setMonth(int month) {
+  public final void setMonth(int month) {
     if (month < 1 || month > 12) {
       throw new IllegalArgumentException(
         "Month value out of bounds [1..12]");
@@ -183,7 +191,7 @@ public class Date {
    * @throws IllegalArgumentException If specified value is negative or
    *                                  three-digit value.
    */
-  public void setYear(int year) {
+  public final void setYear(int year) {
     if (year < 0 || (year > 99 && year < 1000) || year > 9999) {
       throw new IllegalArgumentException(
         "Year must be two or four digit value");
@@ -200,18 +208,19 @@ public class Date {
   /**
    * Returns the String representation of <code>Date</code>. Formats the date in
    * <code>ddmmyy</code> format used in NMEA 0183 sentences.
+   *
+   * @return the date in <code>ddmmyy</code> format
    */
   @Override
   public String toString() {
     int y = getYear();
-    String ystr = String.valueOf(y);
-    String year = ystr.substring(2);
-    String date = String.format("%02d%02d%s", getDay(), getMonth(), year);
-    return date;
+    return String.format("%02d%02d%s", getDay(), getMonth(), String.valueOf(y).substring(2));
   }
 
   /**
    * Returns the date in ISO 8601 format (<code>yyyy-mm-dd</code>).
+   *
+   * @return the date in iso8601 format
    */
   public String toISO8601() {
     return String.format(DATE_PATTERN, getYear(), getMonth(), getDay());
@@ -222,6 +231,7 @@ public class Date {
    * (<code>yyyy-mm-ddThh:mm:ss+hh:mm</code>).
    *
    * @param t Time to format with date
+   * @return the date in iso8601 format
    */
   public String toISO8601(Time t) {
     return toISO8601().concat("T").concat(t.toISO8601());

@@ -20,19 +20,16 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.DataStatus;
-import org.nmea.util.Side;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.Side;
 
 /**
- * <p>
  * Rudder angle, measured in degrees. Negative value represents port side,
  * positive starboard side turn. May contain value for both port and starboard
  * rudder. {@link Side#PORT} is used for vessels with single rudder.
- * 
  * <p>
  * Example:<br>
  * <code>$IIRSA,9,A,,*38</code>
- * 
  *
  * @author Lázár József, Kimmo Tuukkanen
  */
@@ -59,7 +56,7 @@ public interface RSASentence extends Sentence {
    * @param side Rudder side
    * @return Data status
    */
-  DataStatus getStatus(Side side);
+  DataStatusType getStatus(Side side);
 
   /**
    * Set data status for specified side.
@@ -67,5 +64,5 @@ public interface RSASentence extends Sentence {
    * @param side   Rudder side
    * @param status Data status to set
    */
-  void setStatus(Side side, DataStatus status);
+  void setStatus(Side side, DataStatusType status);
 }

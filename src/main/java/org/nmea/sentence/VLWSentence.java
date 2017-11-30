@@ -21,11 +21,9 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * Distance traveled through water, cumulative and trip.
  * <p>
- * <p>
- * Example:<br/>
+ * Example:<br>
  * <code>$VWVLW,2.8,N,2.8,N*4C</code>
  *
  * @author Kimmo Tuukkanen
@@ -87,7 +85,7 @@ public interface VLWSentence extends Sentence {
   /**
    * Sets the units of measure for cumulative total distance.
    *
-   * @param unit Unit to set; 'K' for kilomters, 'N' for nautical miles.
+   * @param unit Unit to set; 'K' for kilometers, 'N' for nautical miles.
    * @throws IllegalArgumentException If trying to set invalid units char.
    * @see #KM
    * @see #NM
@@ -105,7 +103,7 @@ public interface VLWSentence extends Sentence {
   /**
    * Sets the units of measure for distance since last reset.
    *
-   * @param unit Unit to set; 'K' for kilomters, 'N' for nautical miles.
+   * @param unit Unit to set; 'K' for kilometers, 'N' for nautical miles.
    * @throws IllegalArgumentException If trying to set invalid units char.
    * @see #KM
    * @see #NM

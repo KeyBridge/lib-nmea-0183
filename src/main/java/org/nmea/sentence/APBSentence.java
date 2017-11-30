@@ -20,22 +20,18 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.DataStatus;
-import org.nmea.util.Direction;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.DirectionType;
 
 /**
- * <p>
  * Autopilot sentence "type B", cross-track error, bearings and heading towards
  * destination waypoint. This is a fixed form of the APA sentence with some
  * ambiguities removed.
- * 
  * <p>
  * Note: Some autopilots, Robertson in particular, misinterpret "bearing from
  * origin to destination" as "bearing from present position to destination".
- * 
  * <p>
- * <p>
- * Example:<br/>
+ * Example:<br>
  * <code>$GPAPB,A,A,0.10,R,N,V,V,011,M,DEST,011,M,011,M*82</code>
  *
  * @author Kimmo Tuukkanen
@@ -83,7 +79,7 @@ public interface APBSentence extends Sentence {
   /**
    * Returns the Loran-C cycle lock status, not used for GPS.
    */
-  DataStatus getCycleLockStatus();
+  DataStatusType getCycleLockStatus();
 
   /**
    * Returns the destination waypoint id/name.
@@ -104,14 +100,14 @@ public interface APBSentence extends Sentence {
    *
    * @return DataStatus
    */
-  DataStatus getStatus();
+  DataStatusType getStatus();
 
   /**
    * Returns the direction in which to steer in order to get back on route.
    *
-   * @return {@link Direction#LEFT} or {@link Direction#RIGHT}
+   * @return {@link DirectionType#LEFT} or {@link DirectionType#RIGHT}
    */
-  Direction getSteerTo();
+  DirectionType getSteerTo();
 
   /**
    * Tells if vessel has entered the arrival circle.
@@ -200,11 +196,11 @@ public interface APBSentence extends Sentence {
 
   /**
    * Sets the Loran-C cycle lock status. Not used for GPS, may be omitted or
-   * {@link DataStatus#VOID}.
+   * {@link DataStatusType#VOID}.
    *
    * @param status DataStatus to set
    */
-  void setCycleLockStatus(DataStatus status);
+  void setCycleLockStatus(DataStatusType status);
 
   /**
    * Returns the destination waypoint id/name.
@@ -239,13 +235,13 @@ public interface APBSentence extends Sentence {
    *
    * @param status DataStatus to set.
    */
-  void setStatus(DataStatus status);
+  void setStatus(DataStatusType status);
 
   /**
    * Set direction in which to steer in order to get back on route.
    *
-   * @param direction {@link Direction#RIGHT} or {@link Direction#LEFT}
+   * @param direction {@link DirectionType#RIGHT} or {@link DirectionType#LEFT}
    */
-  void setSteerTo(Direction direction);
+  void setSteerTo(DirectionType direction);
 
 }

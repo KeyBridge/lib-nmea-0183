@@ -20,9 +20,12 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.DataStatus;
-import org.nmea.util.Direction;
-import org.nmea.util.Waypoint;
+import com.sun.javafx.scene.traversal.Direction;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.parser.ParseException;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.DirectionType;
+import org.nmea.type.Waypoint;
 
 /**
  * Recommended minimum navigation information. This sentence is transmitted by a
@@ -36,35 +39,25 @@ import org.nmea.util.Waypoint;
 public interface RMBSentence extends Sentence {
 
   /**
-   * Get the arrival to waypoint status. Status is {@link DataStatus#VOID}
+   * Get the arrival to waypoint status. Status is {@link DataStatusType#VOID}
    * (false) while not arrived at destination, otherwise
-   * {@link DataStatus#ACTIVE} (true).
+   * {@link DataStatusType#ACTIVE} (true).
    *
-   * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
+   * @return {@link DataStatusType#ACTIVE} or {@link DataStatusType#VOID}
    * @see #hasArrived()
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  DataStatus getArrivalStatus();
+  DataStatusType getArrivalStatus();
 
   /**
    * Get true bearing to destination.
    *
    * @return True bearing in degrees.
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getBearing();
 
@@ -72,14 +65,9 @@ public interface RMBSentence extends Sentence {
    * Get cross track error (XTE).
    *
    * @return Cross track error, in nautical miles.
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getCrossTrackError();
 
@@ -87,14 +75,9 @@ public interface RMBSentence extends Sentence {
    * Get the destination waypoint.
    *
    * @return Waypoint
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   Waypoint getDestination();
 
@@ -102,14 +85,9 @@ public interface RMBSentence extends Sentence {
    * Get the ID of origin waypoint.
    *
    * @return Id String.
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   String getOriginId();
 
@@ -117,60 +95,40 @@ public interface RMBSentence extends Sentence {
    * Get range to destination waypoint.
    *
    * @return Range to destination, in nautical miles.
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getRange();
 
   /**
    * Get the sentence data status, valid or invalid.
    *
-   * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @return {@link DataStatusType#ACTIVE} or {@link DataStatusType#VOID}
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  DataStatus getStatus();
+  DataStatusType getStatus();
 
   /**
    * Get the direction to steer to correct error (left/right).
    *
    * @return Direction.LEFT or Direction.RIGHT
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  Direction getSteerTo();
+  DirectionType getSteerTo();
 
   /**
    * Get velocity towards destination. Notice that returned value may also be
    * negative if vehicle is moving away from destination.
    *
    * @return Velocity value, in knots (nautical miles per hour).
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getVelocity();
 
@@ -178,26 +136,20 @@ public interface RMBSentence extends Sentence {
    * Tells if the destination waypoint has been reached or not.
    *
    * @return True if has arrived to waypoint, otherwise false.
-   * @throws org.nmea.parser.DataNotAvailableException If arrival
-   *                                                                status is
-   *                                                                not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If arrival status is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   boolean hasArrived();
 
   /**
-   * Set the arrival to waypoint status. Set {@link DataStatus#VOID} if not
-   * arrived at destination, otherwise {@link DataStatus#ACTIVE}.
+   * Set the arrival to waypoint status. Set {@link DataStatusType#VOID} if not
+   * arrived at destination, otherwise {@link DataStatusType#ACTIVE}.
    *
-   * @param status {@link DataStatus#VOID} or {@link DataStatus#ACTIVE}.
+   * @param status {@link DataStatusType#VOID} or {@link DataStatusType#ACTIVE}.
    * @throws IllegalArgumentException If status is <code>null</code>.
    */
-  void setArrivalStatus(DataStatus status);
+  void setArrivalStatus(DataStatusType status);
 
   /**
    * Set true bearing to destination, in degrees.
@@ -241,19 +193,19 @@ public interface RMBSentence extends Sentence {
   /**
    * Set status of sentence data, valid or invalid.
    *
-   * @param status {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
+   * @param status {@link DataStatusType#ACTIVE} or {@link DataStatusType#VOID}
    */
-  void setStatus(DataStatus status);
+  void setStatus(DataStatusType status);
 
   /**
    * Set the direction to steer to correct error (left/right).
    *
-   * @param steerTo {@link Direction#LEFT} or {@link Direction#RIGHT}
+   * @param steerTo {@link DirectionType#LEFT} or {@link DirectionType#RIGHT}
    * @throws IllegalArgumentException If specified direction is any other than
    *                                  defined valid for param
    *                                  <code>steer</code>.
    */
-  void setSteerTo(Direction steerTo);
+  void setSteerTo(DirectionType steerTo);
 
   /**
    * Set velocity towards destination. Notice that value may also be negative if

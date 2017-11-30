@@ -20,14 +20,12 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.DataStatus;
-import org.nmea.util.Units;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.UnitType;
 
 /**
- * <p>
  * Wind speed and angle. Speed in km/h, m/s, or knots. Wind angle is given in
  * degrees relative to bow or true north.
- * <p>
  * <p>
  * Example:<br><code>$IIMWV,199,R,5.9,N,A*2E</code>
  *
@@ -52,17 +50,17 @@ public interface MWVSentence extends Sentence {
   /**
    * Returns the wind speed unit.
    *
-   * @return {@link Units#METER} for meters per second, {@link Units#KMH} for
-   *         kilometers per hour and {@link Units#KNOT} for knots.
+   * @return {@link UnitType#METER} for meters per second, {@link UnitType#KMH}
+   *         for kilometers per hour and {@link UnitType#KNOT} for knots.
    */
-  Units getSpeedUnit();
+  UnitType getSpeedUnit();
 
   /**
    * Get data validity status.
    *
    * @return Data status
    */
-  DataStatus getStatus();
+  DataStatusType getStatus();
 
   /**
    * Tells if the angle is relative or true.
@@ -89,18 +87,19 @@ public interface MWVSentence extends Sentence {
   /**
    * Set wind speed unit.
    *
-   * @param unit {@link Units#METER} for meters per second, {@link Units#KMH}
-   *             for kilometers per hour and {@link Units#KNOT} for knots.
+   * @param unit {@link UnitType#METER} for meters per second,
+   *             {@link UnitType#KMH} for kilometers per hour and
+   *             {@link UnitType#KNOT} for knots.
    * @throws IllegalArgumentException If trying to set invalid unit
    */
-  void setSpeedUnit(Units unit);
+  void setSpeedUnit(UnitType unit);
 
   /**
    * Set data validity status.
    *
    * @param status Data status to set.
    */
-  void setStatus(DataStatus status);
+  void setStatus(DataStatusType status);
 
   /**
    * Set angle to relative or true.

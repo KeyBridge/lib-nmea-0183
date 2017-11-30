@@ -20,7 +20,7 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.Time;
+import org.nmea.type.Time;
 
 /**
  * Interface for sentences that provide UTC time. Notice that some sentences

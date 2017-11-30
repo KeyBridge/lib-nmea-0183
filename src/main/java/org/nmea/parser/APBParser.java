@@ -21,9 +21,9 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.APBSentence;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.DataStatus;
-import org.nmea.util.Direction;
+import org.nmea.type.TalkerType;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.DirectionType;
 
 /**
  * @author ktuu
@@ -60,7 +60,7 @@ class APBParser extends SentenceParser implements APBSentence {
    *
    * @param talker TalkerId to set
    */
-  public APBParser(TalkerId talker) {
+  public APBParser(TalkerType talker) {
     super(talker, "APB", 14);
   }
 
@@ -113,8 +113,8 @@ class APBParser extends SentenceParser implements APBSentence {
    * @see org.nmea.sentence.APBSentence#getCycleLockStatus()
    */
   @Override
-  public DataStatus getCycleLockStatus() {
-    return DataStatus.valueOf(getCharValue(CYCLE_LOCK_STATUS));
+  public DataStatusType getCycleLockStatus() {
+    return DataStatusType.valueOf(getCharValue(CYCLE_LOCK_STATUS));
   }
 
   /*
@@ -143,8 +143,8 @@ class APBParser extends SentenceParser implements APBSentence {
    * @see org.nmea.sentence.APBSentence#getStatus()
    */
   @Override
-  public DataStatus getStatus() {
-    return DataStatus.valueOf(getCharValue(SIGNAL_STATUS));
+  public DataStatusType getStatus() {
+    return DataStatusType.valueOf(getCharValue(SIGNAL_STATUS));
   }
 
   /*
@@ -153,8 +153,8 @@ class APBParser extends SentenceParser implements APBSentence {
    * @see org.nmea.sentence.APBSentence#getSteerTo()
    */
   @Override
-  public Direction getSteerTo() {
-    return Direction.valueOf(getCharValue(XTE_STEER_TO));
+  public DirectionType getSteerTo() {
+    return DirectionType.valueOf(getCharValue(XTE_STEER_TO));
   }
 
   /*
@@ -221,8 +221,8 @@ class APBParser extends SentenceParser implements APBSentence {
    */
   @Override
   public void setArrivalCircleEntered(boolean isEntered) {
-    DataStatus s = isEntered ? DataStatus.ACTIVE : DataStatus.VOID;
-    setCharValue(CIRCLE_STATUS, s.toChar());
+    DataStatusType s = isEntered ? DataStatusType.ACTIVE : DataStatusType.VOID;
+    setCharValue(CIRCLE_STATUS, s.getCode());
   }
 
   /*
@@ -305,8 +305,8 @@ class APBParser extends SentenceParser implements APBSentence {
    * marineapi.nmea.util.DataStatus)
    */
   @Override
-  public void setCycleLockStatus(DataStatus status) {
-    setCharValue(CYCLE_LOCK_STATUS, status.toChar());
+  public void setCycleLockStatus(DataStatusType status) {
+    setCharValue(CYCLE_LOCK_STATUS, status.getCode());
   }
 
   /*
@@ -352,8 +352,8 @@ class APBParser extends SentenceParser implements APBSentence {
    */
   @Override
   public void setPerpendicularPassed(boolean isPassed) {
-    DataStatus s = isPassed ? DataStatus.ACTIVE : DataStatus.VOID;
-    setCharValue(PERPENDICULAR_STATUS, s.toChar());
+    DataStatusType s = isPassed ? DataStatusType.ACTIVE : DataStatusType.VOID;
+    setCharValue(PERPENDICULAR_STATUS, s.getCode());
   }
 
   /*
@@ -363,8 +363,8 @@ class APBParser extends SentenceParser implements APBSentence {
    * .nmea.util.DataStatus)
    */
   @Override
-  public void setStatus(DataStatus status) {
-    setCharValue(SIGNAL_STATUS, status.toChar());
+  public void setStatus(DataStatusType status) {
+    setCharValue(SIGNAL_STATUS, status.getCode());
   }
 
   /*
@@ -374,8 +374,8 @@ class APBParser extends SentenceParser implements APBSentence {
    * .nmea.util.Direction)
    */
   @Override
-  public void setSteerTo(Direction direction) {
-    setCharValue(XTE_STEER_TO, direction.toChar());
+  public void setSteerTo(DirectionType direction) {
+    setCharValue(XTE_STEER_TO, direction.getCode());
   }
 
 }

@@ -21,9 +21,7 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * Water speed and heading in respect to true and magnetic north.
- * <p>
  * <p>
  * Example:<br><code>$IIVHW,,,213,M,0.00,N,,K*2F</code>
  *

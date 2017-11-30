@@ -21,12 +21,12 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.RMBSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.DataStatus;
-import org.nmea.util.Direction;
-import org.nmea.util.Position;
-import org.nmea.util.Waypoint;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.DirectionType;
+import org.nmea.type.Position;
+import org.nmea.type.Waypoint;
 
 /**
  * RMB sentence parser.
@@ -56,7 +56,7 @@ class RMBParser extends PositionParser implements RMBSentence {
    * @param nmea RMB sentence string
    */
   public RMBParser(String nmea) {
-    super(nmea, SentenceId.RMB);
+    super(nmea, SentenceType.RMB);
   }
 
   /**
@@ -64,16 +64,16 @@ class RMBParser extends PositionParser implements RMBSentence {
    *
    * @param talker TalkerId to set
    */
-  public RMBParser(TalkerId talker) {
-    super(talker, SentenceId.RMB, 13);
+  public RMBParser(TalkerType talker) {
+    super(talker, SentenceType.RMB, 13);
   }
 
   /*
    * (non-Javadoc) @see
    * org.nmea.sentence.RMBSentence#getArrivalStatus()
    */
-  public DataStatus getArrivalStatus() {
-    return DataStatus.valueOf(getCharValue(ARRIVAL_STATUS));
+  public DataStatusType getArrivalStatus() {
+    return DataStatusType.valueOf(getCharValue(ARRIVAL_STATUS));
   }
 
   /*
@@ -119,15 +119,15 @@ class RMBParser extends PositionParser implements RMBSentence {
   /*
    * (non-Javadoc) @see org.nmea.sentence.RMBSentence#getStatus()
    */
-  public DataStatus getStatus() {
-    return DataStatus.valueOf(getCharValue(STATUS));
+  public DataStatusType getStatus() {
+    return DataStatusType.valueOf(getCharValue(STATUS));
   }
 
   /*
    * (non-Javadoc) @see org.nmea.sentence.RMBSentence#getSteerTo()
    */
-  public Direction getSteerTo() {
-    return Direction.valueOf(getCharValue(STEER_TO));
+  public DirectionType getSteerTo() {
+    return DirectionType.valueOf(getCharValue(STEER_TO));
   }
 
   /*
@@ -141,7 +141,7 @@ class RMBParser extends PositionParser implements RMBSentence {
    * (non-Javadoc) @see org.nmea.sentence.RMBSentence#hasArrived()
    */
   public boolean hasArrived() {
-    return DataStatus.ACTIVE.equals(getArrivalStatus());
+    return DataStatusType.ACTIVE.equals(getArrivalStatus());
   }
 
   /*
@@ -149,8 +149,8 @@ class RMBParser extends PositionParser implements RMBSentence {
    * org.nmea.sentence.RMBSentence#setArrivalStatus(net.sf.marineapi
    * .nmea.util.DataStatus)
    */
-  public void setArrivalStatus(DataStatus status) {
-    setCharValue(ARRIVAL_STATUS, status.toChar());
+  public void setArrivalStatus(DataStatusType status) {
+    setCharValue(ARRIVAL_STATUS, status.getCode());
   }
 
   /*
@@ -200,8 +200,8 @@ class RMBParser extends PositionParser implements RMBSentence {
    * org.nmea.sentence.RMBSentence#setStatus(net.sf.marineapi
    * .nmea.util.DataStatus)
    */
-  public void setStatus(DataStatus status) {
-    setCharValue(STATUS, status.toChar());
+  public void setStatus(DataStatusType status) {
+    setCharValue(STATUS, status.getCode());
   }
 
   /*
@@ -209,12 +209,12 @@ class RMBParser extends PositionParser implements RMBSentence {
    * org.nmea.sentence.RMBSentence#setSteerTo(net.sf.marineapi
    * .nmea.util.Direction)
    */
-  public void setSteerTo(Direction steer) {
-    if (steer != Direction.LEFT && steer != Direction.RIGHT) {
+  public void setSteerTo(DirectionType steer) {
+    if (steer != DirectionType.LEFT && steer != DirectionType.RIGHT) {
       throw new IllegalArgumentException(
         "Expected steer-to is LEFT or RIGHT.");
     }
-    setCharValue(STEER_TO, steer.toChar());
+    setCharValue(STEER_TO, steer.getCode());
   }
 
   /*

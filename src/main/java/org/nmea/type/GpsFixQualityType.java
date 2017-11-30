@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
  * GpsFixQuality defines the supported fix quality types.
@@ -28,7 +28,7 @@ package org.nmea.util;
  * @see GpsFixStatus
  * @see DataStatus
  */
-public enum GpsFixQuality {
+public enum GpsFixQualityType {
 
   /**
    * No GPS fix acquired.
@@ -67,10 +67,10 @@ public enum GpsFixQuality {
    */
   SIMULATED(8);
 
-  private final int value;
+  private final int code;
 
-  GpsFixQuality(int intValue) {
-    value = intValue;
+  GpsFixQualityType(int code) {
+    this.code = code;
   }
 
   /**
@@ -78,23 +78,23 @@ public enum GpsFixQuality {
    *
    * @return Fix quality indicator value as indicated in sentences.
    */
-  public int toInt() {
-    return value;
+  public int getCode() {
+    return code;
   }
 
   /**
    * Get GpsFixQuality enum that corresponds the actual integer identifier used
    * in the sentences.
    *
-   * @param val Status identifier value
+   * @param code Status identifier value
    * @return GpsFixQuality enum
    */
-  public static GpsFixQuality valueOf(int val) {
-    for (GpsFixQuality gfq : values()) {
-      if (gfq.toInt() == val) {
+  public static GpsFixQualityType valueOf(int code) {
+    for (GpsFixQualityType gfq : values()) {
+      if (gfq.getCode() == code) {
         return gfq;
       }
     }
-    return valueOf(String.valueOf(val));
+    throw new IllegalArgumentException("Unrecognized code " + code);
   }
 }

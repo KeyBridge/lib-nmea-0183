@@ -23,7 +23,7 @@ package org.nmea.io;
 import org.nmea.event.SentenceEvent;
 import org.nmea.event.SentenceListener;
 import org.nmea.sentence.Sentence;
-import org.nmea.sentence.SentenceId;
+import org.nmea.type.SentenceType;
 import java.io.InputStream;
 import java.net.DatagramSocket;
 import java.util.*;
@@ -113,7 +113,7 @@ public class SentenceReader {
    * @param type Sentence type for which the listener is registered.
    * @see org.nmea.event.SentenceListener
    */
-  public void addSentenceListener(SentenceListener sl, SentenceId type) {
+  public void addSentenceListener(SentenceListener sl, SentenceType type) {
     registerListener(sl, type.toString());
   }
 

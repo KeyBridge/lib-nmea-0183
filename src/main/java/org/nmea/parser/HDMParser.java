@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.HDMSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * HDM sentence parser.
@@ -40,7 +40,7 @@ class HDMParser extends SentenceParser implements HDMSentence {
    * @param nmea HDM sentence String
    */
   public HDMParser(String nmea) {
-    super(nmea, SentenceId.HDM);
+    super(nmea, SentenceType.HDM);
   }
 
   /**
@@ -48,8 +48,8 @@ class HDMParser extends SentenceParser implements HDMSentence {
    *
    * @param talker Talker id to set
    */
-  public HDMParser(TalkerId talker) {
-    super(talker, SentenceId.HDM, 2);
+  public HDMParser(TalkerType talker) {
+    super(talker, SentenceType.HDM, 2);
     setCharValue(MAGN_INDICATOR, 'M');
   }
 

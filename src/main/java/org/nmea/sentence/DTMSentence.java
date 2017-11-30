@@ -21,11 +21,9 @@
 package org.nmea.sentence;
 
 /**
+ * Datum reference sentence.
  * <p>
- * Datum reference.
- * <p>
- * <p>
- * Example:<br/>
+ * Example:<br>
  * <code>$GPDTM,W84,,0.000000,N,0.000000,E,0.0,W84*6F</code>
  *
  * @author Kimmo Tuukkanen

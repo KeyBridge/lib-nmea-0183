@@ -21,9 +21,7 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * Water temperature in degrees Celsius.
- * <p>
  * <p>
  * Example:<br><code>$YXMTW,17.75,C*5D</code>
  *

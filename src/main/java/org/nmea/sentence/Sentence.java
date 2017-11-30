@@ -20,6 +20,8 @@
  */
 package org.nmea.sentence;
 
+import org.nmea.type.TalkerType;
+
 /**
  * Base interface and constants for NMEA 0183 sentences.
  *
@@ -87,11 +89,11 @@ public interface Sentence {
   /**
    * Gets the talker ID of the sentence. Talker ID is the next two characters
    * after <code>$</code> in sentence address field. For example, in case of
-   * <code>$GPGGA</code>, the method returns {@link TalkerId#GP}.
+   * <code>$GPGGA</code>, the method returns {@link TalkerType#GP}.
    *
    * @return Talker id enum.
    */
-  TalkerId getTalkerId();
+  TalkerType getTalkerId();
 
   /**
    * Tells if this is an AIS sentence.
@@ -137,7 +139,7 @@ public interface Sentence {
    *
    * @param id TalkerId to set
    */
-  void setTalkerId(TalkerId id);
+  void setTalkerId(TalkerType id);
 
   /**
    * Formats and validates the String representation of sentence. Throws an

@@ -20,8 +20,8 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.FaaMode;
-import org.nmea.util.GpsFixStatus;
+import org.nmea.type.FaaModeType;
+import org.nmea.type.GpsFixStatusType;
 
 /**
  * Precision of GPS fix and list of active satellites. Dilution of precision
@@ -39,29 +39,19 @@ public interface GSASentence extends Sentence {
    * Get the GPS fix mode; 2D, 3D or no fix.
    *
    * @return GpsFixStatus enum
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  GpsFixStatus getFixStatus();
+  GpsFixStatusType getFixStatus();
 
   /**
    * Get the horizontal dilution Of precision (HDOP).
    *
    * @return double
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getHorizontalDOP();
 
@@ -69,29 +59,19 @@ public interface GSASentence extends Sentence {
    * Get the FAA operation mode of GPS.
    *
    * @return FaaMode enum
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
-  FaaMode getMode();
+  FaaModeType getMode();
 
   /**
    * Get the dilution of precision (PDOP) for position.
    *
    * @return double
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getPositionDOP();
 
@@ -99,14 +79,9 @@ public interface GSASentence extends Sentence {
    * Get list of satellites used for acquiring the GPS fix.
    *
    * @return String array containing satellite IDs.
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   String[] getSatelliteIds();
 
@@ -114,14 +89,9 @@ public interface GSASentence extends Sentence {
    * Get the vertical dilution of precision (VDOP).
    *
    * @return double
-   * @throws org.nmea.parser.DataNotAvailableException If the data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If the field
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If the data is not available.
+   * @throws ParseException            If the field contains unexpected or
+   *                                   illegal value.
    */
   double getVerticalDOP();
 
@@ -130,7 +100,7 @@ public interface GSASentence extends Sentence {
    *
    * @param status Status to set
    */
-  void setFixStatus(GpsFixStatus status);
+  void setFixStatus(GpsFixStatusType status);
 
   /**
    * Set the horizontal dilution of precision (HDOP).
@@ -144,7 +114,7 @@ public interface GSASentence extends Sentence {
    *
    * @param mode Mode to set
    */
-  void setMode(FaaMode mode);
+  void setMode(FaaModeType mode);
 
   /**
    * Set the dilution of precision for position.

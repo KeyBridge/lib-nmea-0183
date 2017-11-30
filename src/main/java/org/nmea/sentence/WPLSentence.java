@@ -20,7 +20,9 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.Waypoint;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.parser.ParseException;
+import org.nmea.type.Waypoint;
 
 /**
  * Destination waypoint location and ID. This sentence is transmitted by some
@@ -37,19 +39,10 @@ public interface WPLSentence extends Sentence {
    * Get the destination waypoint.
    *
    * @return Waypoint
-   * @throws org.nmea.parser.DataNotAvailableException If any of
-   *                                                                the waypoint
-   *                                                                related data
-   *                                                                is not
-   *                                                                available.
-   * @throws org.nmea.parser.ParseException            If any of
-   *                                                                the waypoint
-   *                                                                related
-   *                                                                fields
-   *                                                                contain
-   *                                                                unexpected
-   *                                                                or illegal
-   *                                                                value.
+   * @throws DataNotAvailableException If any of the waypoint related data is
+   *                                   not available.
+   * @throws ParseException            If any of the waypoint related fields
+   *                                   contain unexpected or illegal value.
    */
   Waypoint getWaypoint();
 

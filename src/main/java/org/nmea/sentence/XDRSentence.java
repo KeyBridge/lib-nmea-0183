@@ -20,18 +20,17 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.Measurement;
 import java.util.List;
+import org.nmea.type.Measurement;
 
 /**
- * <p>
  * Transducer measurements. Measurements are delivered in sets containing four
  * fields; transducer type, measurement value, unit of measurement and
  * transducer name. There may be any number of sets like this, each describing a
- * sensor. Notice that inserting too many measuments in one sentence may result
- * in exceeding the maximum sentence length (82 chars).
+ * sensor. Notice that inserting too many measurements in one sentence may
+ * result in exceeding the maximum sentence length (82 chars).
  *
- * @see org.nmea.util.Measurement
+ * @see org.nmea.type.Measurement
  * @author Robert Huitema, Kimmo Tuukkanen
  */
 public interface XDRSentence extends Sentence {

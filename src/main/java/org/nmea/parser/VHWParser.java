@@ -20,8 +20,8 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 import org.nmea.sentence.VHWSentence;
 
 /**
@@ -54,8 +54,8 @@ class VHWParser extends SentenceParser implements VHWSentence {
    *
    * @param talker Talker ID to set
    */
-  public VHWParser(TalkerId talker) {
-    super(talker, SentenceId.VHW, 8);
+  public VHWParser(TalkerType talker) {
+    super(talker, SentenceType.VHW, 8);
     setCharValue(TRUE_INDICATOR, 'T');
     setCharValue(MAGNETIC_INDICATOR, 'M');
     setCharValue(KNOTS_INDICATOR, 'N');

@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.AISSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * AIS VDO sentence parser, contains only the NMEA layer. The actual payload
@@ -40,7 +40,7 @@ class VDOParser extends AISParser {
    * @param nmea NMEA sentence String.
    */
   public VDOParser(String nmea) {
-    super(nmea, SentenceId.VDO);
+    super(nmea, SentenceType.VDO);
   }
 
   /**
@@ -48,7 +48,7 @@ class VDOParser extends AISParser {
    *
    * @param talker TalkerId to set
    */
-  public VDOParser(TalkerId talker) {
-    super(talker, SentenceId.VDO);
+  public VDOParser(TalkerType talker) {
+    super(talker, SentenceType.VDO);
   }
 }

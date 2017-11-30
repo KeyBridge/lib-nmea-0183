@@ -21,10 +21,10 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.RSASentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.DataStatus;
-import org.nmea.util.Side;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.Side;
 
 /**
  * RSA sentence parser.
@@ -44,7 +44,7 @@ class RSAParser extends SentenceParser implements RSASentence {
    * @param nmea RSA sentence String
    */
   public RSAParser(String nmea) {
-    super(nmea, SentenceId.RSA);
+    super(nmea, SentenceType.RSA);
   }
 
   /**
@@ -52,10 +52,10 @@ class RSAParser extends SentenceParser implements RSASentence {
    *
    * @param talker TalkerId to set
    */
-  public RSAParser(TalkerId talker) {
-    super(talker, SentenceId.RSA, 4);
-    setStatus(Side.STARBOARD, DataStatus.VOID);
-    setStatus(Side.PORT, DataStatus.VOID);
+  public RSAParser(TalkerType talker) {
+    super(talker, SentenceType.RSA, 4);
+    setStatus(Side.STARBOARD, DataStatusType.VOID);
+    setStatus(Side.PORT, DataStatusType.VOID);
   }
 
   @Override
@@ -76,19 +76,19 @@ class RSAParser extends SentenceParser implements RSASentence {
   }
 
   @Override
-  public DataStatus getStatus(Side side) {
+  public DataStatusType getStatus(Side side) {
     if (Side.STARBOARD.equals(side)) {
-      return DataStatus.valueOf(getCharValue(STARBOARD_STATUS));
+      return DataStatusType.valueOf(getCharValue(STARBOARD_STATUS));
     }
-    return DataStatus.valueOf(getCharValue(PORT_STATUS));
+    return DataStatusType.valueOf(getCharValue(PORT_STATUS));
   }
 
   @Override
-  public void setStatus(Side side, DataStatus status) {
+  public void setStatus(Side side, DataStatusType status) {
     if (Side.STARBOARD.equals(side)) {
-      setCharValue(STARBOARD_STATUS, status.toChar());
+      setCharValue(STARBOARD_STATUS, status.getCode());
     } else {
-      setCharValue(PORT_STATUS, status.toChar());
+      setCharValue(PORT_STATUS, status.getCode());
     }
   }
 }

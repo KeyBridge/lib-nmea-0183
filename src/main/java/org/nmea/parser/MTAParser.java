@@ -21,9 +21,9 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.MTASentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.Units;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.UnitType;
 
 /**
  * MTA sentence parser.
@@ -39,15 +39,15 @@ class MTAParser extends SentenceParser implements MTASentence {
    * Constructor.
    */
   public MTAParser(String mta) {
-    super(mta, SentenceId.MTA);
+    super(mta, SentenceType.MTA);
   }
 
   /**
    * Constructor.
    */
-  public MTAParser(TalkerId talker) {
-    super(talker, SentenceId.MTA, 2);
-    setCharValue(UNIT_INDICATOR, Units.CELSIUS.toChar());
+  public MTAParser(TalkerType talker) {
+    super(talker, SentenceType.MTA, 2);
+    setCharValue(UNIT_INDICATOR, UnitType.CELSIUS.getCode());
   }
 
   /*

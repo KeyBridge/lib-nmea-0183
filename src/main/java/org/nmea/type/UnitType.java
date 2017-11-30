@@ -18,14 +18,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
- * Defines the supported units of measure.
+ * Enumerated supported units of measure.
  *
  * @author Kimmo Tuukkanen
+ * @author Key Bridge
  */
-public enum Units {
+public enum UnitType {
 
   /**
    * Temperature in degrees Celsius (centigrade)
@@ -58,10 +59,10 @@ public enum Units {
    */
   METER('M');
 
-  private final char ch;
+  private final char code;
 
-  private Units(char c) {
-    ch = c;
+  private UnitType(char code) {
+    this.code = code;
   }
 
   /**
@@ -69,22 +70,23 @@ public enum Units {
    *
    * @return Char indicator of enum
    */
-  public char toChar() {
-    return ch;
+  public char getCode() {
+    return code;
   }
 
   /**
    * Get the enum corresponding to specified char.
    *
-   * @param ch Char indicator for unit
-   * @return Units enum
+   * @param code Character code indicator for unit. e.g. C for Celsius, F for
+   *             Fathom, etc.
+   * @return the enumerated UnitType
    */
-  public static Units valueOf(char ch) {
-    for (Units u : values()) {
-      if (u.toChar() == ch) {
+  public static UnitType valueOf(char code) {
+    for (UnitType u : values()) {
+      if (u.getCode() == code) {
         return u;
       }
     }
-    return valueOf(String.valueOf(ch));
+    throw new IllegalArgumentException("Unrecognized code " + code);
   }
 }

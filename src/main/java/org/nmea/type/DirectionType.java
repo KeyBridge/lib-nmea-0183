@@ -1,5 +1,5 @@
 /*
- * GpsFixStatus.java
+ * Direction.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
@@ -18,59 +18,51 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
- * GpsFixStatus defines the status of current GPS fix.
+ * Defines the relative directions, e.g. "left" and "right".
  *
  * @author Kimmo Tuukkanen
- * @see FaaMode
- * @see GpsFixQuality
- * @see DataStatus
  */
-public enum GpsFixStatus {
+public enum DirectionType {
 
   /**
-   * No GPS fix available
+   * Left
    */
-  GPS_NA(1),
+  LEFT('L'),
   /**
-   * 2D GPS fix (lat/lon)
+   * Right
    */
-  GPS_2D(2),
-  /**
-   * 3D GPS fix (lat/lon/alt)
-   */
-  GPS_3D(3);
+  RIGHT('R');
 
-  private final int status;
+  private final char code;
 
-  GpsFixStatus(int intVal) {
-    status = intVal;
+  private DirectionType(char c) {
+    code = c;
   }
 
   /**
-   * Returns the corresponding int value for fix status enum.
+   * Returns the corresponding char constant.
    *
-   * @return Fix status integer values as in sentences
+   * @return Char indicator for Direction
    */
-  public int toInt() {
-    return status;
+  public char getCode() {
+    return code;
   }
 
   /**
-   * Returns the GpsFixStatus enum corresponding to actual int identifier used
-   * in the sentences.
+   * Get the enum corresponding to specified char.
    *
-   * @param val Fix status indentifier int
-   * @return GpsFixStatus enum
+   * @param code Char indicator for Direction
+   * @return Direction
    */
-  public static GpsFixStatus valueOf(int val) {
-    for (GpsFixStatus st : values()) {
-      if (st.toInt() == val) {
-        return st;
+  public static DirectionType valueOf(char code) {
+    for (DirectionType d : values()) {
+      if (d.getCode() == code) {
+        return d;
       }
     }
-    return valueOf(String.valueOf(val));
+    throw new IllegalArgumentException("Unrecognized code " + code);
   }
 }

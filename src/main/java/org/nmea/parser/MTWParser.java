@@ -21,9 +21,9 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.MTWSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.Units;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.UnitType;
 
 /**
  * MTW Sentence parser.
@@ -49,9 +49,9 @@ class MTWParser extends SentenceParser implements MTWSentence {
    *
    * @param tid TalkerId to set
    */
-  public MTWParser(TalkerId tid) {
-    super(tid, SentenceId.MTW, 2);
-    setCharValue(UNIT_INDICATOR, Units.CELSIUS.toChar());
+  public MTWParser(TalkerType tid) {
+    super(tid, SentenceType.MTW, 2);
+    setCharValue(UNIT_INDICATOR, UnitType.CELSIUS.getCode());
   }
 
   /*

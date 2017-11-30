@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.CURSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * CUR sentence parser.
@@ -53,7 +53,7 @@ class CURParser extends SentenceParser implements CURSentence {
    *                                  contain a CUR sentence.
    */
   public CURParser(String nmea) {
-    super(nmea, SentenceId.CUR);
+    super(nmea, SentenceType.CUR);
   }
 
   /**
@@ -61,8 +61,8 @@ class CURParser extends SentenceParser implements CURSentence {
    *
    * @param talker TalkerId to set
    */
-  public CURParser(TalkerId talker) {
-    super(talker, SentenceId.CUR, 11);
+  public CURParser(TalkerType talker) {
+    super(talker, SentenceType.CUR, 11);
     setCharValue(DIRECTION_REFERENCE, 'T');
     setCharValue(HEADING_REFERENCE, 'T');
     setCharValue(SPEED_REFERENCE, 'B');

@@ -21,9 +21,9 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.HDGSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.CompassPoint;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.CompassPointType;
 
 /**
  * HDG sentence parser.
@@ -44,7 +44,7 @@ class HDGParser extends SentenceParser implements HDGSentence {
    * @param nmea HDG sentence String
    */
   public HDGParser(String nmea) {
-    super(nmea, SentenceId.HDG);
+    super(nmea, SentenceType.HDG);
   }
 
   /**
@@ -52,8 +52,8 @@ class HDGParser extends SentenceParser implements HDGSentence {
    *
    * @param talker Talker id to set
    */
-  public HDGParser(TalkerId talker) {
-    super(talker, SentenceId.HDG, 5);
+  public HDGParser(TalkerType talker) {
+    super(talker, SentenceType.HDG, 5);
   }
 
   /*
@@ -65,8 +65,8 @@ class HDGParser extends SentenceParser implements HDGSentence {
     if (dev == 0) {
       return dev;
     }
-    CompassPoint dir = CompassPoint.valueOf(getCharValue(DEV_DIRECTION));
-    return dir == CompassPoint.WEST ? -dev : dev;
+    CompassPointType dir = CompassPointType.valueOf(getCharValue(DEV_DIRECTION));
+    return dir == CompassPointType.WEST ? -dev : dev;
   }
 
   /*
@@ -85,8 +85,8 @@ class HDGParser extends SentenceParser implements HDGSentence {
     if (var == 0) {
       return var;
     }
-    CompassPoint dir = CompassPoint.valueOf(getCharValue(VAR_DIRECTION));
-    return dir == CompassPoint.WEST ? -var : var;
+    CompassPointType dir = CompassPointType.valueOf(getCharValue(VAR_DIRECTION));
+    return dir == CompassPointType.WEST ? -var : var;
   }
 
   /*
@@ -105,9 +105,9 @@ class HDGParser extends SentenceParser implements HDGSentence {
       throw new IllegalArgumentException("Value out of range [-180..180]");
     }
     if (deviation > 0) {
-      setCharValue(DEV_DIRECTION, CompassPoint.EAST.toChar());
+      setCharValue(DEV_DIRECTION, CompassPointType.EAST.getCode());
     } else if (deviation < 0) {
-      setCharValue(DEV_DIRECTION, CompassPoint.WEST.toChar());
+      setCharValue(DEV_DIRECTION, CompassPointType.WEST.getCode());
     } else {
       setStringValue(DEV_DIRECTION, "");
     }
@@ -131,9 +131,9 @@ class HDGParser extends SentenceParser implements HDGSentence {
       throw new IllegalArgumentException("Value out of range [-180..180]");
     }
     if (variation > 0) {
-      setCharValue(VAR_DIRECTION, CompassPoint.EAST.toChar());
+      setCharValue(VAR_DIRECTION, CompassPointType.EAST.getCode());
     } else if (variation < 0) {
-      setCharValue(VAR_DIRECTION, CompassPoint.WEST.toChar());
+      setCharValue(VAR_DIRECTION, CompassPointType.WEST.getCode());
     } else {
       setStringValue(VAR_DIRECTION, "");
     }

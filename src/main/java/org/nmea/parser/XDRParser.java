@@ -20,13 +20,13 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.sentence.XDRSentence;
-import org.nmea.util.Measurement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.sentence.XDRSentence;
+import org.nmea.type.Measurement;
 
 /**
  * <p>
@@ -67,7 +67,7 @@ class XDRParser extends SentenceParser implements XDRSentence {
    * @param nmea XDR sentence string
    */
   public XDRParser(String nmea) {
-    super(nmea, SentenceId.XDR);
+    super(nmea, SentenceType.XDR);
   }
 
   /**
@@ -75,8 +75,8 @@ class XDRParser extends SentenceParser implements XDRSentence {
    *
    * @param talker TalkerId to set
    */
-  public XDRParser(TalkerId talker) {
-    super(talker, SentenceId.XDR, DATA_SET_LENGTH);
+  public XDRParser(TalkerType talker) {
+    super(talker, SentenceType.XDR, DATA_SET_LENGTH);
   }
 
   /*
@@ -90,15 +90,14 @@ class XDRParser extends SentenceParser implements XDRSentence {
   }
 
   /*
-   * (non-Javadoc) @see
-   * org.nmea.sentence.XDRSentence#getMeasurements()
+   * (non-Javadoc) @see org.nmea.sentence.XDRSentence#getMeasurements()
    */
   public List<Measurement> getMeasurements() {
     ArrayList<Measurement> result = new ArrayList<>();
     for (int i = 0; i < getFieldCount(); i += DATA_SET_LENGTH) {
-      Measurement value = fetchValues(i);
-      if (!value.isEmpty()) {
-        result.add(value);
+      Measurement measurement = fetchValues(i);
+      if (measurement.isValid()) {
+        result.add(measurement);
       }
     }
     return result;

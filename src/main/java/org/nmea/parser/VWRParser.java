@@ -20,10 +20,10 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 import org.nmea.sentence.VWRSentence;
-import org.nmea.util.Direction;
+import org.nmea.type.DirectionType;
 
 /**
  * VWR sentence parser.
@@ -48,7 +48,7 @@ class VWRParser extends SentenceParser implements VWRSentence {
    * @throws IllegalArgumentException If specified sentence is invalid
    */
   public VWRParser(String nmea) {
-    super(nmea, SentenceId.VWR);
+    super(nmea, SentenceType.VWR);
   }
 
   /**
@@ -56,8 +56,8 @@ class VWRParser extends SentenceParser implements VWRSentence {
    *
    * @param talker TalkerId to set
    */
-  public VWRParser(TalkerId talker) {
-    super(talker, SentenceId.VWR, 9);
+  public VWRParser(TalkerType talker) {
+    super(talker, SentenceType.VWR, 9);
     setCharValue(KNOTS_INDICATOR, VWRSentence.KNOT);
     setCharValue(MPS_INDICATOR, VWRSentence.MPS);
     setCharValue(KMPH_INDICATOR, VWRSentence.KMPH);
@@ -75,8 +75,8 @@ class VWRParser extends SentenceParser implements VWRSentence {
    * (non-Javadoc) @see
    * org.nmea.sentence.VWRSentence#getDirectionLeftRight()
    */
-  public Direction getDirectionLeftRight() {
-    return Direction.valueOf(getCharValue(WIND_DIRECTION_LEFT_RIGHT_OF_BOW));
+  public DirectionType getDirectionLeftRight() {
+    return DirectionType.valueOf(getCharValue(WIND_DIRECTION_LEFT_RIGHT_OF_BOW));
   }
 
   /*
@@ -136,7 +136,7 @@ class VWRParser extends SentenceParser implements VWRSentence {
    * org.nmea.sentence.VWRSentence#setMode(org.nmea
    * .com.sailgrib.nmea.util.Direction)
    */
-  public void setDirectionLeftRight(Direction directionLeftRight) {
-    setCharValue(WIND_DIRECTION_LEFT_RIGHT_OF_BOW, directionLeftRight.toChar());
+  public void setDirectionLeftRight(DirectionType directionLeftRight) {
+    setCharValue(WIND_DIRECTION_LEFT_RIGHT_OF_BOW, directionLeftRight.getCode());
   }
 }

@@ -1,8 +1,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.AISSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * AIS VDM sentence parser, contains only the NMEA layer. The actual payload
@@ -20,7 +20,7 @@ class VDMParser extends AISParser {
    * @param nmea NMEA sentence String.
    */
   public VDMParser(String nmea) {
-    super(nmea, SentenceId.VDM);
+    super(nmea, SentenceType.VDM);
   }
 
   /**
@@ -28,7 +28,7 @@ class VDMParser extends AISParser {
    *
    * @param talker TalkerId to set
    */
-  public VDMParser(TalkerId talker) {
-    super(talker, SentenceId.VDM);
+  public VDMParser(TalkerType talker) {
+    super(talker, SentenceType.VDM);
   }
 }

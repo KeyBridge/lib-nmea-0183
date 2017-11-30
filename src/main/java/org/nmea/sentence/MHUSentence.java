@@ -21,9 +21,7 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * Relative and absolute humidity with dew point.
- * <p/>
  * <p>
  * <em>Notice: not recommended as of Oct 2008, should use <code>XDR</code>
  * instead.</em>

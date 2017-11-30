@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 import java.text.DecimalFormat;
 
@@ -46,7 +46,7 @@ public class Position {
   /**
    * datum/coordinate system
    */
-  private Datum datum = Datum.WGS84;
+  private DatumType datum = DatumType.WGS84;
 
   /**
    * Creates a new instance of Position. Notice that altitude defaults to -0.0
@@ -82,7 +82,7 @@ public class Position {
    * @param datum Datum to set
    * @see #setAltitude(double)
    */
-  public Position(double lat, double lon, Datum datum) {
+  public Position(double lat, double lon, DatumType datum) {
     this(lat, lon);
     this.datum = datum;
   }
@@ -93,9 +93,10 @@ public class Position {
    *
    * @param lat   Latitude degrees
    * @param lon   Longitude degrees
+   * @param alt   altitude
    * @param datum Datum to set
    */
-  public Position(double lat, double lon, double alt, Datum datum) {
+  public Position(double lat, double lon, double alt, DatumType datum) {
     this(lat, lon, alt);
     this.datum = datum;
   }
@@ -134,12 +135,12 @@ public class Position {
 
   /**
    * Gets the datum, i.e. the coordinate system used to define geographic
-   * position. Default is {@link Datum#WGS84}, unless datum is specified in the
+   * position. Default is {@link DatumType#WGS84}, unless datum is specified in the
    * constructor. Notice also that datum cannot be set afterwards.
    *
    * @return Datum enum
    */
-  public Datum getDatum() {
+  public DatumType getDatum() {
     return datum;
   }
 
@@ -157,8 +158,8 @@ public class Position {
    *
    * @return CompassPoint.NORTH or CompassPoint.SOUTH
    */
-  public CompassPoint getLatitudeHemisphere() {
-    return isLatitudeNorth() ? CompassPoint.NORTH : CompassPoint.SOUTH;
+  public CompassPointType getLatitudeHemisphere() {
+    return isLatitudeNorth() ? CompassPointType.NORTH : CompassPointType.SOUTH;
   }
 
   /**
@@ -175,8 +176,8 @@ public class Position {
    *
    * @return CompassPoint.EAST or CompassPoint.WEST
    */
-  public CompassPoint getLongitudeHemisphere() {
-    return isLongitudeEast() ? CompassPoint.EAST : CompassPoint.WEST;
+  public CompassPointType getLongitudeHemisphere() {
+    return isLongitudeEast() ? CompassPointType.EAST : CompassPointType.WEST;
   }
 
   /**
@@ -214,7 +215,7 @@ public class Position {
    * @throws IllegalArgumentException If specified latitude value is out of
    *                                  range 0..90 degrees.
    */
-  public void setLatitude(double latitude) {
+  public final void setLatitude(double latitude) {
     if (latitude < -90 || latitude > 90) {
       throw new IllegalArgumentException("Latitude out of bounds -90..90 degrees");
     }
@@ -228,7 +229,7 @@ public class Position {
    * @throws IllegalArgumentException If specified longitude value is out of
    *                                  range 0..180 degrees.
    */
-  public void setLongitude(double longitude) {
+  public final void setLongitude(double longitude) {
     if (longitude < -180 || longitude > 180) {
       throw new IllegalArgumentException("Longitude out of bounds -180..180 degrees");
     }
@@ -245,12 +246,12 @@ public class Position {
     sb.append("[");
     sb.append(df.format(Math.abs(getLatitude())));
     sb.append(" ");
-    sb.append(getLatitudeHemisphere().toChar());
+    sb.append(getLatitudeHemisphere().getCode());
     sb.append(", ");
     df.applyPattern("000.0000000");
     sb.append(df.format(Math.abs(getLongitude())));
     sb.append(" ");
-    sb.append(getLongitudeHemisphere().toChar());
+    sb.append(getLongitudeHemisphere().getCode());
     sb.append(", ");
     sb.append(getAltitude());
     sb.append(" m]");
@@ -268,9 +269,7 @@ public class Position {
   }
 
   /**
-   * Haversine formulae, implementation based on example at <a href=
-   * "http://www.codecodex.com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe"
-   * >codecodex</a>.
+   * Haversine formulae, implementation based on example at
    *
    * @param lat1 Origin latitude
    * @param lon1 Origin longitude
@@ -288,13 +287,8 @@ public class Position {
 
     double dLat = Math.toRadians(lat2 - lat1);
     double dLon = Math.toRadians(lon2 - lon1);
-
-    double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
-      + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-      * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
+    double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
     return (earthRadius * c * 1000);
   }
 }

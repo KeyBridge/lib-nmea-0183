@@ -20,7 +20,9 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.Position;
+import org.nmea.parser.DataNotAvailableException;
+import org.nmea.parser.ParseException;
+import org.nmea.type.Position;
 
 /**
  * Common interface for sentences that contain geographic position.
@@ -33,18 +35,10 @@ public interface PositionSentence extends Sentence {
    * Gets the geographic position.
    *
    * @return Position
-   * @throws org.nmea.parser.DataNotAvailableException If any of
-   *                                                                the position
-   *                                                                related
-   *                                                                fields is
-   *                                                                empty.
-   * @throws org.nmea.parser.ParseException            If any of
-   *                                                                the position
-   *                                                                related
-   *                                                                fields
-   *                                                                contains
-   *                                                                unexpected
-   *                                                                value.
+   * @throws DataNotAvailableException If any of the position related fields is
+   *                                   empty.
+   * @throws ParseException            If any of the position related fields
+   *                                   contains unexpected value.
    */
   Position getPosition();
 

@@ -21,8 +21,8 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.AISSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * Common AIS sentence parser. Handles only the NMEA layer for VDM and VDO
@@ -48,7 +48,7 @@ abstract class AISParser extends SentenceParser implements AISSentence {
    *
    * @param nmea NMEA sentence String.
    */
-  public AISParser(String nmea, SentenceId sid) {
+  public AISParser(String nmea, SentenceType sid) {
     super(nmea, sid);
   }
 
@@ -58,7 +58,7 @@ abstract class AISParser extends SentenceParser implements AISSentence {
    * @param tid TalkerId to set
    * @param sid
    */
-  public AISParser(TalkerId tid, SentenceId sid) {
+  public AISParser(TalkerType tid, SentenceType sid) {
     super('!', tid, sid, 6);
   }
 

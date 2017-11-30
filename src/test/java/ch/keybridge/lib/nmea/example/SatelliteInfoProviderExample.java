@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.nmea.io.SentenceReader;
-import org.nmea.util.SatelliteInfo;
+import org.nmea.type.Satellite;
 import ch.keybridge.lib.nmea.provider.SatelliteInfoProvider;
 import ch.keybridge.lib.nmea.provider.event.SatelliteInfoEvent;
 import ch.keybridge.lib.nmea.provider.event.SatelliteInfoListener;
@@ -60,7 +60,7 @@ public class SatelliteInfoProviderExample implements SatelliteInfoListener {
 	 */
 	public void providerUpdate(SatelliteInfoEvent event) {
 		System.out.println("-- GSV report --");
-		for (SatelliteInfo si : event.getSatelliteInfo()) {
+		for (Satellite si : event.getSatelliteInfo()) {
 			String ptrn = "%s: %d, %d";
 			String msg = String.format(ptrn, si.getId(), si.getAzimuth(), si
 					.getElevation());

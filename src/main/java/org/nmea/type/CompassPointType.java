@@ -1,5 +1,5 @@
 /*
- * Datum.java
+ * Direction.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
@@ -18,27 +18,59 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
- * Defines the supported datums, i.e. the coordinate systems used to specify
- * geographic positions.
+ * Defines the supported compass and relative directions.
  *
  * @author Kimmo Tuukkanen
- * @see org.nmea.util.Position
  */
-public enum Datum {
+public enum CompassPointType {
 
   /**
-   * World Geodetic System 1984, the default datum in GPS systems.
+   * North
    */
-  WGS84,
+  NORTH('N'),
   /**
-   * North American Datum 1983
+   * East
    */
-  NAD83,
+  EAST('E'),
   /**
-   * North American Datum 1927
+   * South
    */
-  NAD27;
+  SOUTH('S'),
+  /**
+   * West
+   */
+  WEST('W');
+
+  private final char code;
+
+  private CompassPointType(char c) {
+    this.code = c;
+  }
+
+  /**
+   * Returns the corresponding char constant.
+   *
+   * @return Char indicator for Direction
+   */
+  public char getCode() {
+    return code;
+  }
+
+  /**
+   * Get the enum corresponding to specified char.
+   *
+   * @param code Char indicator for Direction
+   * @return Direction
+   */
+  public static CompassPointType valueOf(char code) {
+    for (CompassPointType d : values()) {
+      if (d.getCode() == code) {
+        return d;
+      }
+    }
+    throw new IllegalArgumentException("Unrecognized code " + code);
+  }
 }

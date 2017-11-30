@@ -21,13 +21,10 @@
 package org.nmea.sentence;
 
 /**
- * <p>
  * Set and drift, true/magnetic direction and speed of current.
- * 
  * <p>
  * Example:<br>
  * <code></code>
- * 
  *
  * @author Kimmo Tuukkanen
  */

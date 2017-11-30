@@ -21,9 +21,9 @@
 package org.nmea.parser;
 
 import org.nmea.sentence.GSVSentence;
-import org.nmea.sentence.SentenceId;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.SatelliteInfo;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
+import org.nmea.type.Satellite;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +53,7 @@ class GSVParser extends SentenceParser implements GSVSentence {
    * @param nmea GSV Sentence
    */
   public GSVParser(String nmea) {
-    super(nmea, SentenceId.GSV);
+    super(nmea, SentenceType.GSV);
   }
 
   /**
@@ -61,8 +61,8 @@ class GSVParser extends SentenceParser implements GSVSentence {
    *
    * @param talker TalkerId to set
    */
-  public GSVParser(TalkerId talker) {
-    super(talker, SentenceId.GSV, 19);
+  public GSVParser(TalkerType talker) {
+    super(talker, SentenceType.GSV, 19);
   }
 
   /*
@@ -77,9 +77,9 @@ class GSVParser extends SentenceParser implements GSVSentence {
    * (non-Javadoc) @see
    * org.nmea.sentence.GSVSentence#getSatelliteInfo()
    */
-  public List<SatelliteInfo> getSatelliteInfo() {
+  public List<Satellite> getSatelliteInfo() {
 
-    List<SatelliteInfo> satellites = new ArrayList<>(4);
+    List<Satellite> satellites = new ArrayList<>(4);
 
     for (int idf : ID_FIELDS) {
       try {
@@ -87,7 +87,7 @@ class GSVParser extends SentenceParser implements GSVSentence {
         int elev = getIntValue(idf + ELEVATION);
         int azm = getIntValue(idf + AZIMUTH);
         int snr = getIntValue(idf + NOISE);
-        satellites.add(new SatelliteInfo(id, elev, azm, snr));
+        satellites.add(new Satellite(id, elev, azm, snr));
       } catch (DataNotAvailableException e) {
         // nevermind missing satellite info
       } catch (IndexOutOfBoundsException e) {
@@ -142,14 +142,14 @@ class GSVParser extends SentenceParser implements GSVSentence {
    * org.nmea.sentence.GSVSentence#setSatelliteInfo(java.util
    * .List)
    */
-  public void setSatelliteInfo(List<SatelliteInfo> info) {
+  public void setSatelliteInfo(List<Satellite> info) {
     if (info.size() > 4) {
       throw new IllegalArgumentException("Maximum list size is 4");
     }
     int i = 0;
     for (int id : ID_FIELDS) {
       if (i < info.size()) {
-        SatelliteInfo si = info.get(i++);
+        Satellite si = info.get(i++);
         setStringValue(id, si.getId());
         setIntValue(id + ELEVATION, si.getElevation());
         setIntValue(id + AZIMUTH, si.getAzimuth(), 3);

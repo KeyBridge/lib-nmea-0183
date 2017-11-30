@@ -20,7 +20,7 @@
  */
 package org.nmea.sentence;
 
-import org.nmea.util.DataStatus;
+import org.nmea.type.DataStatusType;
 
 /**
  * Revolutions, measured from shaft or engine.
@@ -72,7 +72,7 @@ public interface RPMSentence extends Sentence {
    *
    * @return DataStatus
    */
-  DataStatus getStatus();
+  DataStatusType getStatus();
 
   /**
    * Tells if the data source is engine.
@@ -122,5 +122,5 @@ public interface RPMSentence extends Sentence {
    *
    * @param status DataStatus to set.
    */
-  void setStatus(DataStatus status);
+  void setStatus(DataStatusType status);
 }

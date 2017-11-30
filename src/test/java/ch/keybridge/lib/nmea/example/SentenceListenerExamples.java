@@ -34,7 +34,7 @@ import org.nmea.sentence.GLLSentence;
 import org.nmea.sentence.GSASentence;
 import org.nmea.sentence.GSVSentence;
 import org.nmea.sentence.Sentence;
-import org.nmea.sentence.SentenceId;
+import org.nmea.type.SentenceType;
 
 /**
  * Demonstrates the different ways to use SentenceListeners.
@@ -72,7 +72,7 @@ public class SentenceListenerExamples {
 
 		reader.addSentenceListener(new GSAListener());
 		reader.addSentenceListener(new MultiSentenceListener());
-		reader.addSentenceListener(new SingleSentenceListener(), SentenceId.GSV);
+		reader.addSentenceListener(new SingleSentenceListener(), SentenceType.GSV);
 		
 		reader.start();
 	}

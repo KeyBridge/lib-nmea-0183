@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.nmea.util;
+package org.nmea.type;
 
 /**
  * SatelliteInfo represents the information about a single GPS satellite
@@ -27,11 +27,23 @@ package org.nmea.util;
  * @author Kimmo Tuukkanen
  * @see org.nmea.sentence.GSVSentence
  */
-public class SatelliteInfo {
+public class Satellite {
 
+  /**
+   * Satellite ID, for example "05".
+   */
   private String id;
+  /**
+   * Current elevation of the satellite, in degrees (max. 90&deg;).
+   */
   private int elevation;
+  /**
+   * Current azimuth of the satellite, in degrees from true north (0..359&deg;).
+   */
   private int azimuth;
+  /**
+   * Current noise ratio of the satellite signal, in dB (0-99 dB).
+   */
   private int noise;
 
   /**
@@ -42,7 +54,7 @@ public class SatelliteInfo {
    * @param azimuth   Current azimuth of the satellite
    * @param noise     Current noise ratio of the satellite signal
    */
-  public SatelliteInfo(String id, int elevation, int azimuth, int noise) {
+  public Satellite(String id, int elevation, int azimuth, int noise) {
     this.id = id;
     this.elevation = elevation;
     this.azimuth = azimuth;

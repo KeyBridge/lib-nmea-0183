@@ -2,9 +2,9 @@ package ch.keybridge.lib.nmea.example;
 
 import org.nmea.parser.SentenceFactory;
 import org.nmea.sentence.MWVSentence;
-import org.nmea.sentence.TalkerId;
-import org.nmea.util.DataStatus;
-import org.nmea.util.Units;
+import org.nmea.type.TalkerType;
+import org.nmea.type.DataStatusType;
+import org.nmea.type.UnitType;
 
 /**
  * Demonstrates the usage of sentence parsers for data output.
@@ -17,7 +17,7 @@ public class OutputExample {
 		
 		// Create a fresh MWV parser
 		SentenceFactory sf = SentenceFactory.getInstance();
-		MWVSentence mwv = (MWVSentence) sf.createParser(TalkerId.II, "MWV");
+		MWVSentence mwv = (MWVSentence) sf.createParser(TalkerType.II, "MWV");
 		
 		// should output "$IIMWV,,,,,V*36" 
 		System.out.println(mwv.toSentence());
@@ -28,8 +28,8 @@ public class OutputExample {
 		mwv.setAngle(43.7);
 		mwv.setTrue(true);
 		mwv.setSpeed(4.54);
-		mwv.setSpeedUnit(Units.METER);
-		mwv.setStatus(DataStatus.ACTIVE);
+		mwv.setSpeedUnit(UnitType.METER);
+		mwv.setStatus(DataStatusType.ACTIVE);
 		
 		// should output "$IIMWV,043.7,T,4.5,M,A*39"
 		System.out.println(mwv.toSentence());
