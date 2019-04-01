@@ -20,12 +20,12 @@
  */
 package org.nmea.parser;
 
-import org.nmea.sentence.Sentence;
-import org.nmea.type.SentenceType;
-import org.nmea.type.TalkerType;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import org.nmea.sentence.Sentence;
+import org.nmea.type.SentenceType;
+import org.nmea.type.TalkerType;
 
 /**
  * Factory for creating sentence parsers.
@@ -49,9 +49,9 @@ import java.util.*;
  * the {@link #registerParser(String, Class)} method.</li>
  * <li>Use {@link SentenceFactory#createParser(String)} or
  * {@link SentenceFactory#createParser(TalkerId, String)} to obtain an instance
- * of your parser. In addition, {@link org.nmea.io.SentenceReader}
- * will dispatch instances of <code>XYZSentence</code> when "XYZ" sentences are
- * read from data source.</li>
+ * of your parser. In addition, {@link org.nmea.io.SentenceReader} will dispatch
+ * instances of <code>XYZSentence</code> when "XYZ" sentences are read from data
+ * source.</li>
  * </ol>
  *
  * @author Kimmo Tuukkanen
@@ -163,9 +163,7 @@ public final class SentenceFactory {
    * @param type   Sentence type id, e.g. "GGA" or "GLL".
    * @param parser Class of parser implementation for given <code>type</code>.
    */
-  public void registerParser(String type,
-                             Class<? extends SentenceParser> parser) {
-
+  public void registerParser(String type, Class<? extends SentenceParser> parser) {
     try {
       parser.getConstructor(new Class[]{String.class});
       parser.getConstructor(new Class[]{TalkerType.class});
